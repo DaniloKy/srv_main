@@ -10,6 +10,7 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "laminas/laminas-escaper": "^2.9",
+        "larapack/dd": "1.*",
         "psr/log": "^1.1"
     },
     "require-dev": {

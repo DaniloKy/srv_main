@@ -1,0 +1,1 @@
+__ci_last_regenerate|i:1685928549;_ci_previous_url|s:27:"http://localhost:8080/login";login_error|s:21:"Email does not exist.";__ci_vars|a:2:{s:11:"login_error";s:3:"old";s:13:"_ci_old_input";s:3:"old";}_ci_old_input|a:2:{s:3:"get";a:0:{}s:4:"post";a:2:{s:5:"email";s:20:"admin@localhost.comm";s:8:"password";s:8:"admin123";}}

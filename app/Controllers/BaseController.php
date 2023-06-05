@@ -35,13 +35,13 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['form', 'url'];
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
-    // protected $session;
+    protected $session;
 
     /**
      * Constructor.
@@ -53,6 +53,26 @@ abstract class BaseController extends Controller
 
         // Preload any models, libraries, etc, here.
 
-        // E.g.: $this->session = \Config\Services::session();
+        $this->session = \Config\Services::session();
     }
+
+    public function validate_form($data, $str):bool{
+        $validation = \Config\Services::validation();
+        return $validation->run($data, $str);
+    }
+
+    public function baseHomeView($body, $data = []){
+        return view('common/header', ['title' => 'Home', 'cssPath' => 'css/main.css', 'jsPath' => 'js/script.js'])
+        . view('common/menu')
+        . view($body, $data)
+        . view('common/footer');
+    }
+
+    public function baseMainView($body, $data = []){
+        return view('common/header', ['title' => 'Home', 'cssPath' => 'css/main.css', 'jsPath' => 'js/script.js'])
+        . view('signup/common/menu')
+        . view($body, $data)
+        . view('common/footer');
+    }
+
 }

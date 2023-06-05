@@ -1,0 +1,50 @@
+CRITICAL - 2023-06-03 17:34:11 --> Invalid file: "common/menu.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('common/menu.php')
+ 2 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('common/menu', [], true)
+ 3 APPPATH\Controllers\Home.php(10): view('common/menu')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Home->index()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+CRITICAL - 2023-06-03 17:35:31 --> Invalid file: "common/menu.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('common/menu.php')
+ 2 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('common/menu', [], true)
+ 3 APPPATH\Controllers\Home.php(10): view('common/menu')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Home->index()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+CRITICAL - 2023-06-03 17:40:04 --> Invalid file: "menu.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('menu.php')
+ 2 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('menu', [], true)
+ 3 APPPATH\Controllers\Home.php(11): view('menu')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Home->index()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+CRITICAL - 2023-06-03 20:28:58 --> Undefined constant "Config\routes"
+in APPPATH\Config\Routes.php on line 34.
+ 1 SYSTEMPATH\Router\RouteCollection.php(676): CodeIgniter\Router\RouteCollection::Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 2 APPPATH\Config\Routes.php(33): CodeIgniter\Router\RouteCollection->group('signup', [...], Object(Closure))
+ 3 SYSTEMPATH\Router\RouteCollection.php(267): require('C:\\xampp\\htdocs\\srv_main\\app\\Config\\Routes.php')
+ 4 SYSTEMPATH\CodeIgniter.php(802): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 5 SYSTEMPATH\CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+CRITICAL - 2023-06-03 20:38:34 --> Invalid file: "menu.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('menu.php')
+ 2 SYSTEMPATH\Common.php(1184): CodeIgniter\View\View->render('menu', [], true)
+ 3 APPPATH\Controllers\Session.php(10): view('menu')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->index()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')

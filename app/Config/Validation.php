@@ -14,6 +14,17 @@ class Validation extends BaseConfig
     // Setup
     // --------------------------------------------------------------------
 
+    public $singin = [
+        'email'        => 'required|valid_email',
+        'password'     => 'required|min_length[8]',
+    ];
+
+    public $signup = [
+        'email'        => 'required|valid_email',
+        'password'     => 'required|min_length[8]',
+        'password_confirmation' => 'required|matches[password]',        
+    ];
+
     /**
      * Stores the classes that contain the
      * rules that are available.
