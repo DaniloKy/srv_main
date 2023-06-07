@@ -19,22 +19,20 @@ class LoginModel extends Model
     }
     
 	public function isLoggedIn(){
+		
 		$userdata = $this->session->get('userdata');
 		if($userdata && $userdata['logged_in'] == TRUE){
 			$user = $this->find($userdata['user']['id']);
-			if(!$this->checkSession($user)){
+			//dd(!$user['sId'] == session_id());
+			if(!$user['sId'] == session_id()){
 				$this->update($user['id'], ['sId' => '']);
-				$this->session->destroy();
+				redirect('logout');
 				return false;
 			}
-			$this->createSession($userdata['user']);
+			//$this->createSession($userdata['user']);
 			return true;
 		}
 		return false;
-	}
-
-	public function checkSession($user){
-		return $user['sId'] == session_id();
 	}
 
 	public function createSession($user_data){
