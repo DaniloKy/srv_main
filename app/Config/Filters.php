@@ -24,6 +24,7 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'isLogged' => \App\Filters\isLoggedFilter::class,
+        'checkRemberMe' => \App\Filters\checkRemberMeFilter::class
     ];
 
     /**
@@ -32,6 +33,7 @@ class Filters extends BaseConfig
      */
     public array $globals = [
         'before' => [
+            'checkRemberMe',
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',

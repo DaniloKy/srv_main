@@ -13,13 +13,12 @@ class UsersModel extends Model
     public function getById($id){
         return $this->find($id);   
     }
-    public function getByEmail($email){
-        $user = $this->where(['email' => $email])->first();
-		return $user?:false;
-	}
-    public function getByUsername($username){
-        $user = $this->where(['username' => $username])->first();
-		return $user?:false;
+    public function getWhere($assoc, $first = false){
+        if($first)
+            $val = $this->where($assoc)->first();
+        else
+            $val = $this->where($assoc)->get()->getResult();
+		return $val?:false;
 	}
 
     public function create($validated){

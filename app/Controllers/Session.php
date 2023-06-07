@@ -29,13 +29,14 @@ class Session extends BaseController
             return redirect()->to('/');
 
         $singin = $this->request->getPost();
+        
         if(filter_var($singin['login_input'], FILTER_VALIDATE_EMAIL))
-            $user = $this->users_model->getByEmail($singin['login_input']);
+            $user = $this->users_model->getWhere(['email' => $singin['login_input']], true);
         else
-            $user = $this->users_model->getByUsername($singin['login_input']);
+            $user = $this->users_model->getWhere(['username' => $singin['login_input']], true);
         if($user){
             if(password_verify($singin['password'], $user['password'])) {
-                if ($singin['rememberMe'] === 'on') {
+                if (isset($singin['rememberMe']) && $singin['rememberMe'] === 'on') {
                     $rememberToken = bin2hex(random_bytes(32));
                     $user['remember_token'] = $rememberToken;
                     $this->users_model->save($user);
@@ -49,13 +50,12 @@ class Session extends BaseController
                     'id' => $user['id'], 
                     "username" => $user['username'], 
                     "email" => $user['email'], 
-                    "remember_token" => $user['remember_token'],
                     "verification_code" => $user['verification_code'],
                     "active" => $user['active'],
                     "super" => $user['super'],
                     "created_at" => $user['created_at'],
                 ]);
-                return redirect()->to('game/');
+                return redirect()->to('/');
             }else
                 $this->session->setFlashdata('login_error', 'Incorrect username or password.');
         }else
@@ -70,7 +70,7 @@ class Session extends BaseController
         $signup = $this->request->getPost();
         $val = $this->validate_form($signup, 'signup');
         if($val){
-            if(!$this->users_model->getByEmail($signup['email'])){
+            if(!$this->users_model->getWhere(['email' => $signup['email']], true)){
                 $signup['password'] = password_hash($signup['password'], PASSWORD_BCRYPT);
                 $this->users_model->create($signup);
                 return redirect()->to('/');
@@ -98,7 +98,7 @@ class Session extends BaseController
     }
 
     public function logout(){
-        delete_cookie('remember_token');
+        setcookie('remember_token', null, -1);
         $this->session->destroy();
 	    return redirect()->to('/');
     }

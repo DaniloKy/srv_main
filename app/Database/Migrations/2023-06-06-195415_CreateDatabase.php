@@ -33,8 +33,9 @@ class CreateDatabase extends Migration
             ],
             "remember_token" => [
                 "type" => "VARCHAR",
-                "constraint" => "100",
+                "constraint" => "64",
                 "null" => true,
+                "unique" => true,
             ],
             "sId" => [
                 "type" => "VARCHAR",
