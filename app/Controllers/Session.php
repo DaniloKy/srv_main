@@ -29,33 +29,51 @@ class Session extends BaseController
             return redirect()->to('/');
 
         $singin = $this->request->getPost();
-        $val = $this->validate_form($singin, 'singin');
-        if($val){
-            if($user = $this->login_model->getByEmail($singin['email'])){
-                if(password_verify($singin['password'], $user['password'])) {
-                    $this->login_model->createSession($user);
-                    return redirect()->to('signup/main');
-                }else
-                    $this->session->setFlashdata('login_error', 'Incorrect password.');
+        if(filter_var($singin['login_input'], FILTER_VALIDATE_EMAIL))
+            $user = $this->users_model->getByEmail($singin['login_input']);
+        else
+            $user = $this->users_model->getByUsername($singin['login_input']);
+        if($user){
+            if(password_verify($singin['password'], $user['password'])) {
+                if ($singin['rememberMe'] === 'on') {
+                    $rememberToken = bin2hex(random_bytes(32));
+                    $user['remember_token'] = $rememberToken;
+                    $this->users_model->save($user);
+                    setcookie('remember_token', $rememberToken, time()+86400);
+                }
+                if(session_regenerate_id()){
+                    $user['sId'] = session_id();
+                    $this->users_model->save($user);
+                }
+                $this->login_model->createSession([
+                    'id' => $user['id'], 
+                    "username" => $user['username'], 
+                    "email" => $user['email'], 
+                    "remember_token" => $user['remember_token'],
+                    "verification_code" => $user['verification_code'],
+                    "active" => $user['active'],
+                    "super" => $user['super'],
+                    "created_at" => $user['created_at'],
+                ]);
+                return redirect()->to('game/');
             }else
-                $this->session->setFlashdata('login_error', 'Email does not exist.');
-        }
+                $this->session->setFlashdata('login_error', 'Incorrect username or password.');
+        }else
+            $this->session->setFlashdata('login_error', 'Incorrect username or password.');
         return redirect('login')->withInput();
     }
 
     public function registering(){
         if($this->login_model->isLoggedIn())
             return redirect()->to('/');
-
+            
         $signup = $this->request->getPost();
         $val = $this->validate_form($signup, 'signup');
         if($val){
-            if(!$this->login_model->getByEmail($signup['email'])){
+            if(!$this->users_model->getByEmail($signup['email'])){
                 $signup['password'] = password_hash($signup['password'], PASSWORD_BCRYPT);
-                $createdUserId = $this->users_model->create($signup);
-                $createdUser = $this->users_model->getById($createdUserId);
-                $this->login_model->createSession($createdUser);
-                return redirect()->to('signup/main');
+                $this->users_model->create($signup);
+                return redirect()->to('/');
             }else
                 $this->session->setFlashdata('register_error', 'Email already in use.');
         }
@@ -80,6 +98,7 @@ class Session extends BaseController
     }
 
     public function logout(){
+        delete_cookie('remember_token');
         $this->session->destroy();
 	    return redirect()->to('/');
     }

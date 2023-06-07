@@ -8,6 +8,7 @@ class LoginModel extends Model
 {   
 
     protected $table = 'users';
+	protected $allowedFields = ['sId'];
     protected $session;
 
     public function __construct()
@@ -16,19 +17,24 @@ class LoginModel extends Model
 
         $this->session = session();
     }
-
-    public function getByEmail($email){
-        $user = $this->where(['email' => $email])->first();
-		return $user?:false;
-	}
     
 	public function isLoggedIn(){
 		$userdata = $this->session->get('userdata');
-		if($userdata && $userdata['logged_in']== TRUE){
+		if($userdata && $userdata['logged_in'] == TRUE){
+			$user = $this->find($userdata['user']['id']);
+			if(!$this->checkSession($user)){
+				$this->update($user['id'], ['sId' => '']);
+				$this->session->destroy();
+				return false;
+			}
 			$this->createSession($userdata['user']);
 			return true;
 		}
 		return false;
+	}
+
+	public function checkSession($user){
+		return $user['sId'] == session_id();
 	}
 
 	public function createSession($user_data){

@@ -30,15 +30,14 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->group('signup', static function ($routes) {
-    $routes->get('main', 'Main::index');
+$routes->group('game', ['filter' => 'isLogged'], static function ($routes) {
+    $routes->get('lobby', 'Main::index');
+    $routes->get('/', 'Main::index');
 });
 
-
-
-//$db = \Config\Database::connect();
-//dd($db);
 $routes->get('/', 'Home::index');
+$routes->get('home', 'Home::index');
+
 $routes->get('login', 'Session::login');
 $routes->get('register', 'Session::register');
 $routes->post('logining', 'Session::logining');

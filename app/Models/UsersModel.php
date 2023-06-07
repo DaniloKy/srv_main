@@ -8,28 +8,39 @@ class UsersModel extends Model
 {   
 
     protected $table = 'users';
-    protected $allowedFields = ['email', 'password', 'created_at', 'active', 'super', 'sId', 'verification_code'];
+    protected $allowedFields = ['email', 'password', 'remember_token', 'sId', 'verification_code', 'active', 'super', 'created_at'];
 
     public function getById($id){
-        $user = $this->find($id);
-        return $user;
+        return $this->find($id);   
     }
+    public function getByEmail($email){
+        $user = $this->where(['email' => $email])->first();
+		return $user?:false;
+	}
+    public function getByUsername($username){
+        $user = $this->where(['username' => $username])->first();
+		return $user?:false;
+	}
 
     public function create($validated){
         $data = array(
+            'username' => $validated['username'],
             'email' => $validated['email'],
             'password' => $validated['password'],
-            'created_at' => date("Y-m-d H:i:s"),
-            'active' => 0,
-            'super' => 0,
             'sId' => session_id(),
             'verification_code' => $this->makeVerfCode(),
+            'active' => 0,
+            'super' => 0,
+            'created_at' => date("Y-m-d H:i:s"),
         );
-        $user = $this->insert($data);
-        return $user;
+        return $this->insert($data);
     }
 
-    public function makeVerfCode($length = 32){
+    public function updateUser($id, $data){
+        return $this->update($id, $data);
+    }
+
+    public function makeVerfCode($length = 8){
         $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvvwxyz";
         $str = "";
 

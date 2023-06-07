@@ -14,14 +14,10 @@ class Validation extends BaseConfig
     // Setup
     // --------------------------------------------------------------------
 
-    public $singin = [
-        'email'        => 'required|valid_email',
-        'password'     => 'required|min_length[8]',
-    ];
-
     public $signup = [
-        'email'        => 'required|valid_email',
-        'password'     => 'required|min_length[8]',
+        'username' =>'required|min_length[4]|max_length[16]',
+        'email' => 'required|valid_email',
+        'password' => 'required|min_length[4]|max_length[72]',
         'password_confirmation' => 'required|matches[password]',        
     ];
 

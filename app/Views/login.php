@@ -2,11 +2,11 @@
 <?=validation_list_errors(); ?>
 <div class="container">
     <form id="login_form" action="<?=base_url('logining')?>" method="POST">
-        <label for="email">Email</label><br />
-        <input id="email" type="text" placeholder="email" name="email" value="<?= old('email') ?>" required maxlength="120"><br />
+        <label for="login_input">Username or email address</label><br />
+        <input id="login_input" type="text" name="login_input" value="<?= old('login_input') ?>"><br />
         <label for="password">Password</label><br />
-        <input id="password" type="password" placeholder="password" name="password" required maxlength="120"><br />
-        <input type="checkbox" id="rememberMe"  name="checkbox"><label for="rememberMe">Remember me</label><br />
+        <input id="password" type="password" name="password"><br />
+        <input type="checkbox" id="rememberMe"  name="rememberMe"><label for="rememberMe">Remember me</label><br />
         <input id="submit_form" type="submit" value="Log in">
         <p class="alert"></p>
         <p>Don't have an account yet? <a href="<?=base_url('register')?>">Register</a></p>
