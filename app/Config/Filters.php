@@ -69,5 +69,8 @@ class Filters extends BaseConfig
         'isLogged' => [
             
         ],
+        /*'notLogged' => [
+            
+        ],*/
     ];
 }

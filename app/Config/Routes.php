@@ -44,8 +44,6 @@ $routes->post('logining', 'Session::logining');
 $routes->get('logout', 'Session::logout');
 $routes->post('registering', 'Session::registering');
 
-
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing

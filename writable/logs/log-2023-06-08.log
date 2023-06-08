@@ -1,0 +1,103 @@
+INFO - 2023-06-08 00:05:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 00:05:49 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 00:08:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 00:08:08 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 00:10:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 00:10:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 00:10:33 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 00:17:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 00:17:13 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 00:17:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 00:17:24 --> Class "Config\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 00:17:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 00:17:37 --> Class "Config\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 00:17:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 00:17:50 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 00:21:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 00:21:00 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 00:21:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 00:21:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 00:21:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 00:21:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 00:21:25 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')

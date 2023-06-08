@@ -13,7 +13,7 @@ use function PHPUnit\Framework\isEmpty;
 class checkRemberMeFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
-    {        
+    {   
         if (model(LoginModel::class)->isLoggedIn()){
             return null;
         }
