@@ -71,15 +71,17 @@ class Session extends BaseController
         $val = $this->validate_form($signup, 'signup');
         if($val){
             if(!$this->users_model->getWhere(['email' => $signup['email']], true)){
-                $signup['password'] = password_hash($signup['password'], PASSWORD_BCRYPT);
-                $this->users_model->create($signup);
-                return redirect()->to('/');
+                if(!$this->users_model->getWhere(['username' => $signup['username']], true)){
+                    $signup['password'] = password_hash($signup['password'], PASSWORD_BCRYPT);
+                    $this->users_model->create($signup);
+                    return redirect()->to('/');
+                }else
+                    $this->session->setFlashdata('register_error', 'Username already in use.');    
             }else
                 $this->session->setFlashdata('register_error', 'Email already in use.');
         }
         return redirect('register')->withInput();
     }
-
 
     public function login()
     {

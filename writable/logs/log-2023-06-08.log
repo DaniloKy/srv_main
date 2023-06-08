@@ -101,3 +101,341 @@ in SYSTEMPATH\Validation\Validation.php on line 613.
  6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:35:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 13:38:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 13:38:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 13:38:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 13:38:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:38:42 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:40:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:40:13 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:50:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:50:20 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:50:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:50:32 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:52:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:52:40 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:53:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:53:40 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:54:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:54:41 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:55:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:55:12 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:56:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:56:02 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:56:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:56:03 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:56:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:56:12 --> Class "Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:59:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:59:18 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 13:59:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-06-08 13:59:38 --> Class "App\Validation\UsernameRule" not found
+in SYSTEMPATH\Validation\Validation.php on line 613.
+ 1 SYSTEMPATH\Validation\Validation.php(127): CodeIgniter\Validation\Validation->loadRuleSets()
+ 2 APPPATH\Controllers\BaseController.php(62): CodeIgniter\Validation\Validation->run([...], 'signup')
+ 3 APPPATH\Controllers\Session.php(71): App\Controllers\BaseController->validate_form([...], 'signup')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 14:02:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:02:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:03:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:03:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:03:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:03:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:03:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:03:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:03:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:06:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:06:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:06:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:07:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:07:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:07:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:07:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:08:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:08:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:08:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:08:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:08:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:09:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:09:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:09:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:16:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:16:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:16:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:17:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:21:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:21:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2023-06-08 14:21:46 --> mysqli_sql_exception: Duplicate entry '' for key 'username' in C:\xampp\htdocs\srv_main\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\srv_main\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\srv_main\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\srv_main\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\srv_main\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\srv_main\system\Model.php(330): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\srv_main\system\BaseModel.php(782): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\srv_main\system\Model.php(730): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\srv_main\app\Models\UsersModel.php(35): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\srv_main\app\Controllers\Session.php(75): App\Models\UsersModel->create(Array)
+#9 C:\xampp\htdocs\srv_main\system\CodeIgniter.php(934): App\Controllers\Session->registering()
+#10 C:\xampp\htdocs\srv_main\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+#11 C:\xampp\htdocs\srv_main\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\srv_main\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\srv_main\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2023-06-08 14:21:46 --> Duplicate entry '' for key 'username'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (\'joaoRob@gmail.com\', \'$2y$10$qn8bfROKnyzRDrhFSc8GnOAfjH3jdulqvWsZgmEJ3Xg1cPJ79DM7i\', \'pj0anhu9d0oq7lojjs547cp2v60lcqo8\', \'y4Mlt38N\', 0, 0, \'2023-06-08 14:21:46\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (\'joaoRob@gmail.com\', \'$2y$10$qn8bfROKnyzRDrhFSc8GnOAfjH3jdulqvWsZgmEJ3Xg1cPJ79DM7i\', \'pj0anhu9d0oq7lojjs547cp2v60lcqo8\', \'y4Mlt38N\', 0, 0, \'2023-06-08 14:21:46\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (\'joaoRob@gmail.com\', \'$2y$10$qn8bfROKnyzRDrhFSc8GnOAfjH3jdulqvWsZgmEJ3Xg1cPJ79DM7i\', \'pj0anhu9d0oq7lojjs547cp2v60lcqo8\', \'y4Mlt38N\', 0, 0, \'2023-06-08 14:21:46\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (:email:, :password:, :sId:, :verification_code:, :active:, :super:, :created_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(782): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(730): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Models\UsersModel.php(35): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\Session.php(75): App\Models\UsersModel->create([...])
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 14:25:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:27:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:27:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2023-06-08 14:27:06 --> mysqli_sql_exception: Duplicate entry '' for key 'username' in C:\xampp\htdocs\srv_main\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\srv_main\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\srv_main\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\srv_main\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\srv_main\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\srv_main\system\Model.php(330): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\srv_main\system\BaseModel.php(782): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\srv_main\system\Model.php(730): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\srv_main\app\Models\UsersModel.php(35): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\srv_main\app\Controllers\Session.php(76): App\Models\UsersModel->create(Array)
+#9 C:\xampp\htdocs\srv_main\system\CodeIgniter.php(934): App\Controllers\Session->registering()
+#10 C:\xampp\htdocs\srv_main\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+#11 C:\xampp\htdocs\srv_main\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\srv_main\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\srv_main\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2023-06-08 14:27:06 --> Duplicate entry '' for key 'username'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (\'joaoRob@gmail.com\', \'$2y$10$MxfYFEpRiZDZyj.sWYswi.j.rkrmXsLkLFnvS7oiU3vyIv.QS67VK\', \'lnc8n82c6o11ba3o5uh8s969qq9mefrh\', \'F3jVOLYz\', 0, 0, \'2023-06-08 14:27:06\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (\'joaoRob@gmail.com\', \'$2y$10$MxfYFEpRiZDZyj.sWYswi.j.rkrmXsLkLFnvS7oiU3vyIv.QS67VK\', \'lnc8n82c6o11ba3o5uh8s969qq9mefrh\', \'F3jVOLYz\', 0, 0, \'2023-06-08 14:27:06\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (\'joaoRob@gmail.com\', \'$2y$10$MxfYFEpRiZDZyj.sWYswi.j.rkrmXsLkLFnvS7oiU3vyIv.QS67VK\', \'lnc8n82c6o11ba3o5uh8s969qq9mefrh\', \'F3jVOLYz\', 0, 0, \'2023-06-08 14:27:06\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (:email:, :password:, :sId:, :verification_code:, :active:, :super:, :created_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(782): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(730): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Models\UsersModel.php(35): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\Session.php(76): App\Models\UsersModel->create([...])
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 14:27:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:27:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:27:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:27:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2023-06-08 14:27:36 --> mysqli_sql_exception: Duplicate entry '' for key 'username' in C:\xampp\htdocs\srv_main\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\srv_main\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\srv_main\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\srv_main\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\srv_main\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\srv_main\system\Model.php(330): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\srv_main\system\BaseModel.php(782): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\srv_main\system\Model.php(730): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\srv_main\app\Models\UsersModel.php(35): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\srv_main\app\Controllers\Session.php(76): App\Models\UsersModel->create(Array)
+#9 C:\xampp\htdocs\srv_main\system\CodeIgniter.php(934): App\Controllers\Session->registering()
+#10 C:\xampp\htdocs\srv_main\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+#11 C:\xampp\htdocs\srv_main\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\srv_main\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\srv_main\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2023-06-08 14:27:36 --> Duplicate entry '' for key 'username'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (\'joaoRob@gmail.com\', \'$2y$10$8SkelF./H65qiQ0I0KH9b.tpAVRxQhqIa3SsEncmeTQVOJ8CqWfbK\', \'lnc8n82c6o11ba3o5uh8s969qq9mefrh\', \'v1CEcKH8\', 0, 0, \'2023-06-08 14:27:36\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (\'joaoRob@gmail.com\', \'$2y$10$8SkelF./H65qiQ0I0KH9b.tpAVRxQhqIa3SsEncmeTQVOJ8CqWfbK\', \'lnc8n82c6o11ba3o5uh8s969qq9mefrh\', \'v1CEcKH8\', 0, 0, \'2023-06-08 14:27:36\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (\'joaoRob@gmail.com\', \'$2y$10$8SkelF./H65qiQ0I0KH9b.tpAVRxQhqIa3SsEncmeTQVOJ8CqWfbK\', \'lnc8n82c6o11ba3o5uh8s969qq9mefrh\', \'v1CEcKH8\', 0, 0, \'2023-06-08 14:27:36\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`email`, `password`, `sId`, `verification_code`, `active`, `super`, `created_at`) VALUES (:email:, :password:, :sId:, :verification_code:, :active:, :super:, :created_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(782): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(730): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Models\UsersModel.php(35): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\Session.php(76): App\Models\UsersModel->create([...])
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->registering()
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 14:31:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:31:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:33:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:33:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:33:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:35:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:36:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:37:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:37:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:37:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:39:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:39:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:39:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:39:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:39:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:39:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:39:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:40:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:40:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:40:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:40:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:40:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2023-06-08 14:40:57 --> [DEPRECATED] setcookie(): Passing null to parameter #2 ($value) of type string is deprecated in APPPATH\Controllers\Session.php on line 103.
+ 1 APPPATH\Controllers\Session.php(103): setcookie('remember_token', null, -1)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Session->logout()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Session))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs\\srv_main\\public\\index.php')
+INFO - 2023-06-08 14:40:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:40:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:40:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:41:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:41:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:41:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:41:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:41:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:41:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:41:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:41:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:42:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:42:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:56:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 14:56:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 16:31:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 16:31:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 16:31:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 17:48:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 17:48:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 17:48:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 17:48:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 17:48:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-06-08 17:48:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

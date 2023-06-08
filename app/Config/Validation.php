@@ -17,11 +17,12 @@ class Validation extends BaseConfig
     // --------------------------------------------------------------------
 
     public $signup = [
-        'username' =>'required|min_length[4]|max_length[16]',
+        'username' =>'required|min_length[4]|max_length[16]|alpha_numeric_underscore',
         'email' => 'required|valid_email',
         'password' => 'required|min_length[4]|max_length[72]',
         'password_confirmation' => 'required|matches[password]',        
     ];
+    
 
     /**
      * Stores the classes that contain the
@@ -51,4 +52,5 @@ class Validation extends BaseConfig
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------
+
 }

@@ -8,7 +8,7 @@ class UsersModel extends Model
 {   
 
     protected $table = 'users';
-    protected $allowedFields = ['email', 'password', 'remember_token', 'sId', 'verification_code', 'active', 'super', 'created_at'];
+    protected $allowedFields = ['username', 'email', 'password', 'remember_token', 'sId', 'verification_code', 'active', 'super', 'created_at'];
 
     public function getById($id){
         return $this->find($id);   

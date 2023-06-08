@@ -15,15 +15,15 @@
         <li>
             <a href="#">PATCH NOTES</a>
         </li>
-    <?php if(session('userdata') == null || !session('userdata')['logged_in']): ?>
+        <?php if(session('userdata') == null || !session('userdata')['logged_in']): ?>
         <li>
             <a href="<?=base_url('login')?>">SING IN</a>
-            <a href="<?=base_url('game/')?>">PLAY</a>
+            <a href="<?=base_url('login')?>">PLAY</a>
         </li>
         <?php else: ?>
         <li>
             <a href="<?=base_url('logout')?>">LOGOUT</a>
-            <a href="#">PLAY</a>
+            <a href="<?=base_url('game/character/select')?>">PLAY</a>
         </li>
         <?php endif; ?>
     </ul>
