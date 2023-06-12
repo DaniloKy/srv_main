@@ -30,7 +30,7 @@ class checkRemberMeFilter implements FilterInterface
                     "username" => $user['username'], 
                     "email" => $user['email'], 
                     "verification_code" => $user['verification_code'],
-                    "active" => $user['active'],
+                    "status" => $user['status'],
                     "super" => $user['super'],
                     "created_at" => $user['created_at'],
                 ]);

@@ -47,10 +47,9 @@ class CreateDatabase extends Migration
                 "constraint" => "8",
                 "null" => true,
             ],
-            "active" => [
+            "status" => [
                 "type" => "TINYINT",
                 "constraint" => 1,
-                "unsigned" => true,
                 "default" => "0",
             ],
             "super" => [
@@ -197,7 +196,7 @@ class CreateDatabase extends Migration
             
         ])->addPrimaryKey("game_id", "belong_to");
 
-        if ($this->forge->createTable("game_ids", true, ["ENGINE" => "InnoDB",]) === false) {
+        if ($this->forge->createTable("player_ids", true, ["ENGINE" => "InnoDB",]) === false) {
             throw new \RuntimeException("Could not create users table.");
         }
 

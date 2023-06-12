@@ -8,7 +8,7 @@ class UsersModel extends Model
 {   
 
     protected $table = 'users';
-    protected $allowedFields = ['username', 'email', 'password', 'remember_token', 'sId', 'verification_code', 'active', 'super', 'created_at'];
+    protected $allowedFields = ['username', 'email', 'password', 'remember_token', 'sId', 'verification_code', 'status', 'super', 'created_at'];
 
     public function getById($id){
         return $this->find($id);   
@@ -28,7 +28,7 @@ class UsersModel extends Model
             'password' => $validated['password'],
             'sId' => session_id(),
             'verification_code' => $this->makeVerfCode(),
-            'active' => 0,
+            'status' => 0,
             'super' => 0,
             'created_at' => date("Y-m-d H:i:s"),
         );

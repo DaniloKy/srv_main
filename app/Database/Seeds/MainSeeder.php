@@ -13,9 +13,8 @@ class MainSeeder extends Seeder
             'username' => env('ADMIN_USERNAME'),
             'email'    => env('ADMIN_EMAIL'),
             'password' => password_hash(env('ADMIN_PASS'), PASSWORD_BCRYPT),
-            'sId' => '',
             'verification_code' => model(UsersModel::class)->makeVerfCode(),
-            'active' => 1,
+            'status' => 1,
             'super' => 1,
             'created_at' => date("Y-m-d H:i:s"),
         ];
