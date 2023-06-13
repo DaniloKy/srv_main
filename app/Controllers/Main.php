@@ -21,7 +21,7 @@ class Main extends BaseController
     }
 
     public function index()
-    {        
+    {
         return $this->baseMainView('signup/main');
     }
 }
