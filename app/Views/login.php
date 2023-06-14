@@ -1,7 +1,7 @@
 <h1>Login</h1>
 <?=validation_list_errors(); ?>
-<div class="container">
-    <form id="login_form" action="<?=base_url('logining')?>" method="POST">
+<div>
+    <form id="login_form" action="<?=base_url('login')?>" method="POST">
         <label for="login_input">Username or email address</label><br />
         <input id="login_input" type="text" name="login_input" value="<?= old('login_input') ?>"><br />
         <label for="password">Password</label><br />

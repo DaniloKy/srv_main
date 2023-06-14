@@ -160,6 +160,32 @@ class Model extends BaseModel
     }
 
     /**
+     * 
+     * MY FUNCTIONS 
+     * 
+     */
+
+    public function getById($id){
+        return $this->find($id);   
+    }
+    
+    public function getWhere($assoc, $first = false){
+        if($first)
+            $val = $this->where($assoc)->first();
+        else
+            $val = $this->where($assoc)->get()->getResult();
+		return $val?:false;
+	}
+
+    public function countWhere($assoc, $first = false){
+        if($first)
+            $val = $this->where($assoc)->first();
+        else
+            $val = $this->where($assoc)->countAllResults();
+		return $val?:false;
+	}
+
+    /**
      * Specify the table associated with a model
      *
      * @param string $table Table

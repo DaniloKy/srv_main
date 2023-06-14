@@ -1,7 +1,7 @@
 <h1>Register</h1>
 <?=validation_list_errors(); ?>
 <div>
-    <form id="register_form" action="<?=base_url('registering')?>" method="POST">
+    <form id="register_form" action="<?=base_url('register')?>" method="POST">
         <label for="username">Username</label><br />
         <input id="username" type="text" name="username" value="<?= old('username') ?>" placeholder="username"><br />
         <label for="email">Email</label><br />

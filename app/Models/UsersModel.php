@@ -10,17 +10,6 @@ class UsersModel extends Model
     protected $table = 'users';
     protected $allowedFields = ['username', 'email', 'password', 'remember_token', 'sId', 'verification_code', 'status', 'super', 'created_at'];
 
-    public function getById($id){
-        return $this->find($id);   
-    }
-    public function getWhere($assoc, $first = false){
-        if($first)
-            $val = $this->where($assoc)->first();
-        else
-            $val = $this->where($assoc)->get()->getResult();
-		return $val?:false;
-	}
-
     public function create($validated){
         $data = array(
             'username' => $validated['username'],

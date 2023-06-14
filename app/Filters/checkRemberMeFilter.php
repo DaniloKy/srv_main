@@ -13,11 +13,14 @@ use function PHPUnit\Framework\isEmpty;
 class checkRemberMeFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
-    {   
+    {
         if (model(LoginModel::class)->isLoggedIn()){
             return null;
         }
         if(isset($_COOKIE) && isset($_COOKIE['remember_token'])){
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
             $users_model = model(UsersModel::class);
             $user = $users_model->getWhere(['remember_token' => $_COOKIE['remember_token']], true);
             if($user){

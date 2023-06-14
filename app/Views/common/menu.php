@@ -23,7 +23,7 @@
         <?php else: ?>
         <li>
             <a href="<?=base_url('logout')?>">LOGOUT</a>
-            <a href="<?=base_url('game/character/select')?>">PLAY</a>
+            <a href="<?=base_url('game/character/list')?>">PLAY</a>
         </li>
         <?php endif; ?>
     </ul>

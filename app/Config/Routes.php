@@ -32,8 +32,10 @@ $routes->set404Override();
 
 $routes->group('game', ['filter' => 'isLogged'], static function ($routes) {
     $routes->group('character', static function ($routes) {
-        $routes->get('select', 'Character::list');
-        $routes->get('create', 'Character::create');
+        $routes->post('select', 'Character::select');
+        $routes->get('list', 'Character::list');
+        $routes->get('create', 'Character::createView');
+        $routes->post('create', 'Character::create');
     });
     $routes->get('lobby', 'Main::index');
     $routes->get('/', 'Main::index');
@@ -43,10 +45,10 @@ $routes->get('/', 'Home::index');
 $routes->get('home', 'Home::index');
 
 $routes->get('login', 'Session::login');
+$routes->post('login', 'Session::logining');
 $routes->get('register', 'Session::register');
-$routes->post('logining', 'Session::logining');
+$routes->post('register', 'Session::registering');
 $routes->get('logout', 'Session::logout');
-$routes->post('registering', 'Session::registering');
 
 /*
  * --------------------------------------------------------------------
