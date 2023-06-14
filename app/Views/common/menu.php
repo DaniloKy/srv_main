@@ -17,12 +17,16 @@
         </li>
         <?php if(session('userdata') == null || !session('userdata')['logged_in']): ?>
         <li>
-            <a href="<?=base_url('login')?>">SING IN</a>
+            <a href="<?=base_url('login')?>">SIGN IN</a>
             <a href="<?=base_url('login')?>">PLAY</a>
         </li>
         <?php else: ?>
         <li>
-            <a href="<?=base_url('logout')?>">LOGOUT</a>
+            <span class="dropdown">ACCOUNT</span>
+            <div class="dropdown_content visually-hidden">
+                <a href="<?=base_url('account_manage')?>">MANAGE ACCOUNT</a>
+                <a href="<?=base_url('logout')?>">LOGOUT</a>
+            </div>
             <a href="<?=base_url('game/character/list')?>">PLAY</a>
         </li>
         <?php endif; ?>

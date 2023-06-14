@@ -27,6 +27,7 @@ class LoginModel extends Model
 				return false;
 			}
 			if($user['sId'] != session_id()){
+				//dd($user['sId'], session_id());
 				$this->update($user['id'], ['sId' => '']);
 				$this->session->destroy();
 				return false;
