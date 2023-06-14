@@ -42,7 +42,7 @@ footer{
     margin-left: auto;
 }
 
-.navbar-list li a {
+.navbar-list li a, span {
     display: inline-block;
     padding: 1em;
     text-decoration: none;
@@ -52,18 +52,14 @@ footer{
 .navbar-list li a:hover {
     background-color: #ccc;
 }
+.navbar-list li span:hover {
+    background-color: #ccc;
+}
 .navbar-list li a:active {
     background-color: #888;
 }
 
-.dropdown:hover .dropdown_content {display: block;}
-
-.dropdown:hover {
-    background-color: #b36500;
-}
-
 .dropdown_content {
-    display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;

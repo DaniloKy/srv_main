@@ -22,8 +22,8 @@
         </li>
         <?php else: ?>
         <li>
-            <a href="" class="dropdown">ACCOUNT</a>
-            <div class="dropdown_content">
+            <span class="dropdown">ACCOUNT</span>
+            <div class="dropdown_content visually-hidden">
                 <a href="<?=base_url('account_manage')?>">MANAGE ACCOUNT</a>
                 <a href="<?=base_url('logout')?>">LOGOUT</a>
             </div>
