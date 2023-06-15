@@ -101,7 +101,9 @@ class Session extends BaseController
 
     public function logout(){
         setcookie('remember_token', null, -1);
-        $this->session->destroy();
+        if (session_status() === PHP_SESSION_ACTIVE){
+            $this->session->destroy();
+        }
 	    return redirect()->to('/');
     }
 
