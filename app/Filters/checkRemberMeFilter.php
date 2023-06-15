@@ -17,7 +17,7 @@ class checkRemberMeFilter implements FilterInterface
         if (model(LoginModel::class)->isLoggedIn()){
             return null;
         }
-        //dd("asd");
+        //dd("CheckFILTER, not loged");
         if(isset($_COOKIE) && isset($_COOKIE['remember_token'])){
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();

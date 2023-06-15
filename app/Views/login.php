@@ -9,8 +9,9 @@
         <input type="checkbox" id="rememberMe"  name="rememberMe"><label for="rememberMe">Remember me</label><br />
         <input id="submit_form" type="submit" value="Log in">
         <p class="alert"></p>
-        <p>Don't have an account yet? <a href="<?=base_url('register')?>">Register</a></p>
+        <a href="<?=base_url('password_reset')?>">Forgot password?</a>
     </form>
+    <p>Don't have an account yet?<a href="<?=base_url('register')?>">Register</a></p>
     <?php if(session('login_error')): ?>
     <p class="alert"><?=session('login_error');?></p>
     <?php endif; ?>

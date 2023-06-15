@@ -36,9 +36,15 @@ $routes->group('game', ['filter' => 'isLogged'], static function ($routes) {
         $routes->get('list', 'Character::list');
         $routes->get('create', 'Character::createView');
         $routes->post('create', 'Character::create');
+        $routes->delete('delete/(:segment)', 'Character::create/$1');
     });
-    $routes->get('lobby', 'Main::index');
-    $routes->get('/', 'Main::index');
+    //$routes->get('lobby', 'Main::index');
+    //$routes->get('/', 'Main::index');
+});
+
+$routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
+    $routes->get('manage', 'User::manage');
+    $routes->put('update', 'User::update');
 });
 
 $routes->get('/', 'Home::index');
