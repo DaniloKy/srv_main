@@ -5,6 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\CharacterModel;
+use Exception;
 use PHPUnit\Framework\Constraint\IsEmpty;
 use Psr\Log\LoggerInterface;
 
@@ -42,9 +43,13 @@ class Character extends BaseController
         if(!$count_results > 0){
             return $this->baseHomeView('signup/character/select', ["characters" => $data]);
         }
+        try{
         //$query_results = $this->character_model->getWhere(['belong_to' => session('userdata')['user']['id']]);
-        $response = $this->client->get('character/'.session('userdata')['user']['username']."?username=true");
-        $data = json_decode($response->getBody());
+            $response = $this->client->get('character/'.session('userdata')['user']['username']."?username=true");
+            $data = json_decode($response->getBody());
+        }catch(Exception $e){
+            return view("error/503", ['message' => $e]);
+        }
         //dd($data);
         return $this->baseHomeView('signup/character/select', ["characters" => $data]);
     }
@@ -64,9 +69,12 @@ class Character extends BaseController
     }
 
     public function createView(){
-        $response = $this->client->get('classes');
-        $data = json_decode($response->getBody());
-
+        try{
+            $response = $this->client->get('classes');
+            $data = json_decode($response->getBody());
+        }catch(Exception $e){
+            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+        }
         return $this->baseHomeView('signup/character/create', ["classes" => $data]);
     }
 

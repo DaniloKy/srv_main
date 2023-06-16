@@ -38,8 +38,8 @@ $routes->group('game', ['filter' => 'isLogged'], static function ($routes) {
         $routes->post('create', 'Character::create');
         $routes->delete('delete/(:segment)', 'Character::delete/$1');
     });
-    //$routes->get('lobby', 'Main::index');
-    //$routes->get('/', 'Main::index');
+    $routes->get('lobby', 'Main::index');
+    $routes->get('/', 'Main::index');
 });
 
 $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {

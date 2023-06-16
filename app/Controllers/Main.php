@@ -22,6 +22,6 @@ class Main extends BaseController
 
     public function index()
     {
-        return $this->baseMainView('signup/main');
+        return $this->baseGameView('signup/game/lobby');
     }
 }

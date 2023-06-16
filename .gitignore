@@ -5,7 +5,7 @@
 **/writable/cache/
 **/writable/session/
 **/writable/uploads/
-writable/debugbar/*
-writable/cache/*
-writable/session/*
-writable/uploads/*
+writable/debugbar/
+writable/cache/
+writable/session/
+writable/uploads/

@@ -22,6 +22,10 @@ class Validation extends BaseConfig
         'password' => 'required|min_length[4]|max_length[72]',
         'password_confirmation' => 'required|matches[password]',        
     ];
+
+    public $user_update = [
+        'username' =>'required|min_length[4]|max_length[16]|alpha_numeric_underscore',  
+    ];
     
 
     /**

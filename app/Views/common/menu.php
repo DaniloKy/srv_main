@@ -24,7 +24,7 @@
         <li>
             <span class="dropdown"><i class="bx bx-user-circle bx-sm"></i></span>
             <div class="dropdown_content visually-hidden">
-                <a href="<?=base_url('user/manage')?>">MANAGE ACCOUNT</a>
+                <a href="<?=base_url('user/manage')?>">ACCOUNT</a>
                 <a href="<?=base_url('logout')?>">LOGOUT</a>
             </div>
             <a href="<?=base_url('game/character/list')?>">PLAY</a>
@@ -32,3 +32,4 @@
         <?php endif; ?>
     </ul>
 </nav>
+<main>

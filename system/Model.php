@@ -166,7 +166,7 @@ class Model extends BaseModel
      */
 
     public function getById($id){
-        return $this->find($id);   
+        return $this->find($id);
     }
     
     public function getWhere($assoc, $first = false){

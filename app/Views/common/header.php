@@ -14,4 +14,3 @@
         <title><?=esc($title)?></title>
     </head>
     <body>
-        <main>

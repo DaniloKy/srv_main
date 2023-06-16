@@ -69,9 +69,9 @@ abstract class BaseController extends Controller
         . view('common/footer');
     }
 
-    public function baseMainView($body, $data = []){
+    public function baseGameView($body, $data = []){
         return view('common/header', ['title' => 'Home', 'cssPath' => 'css/main.css', 'jsPath' => 'js/script.js'])
-        . view('signup/common/menu')
+        . view('signup/game/menu')
         . view($body, $data)
         . view('common/footer');
     }
