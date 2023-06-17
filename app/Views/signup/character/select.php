@@ -4,7 +4,7 @@
         <div class="container">
         <?php if(isset($characters[0])): ?>
             <label class="card">
-                <img src="<?=base_url('images/'.$characters[0]->class.".svg")?>" alt="<?=$characters[0]->class?>">
+                <img src="<?=base_url('images/classes/'.$characters[0]->class.".svg")?>" alt="<?=$characters[0]->class?>">
                 <input type="radio" class="visually-hidden" required hidden name="character" value="<?=$characters[0]->id?>"/>
             </label>
         <?php else:?>
@@ -14,7 +14,7 @@
         <?php endif; ?>
         <?php if(isset($characters[1])): ?>
             <label class="card">
-                <img src="<?=base_url('images/'.$characters[1]->class.".svg")?>" alt="<?=$characters[1]->class?>">
+                <img src="<?=base_url('images/classes/'.$characters[1]->class.".svg")?>" alt="<?=$characters[1]->class?>">
                 <input type="radio" class="visually-hidden" hidden name="character" value="<?=$characters[1]->id?>"/>
             </label>
         <?php else:?>
@@ -24,7 +24,7 @@
         <?php endif; ?>
         <?php if(isset($characters[2])): ?>
             <label class="card">
-                <img src="<?=base_url('images/'.$characters[2]->class.".svg")?>" alt="<?=$characters[2]->class?>">
+                <img src="<?=base_url('images/classes/'.$characters[2]->class.".svg")?>" alt="<?=$characters[2]->class?>">
                 <input type="radio" class="visually-hidden" hidden name="character" value="<?=$characters[2]->id?>"/>
             </label>
         <?php else:?>
