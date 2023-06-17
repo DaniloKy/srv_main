@@ -16,6 +16,11 @@ class Validation extends BaseConfig
     // Setup
     // --------------------------------------------------------------------
 
+    public $createChar = [
+        'character' => 'required',
+        'character_name' => 'required|min_length[4]|max_length[16]|alpha_numeric_underscore',
+    ];
+
     public $signup = [
         'username' =>'required|min_length[4]|max_length[16]|alpha_numeric_underscore',
         'email' => 'required|valid_email',

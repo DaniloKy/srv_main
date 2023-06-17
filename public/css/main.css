@@ -199,13 +199,19 @@ footer{
     justify-content: space-between;
 }
 
-.class_list{
+.class_head{
     flex: 1;
 }
 
-.class_list h3{
+.class_head h3{
     display: flex;
     justify-content: center;
+}
+
+.class_list{
+    display: flex;
+    flex-wrap: wrap;
+    
 }
 
 .class_list > div{

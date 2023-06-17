@@ -76,7 +76,7 @@ class Session extends BaseController
                     $this->users_model->create($signup);
                     return redirect()->to('/');
                 }else
-                    $this->session->setFlashdata('register_error', 'Username already in use.');    
+                    $this->session->setFlashdata('register_error', 'Username already in use.');
             }else
                 $this->session->setFlashdata('register_error', 'Email already in use.');
         }
