@@ -113,7 +113,7 @@ class Character extends BaseController
     public function delete(){
         $deleteChar = $this->request->getPost();
         try{
-            $this->client->delete('character/'.$deleteChar['character_name']); 
+            $this->client->delete('character/'.session('userdata')['user']['id']."/".$deleteChar['character_name']);
         }catch(Exception $e){
             return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
         }

@@ -93,12 +93,13 @@ footer{
     margin-left: auto;
 }
 
-.navbar-list li a {
+.navbar-list li a{
     padding: 1em;
     display: inline-block;
     text-decoration: none;
     color: #000;
 }
+
 
 .navbar-list li a:hover {
     background-color: #ccc;
@@ -109,10 +110,14 @@ footer{
 }
 
 .dropdown {
-    padding: 0.5em;
+    padding: 1em;
     display: inline-block;
     text-decoration: none;
     color: #000;
+}
+
+.dropdown:hover{
+    background-color: #ccc;
 }
 
 .dropdown_content { 

@@ -24,6 +24,7 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'isLogged' => \App\Filters\isLoggedFilter::class,
+        'isAdmin' => \App\Filters\isAdminFilter::class,
         'checkRemberMe' => \App\Filters\checkRemberMeFilter::class
     ];
 
@@ -67,6 +68,9 @@ class Filters extends BaseConfig
      */
     public array $filters = [
         'isLogged' => [
+            
+        ],
+        'isAdmin' => [
             
         ],
         /*'notLogged' => [

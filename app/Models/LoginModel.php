@@ -37,6 +37,17 @@ class LoginModel extends Model
 		return false;
 	}
 
+	public function isAdmin(){
+		$userdata = $this->session->get('userdata');
+		if($userdata){
+			$user = $this->find($userdata['user']['id']);
+			if($user && $user['super'] == "1"){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function createSession($user_data){
 		$this->session->set('userdata', array('logged_in' =>TRUE, 'user'=>$user_data));
 	}

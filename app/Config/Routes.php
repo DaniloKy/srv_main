@@ -43,6 +43,21 @@ $routes->group('game', ['filter' => 'isLogged'], static function ($routes) {
 });
 
 $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
+    $routes->group('admin', ['filter' => 'isAdmin'], static function ($routes) {
+        $routes->get('manage', 'Admin::manage');
+        $routes->group('users', static function ($routes) {
+            $routes->get('manage', 'UserAdmin::manage');
+
+        });
+        $routes->group('classes', static function ($routes) {
+            $routes->get('manage', 'Classe::manage');
+
+        });
+        $routes->group('announcements', static function ($routes) {
+            $routes->get('manage', 'Announcement::manage');
+
+        });
+    });
     $routes->get('manage', 'User::manage');
     $routes->put('update', 'User::update');
 });
