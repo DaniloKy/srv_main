@@ -20,9 +20,9 @@ class MainSeeder extends Seeder
         ];
         $this->db->table('users')->insert($data_users);
 
-        $tags = ["news", "patches"];
-        for($i = 0; $i < count($tags); $i++)
-            $this->db->table('tags')->insert(["tag" => $tags[$i]]);
+
+        $this->db->table('tags')->insert(["tag" => "News", "tag_compiled" => "news"]);
+        $this->db->table('tags')->insert(["tag" => "Patch Notes", "tag_compiled" => "patch_notes"]);
         
     }
 }

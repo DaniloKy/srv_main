@@ -185,6 +185,10 @@ class Model extends BaseModel
 		return $val?:false;
 	}
 
+    public function listAll(){
+        return $this->get()->getResult();
+    }
+
     /**
      * Specify the table associated with a model
      *

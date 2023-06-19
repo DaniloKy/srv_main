@@ -17,7 +17,7 @@
 <div>
     <form action="<?=base_url("game/character/select")?>" method="POST" class="select_container">
         <div class="container">
-        <?php for($i = 0; $i < 3; $i++): ?>
+        <?php for($i = 0; $i < env('MAX_CHARACTERS'); $i++): ?>
             <?php $character = $characters[$i]??null;?>
             <?php if(isset($character)): ?>
             <div class="card">

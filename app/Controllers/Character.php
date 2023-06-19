@@ -62,7 +62,7 @@ class Character extends BaseController
         try{
             $response = $this->client->get('character/belong_to/'.session('userdata')['user']['id']);
             $char_data = json_decode($response->getBody());
-            if(count($char_data) >= 3){
+            if(count($char_data) >= env('MAX_CHARACTERS')){
                 return redirect('game/character/list');
             }
             $response = $this->client->get('classes');
@@ -82,7 +82,7 @@ class Character extends BaseController
                 $userId = session('userdata')['user']['id'];
                 $response = $this->client->get('character/belong_to/'.$userId);
                 $char_data = json_decode($response->getBody());
-                if(count($char_data) >= 3){
+                if(count($char_data) >= env('MAX_CHARACTERS')){
                     return redirect('game/character/list');
                 }
                 if(!$this->client->get('classes/'.$createChar['character'].'?name=true')){

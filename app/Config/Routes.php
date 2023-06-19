@@ -50,11 +50,15 @@ $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
 
         });
         $routes->group('classes', static function ($routes) {
-            $routes->get('manage', 'Classe::manage');
+            $routes->get('manage', 'ClassAdmin::manage');
 
         });
         $routes->group('announcements', static function ($routes) {
-            $routes->get('manage', 'Announcement::manage');
+            $routes->get('manage', 'AnnouncementAdmin::manage');
+
+        });
+        $routes->group('tags', static function ($routes) {
+            $routes->get('manage', 'TagsAdmin::manage');
 
         });
     });
@@ -64,6 +68,10 @@ $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
 
 $routes->get('/', 'Home::index');
 $routes->get('home', 'Home::index');
+$routes->get('how-to-play', 'Home::how-to-play');
+$routes->get('classes', 'Classes::index');
+$routes->get('announcements/(:segments)/(:segments)', 'Announcement::index/?1/?2');
+
 
 $routes->get('login', 'Session::login');
 $routes->post('login', 'Session::logining');

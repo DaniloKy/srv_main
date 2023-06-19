@@ -1,0 +1,15 @@
+set password after the email verif
+
+on register
+    if email already exists but status = 0 and verification_sent_at = 1hour old then consider accound inactive and can update accounts
+
+on password_reset when submit your email generate random code send an email and update on database
+    before authentication status 0
+    after authentication status 1
+
+    'ban'/'suspent' user = status -1
+
+
+
+captcha on register
+

@@ -45,7 +45,9 @@ class CreateDatabase extends Migration
             "verification_code" => [
                 "type" => "VARCHAR",
                 "constraint" => "8",
-                "null" => true,
+            ],
+            "verification_sent_at" => [
+                "type" => "TIMESTAMP",
             ],
             "status" => [
                 "type" => "TINYINT",
@@ -93,11 +95,6 @@ class CreateDatabase extends Migration
                 "constraint" => "100",
                 "null" => true,
             ],
-            "tag_id" => [
-                "type" => "INT",
-                "constraint" => 3,
-                "unsigned" => true,
-            ],
             "created_by" => [
                 "type" => "INT",
                 "constraint" => 11,
@@ -121,6 +118,11 @@ class CreateDatabase extends Migration
                 "auto_increment" => true,
             ],
             "tag" => [
+                "type" => "VARCHAR",
+                "constraint" => "100",
+                "unique" => true,
+            ],
+            "tag_compiled" => [
                 "type" => "VARCHAR",
                 "constraint" => "100",
                 "unique" => true,

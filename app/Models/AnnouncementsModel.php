@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class AnnouncementsModel extends Model
+{   
+
+    protected $table = 'announcements';
+    protected $allowedFields = ['title', 'title_compiled', 'description, image_path', 'created_by', 'created_at'];
+
+    public function create($validated){
+        $data = array(
+            'title' => $validated['title'],
+            'title_compiled' => url_title($validated['title'], '-', true),
+            'description' => $validated['description'],
+            'image_path' => $validated['image_path'],
+            'created_by' => $validated['created_by'],
+            'created_at' => date("Y-m-d H:i:s"),
+        );
+        return $this->insert($data);
+    }
+    
+}
+
+?>
