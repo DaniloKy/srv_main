@@ -9,26 +9,13 @@ window.onload = (event) => {
         });
     }
 
-    const characterInputs = document.querySelectorAll('input[name="character"]');
-    const classDetailDivs = document.querySelectorAll('.general_details');
-    console.log(characterInputs, classDetailDivs);
-    if(characterInputs != null && classDetailDivs != null){
-        characterInputs.forEach(function(input) {
-            input.addEventListener('change', function() {
-                const selectedClass = document.querySelector('input[name="character"]:checked').value;
-                console.log(selectedClass);
-                classDetailDivs.forEach(function(div) {
-                    console.log(div.id, selectedClass + '-details');
-                    if (div.id === selectedClass + '-details') {
-                        console.log("remove class 'visually-hidden' from div.id"); 
-                        div.classList.remove('visually-hidden');
-                    } else {
-                        div.classList.add('visually-hidden');
-                    }
-                });
-            });
+
+    const buttons = document.querySelectorAll('button[type="button"][data-characterId]');
+    for(const i of buttons){
+        const id = i.getAttribute("data-characterId");
+        const dialog = document.querySelector("dialog[data-characterId='"+id+"']");
+        i.addEventListener("click", function(e){
+            dialog.showModal();
         });
     }
-
-
 };

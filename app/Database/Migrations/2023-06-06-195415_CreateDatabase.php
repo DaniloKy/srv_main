@@ -181,25 +181,6 @@ class CreateDatabase extends Migration
         if ($this->forge->createTable("classes", true, ["ENGINE" => "InnoDB",]) === false) {
             throw new \RuntimeException("Could not create users table.");
         }
-
-        $this->forge->addField([
-            "game_id" => [
-                "type" => "BIGINT",
-                "constraint" => 20,
-                "unsigned" => true,
-            ],
-            "belong_to" => [
-                "type" => "INT",
-                "constraint" => 11,
-                "unsigned" => true,
-            ],
-            
-        ])->addPrimaryKey("game_id", "belong_to");
-
-        if ($this->forge->createTable("player_ids", true, ["ENGINE" => "InnoDB",]) === false) {
-            throw new \RuntimeException("Could not create users table.");
-        }
-
     }
 
     public function down()

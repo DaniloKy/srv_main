@@ -1,39 +1,41 @@
 <h1>CHOSE YOUR PLAYER</h1>
+
+<?php foreach($characters as $character): ?>
+    <?php if(isset($character)): ?>
+    <dialog data-characterId="<?=$character->id?>">
+        <p>Are you sure you want to delete <?=$character->username?></p>
+        <form action="<?=base_url('game/character/delete')?>" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="character_name" value="<?=$character->username?>">
+            <button type="submit">YES</button>
+            <button formmethod="dialog">NO</button>
+        </form>
+    </dialog>
+    <?php endif; ?>
+<?php endforeach;?>
+
 <div>
-    <form action="<?=base_url("game/character/select")?>" method="POST">
+    <form action="<?=base_url("game/character/select")?>" method="POST" class="select_container">
         <div class="container">
-        <?php if(isset($characters[0])): ?>
-            <label class="card">
-                <img src="<?=base_url('images/classes/'.$characters[0]->class.".svg")?>" alt="<?=$characters[0]->class?>">
-                <input type="radio" class="visually-hidden" required hidden name="character" value="<?=$characters[0]->id?>"/>
-            </label>
-        <?php else:?>
+        <?php for($i = 0; $i < 3; $i++): ?>
+            <?php $character = $characters[$i]??null;?>
+            <?php if(isset($character)): ?>
             <div class="card">
-                <a href="<?=base_url('game/character/create')?>" class="plus-icon"><div>+</div></a>
+                <button type="button" data-characterId="<?=$character->id?>">X</button>
+                <label>
+                    <h2><?=$character->username?></h2>
+                    <img src="<?=base_url('images/classes/'.$character->class_name.".svg")?>" alt="<?=$character->class_name?>">
+                    <input type="radio" class="visually-hidden" required hidden name="character" value="<?=$character->id?>"/>
+                </label>
             </div>
-        <?php endif; ?>
-        <?php if(isset($characters[1])): ?>
-            <label class="card">
-                <img src="<?=base_url('images/classes/'.$characters[1]->class.".svg")?>" alt="<?=$characters[1]->class?>">
-                <input type="radio" class="visually-hidden" hidden name="character" value="<?=$characters[1]->id?>"/>
-            </label>
-        <?php else:?>
-            <div class="card" onclick="selectCard(this)">
-                <a href="<?=base_url('game/character/create')?>"><div class="plus-icon">+</div></a>
-            </div>
-        <?php endif; ?>
-        <?php if(isset($characters[2])): ?>
-            <label class="card">
-                <img src="<?=base_url('images/classes/'.$characters[2]->class.".svg")?>" alt="<?=$characters[2]->class?>">
-                <input type="radio" class="visually-hidden" hidden name="character" value="<?=$characters[2]->id?>"/>
-            </label>
-        <?php else:?>
-            <div class="card">
-                <a href="<?=base_url('game/character/create')?>" class="plus-icon"><div>+</div></a>
-            </div>
-        <?php endif; ?>
+            <?php else:?>
+                <div class="card">
+                    <a href="<?=base_url('game/character/create')?>" class="plus-icon"><div>+</div></a>
+                </div>
+            <?php endif; ?>
+        <?php endfor;?>
         </div>
-        <button type="submit" class="select_btn">SELECT</button>
+        <button type="submit" class="class_btn select_btn">SELECT</button>
     </form>
     <?php if(session('error')): ?>
         <p class="alert"><?=session('error');?></p>

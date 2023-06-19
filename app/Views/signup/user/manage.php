@@ -14,7 +14,6 @@
         <label for="username">Username</label><br />
         <input id="username" type="text" name="username" value="<?= $userInfo['username'] ?? old('username') ?>"><br />
         <button id="submit_form" class="btn green" type="submit">Update profile</button>
-        <p class="alert"></p>
     </form>
     <a href="<?=base_url('user/change_password')?>">Change password</a>
     <?php if(session('login_error')): ?>

@@ -16,7 +16,7 @@
                             <?php if($c->name_compiled == $class) $current_class = $c?>
                             <div class="card_class">
                                 <p><?=$c->name?></p>
-                                <input type="radio" class="visually-hidden" required name="character" id="selected_character" <?php if($c->name_compiled == $class) echo 'checked'?> value="<?=$c->name_compiled?>"/>
+                                <input type="radio" class="visually-hidden" name="character" id="selected_character" <?php if($c->name_compiled == $class) echo 'checked'?> value="<?=$c->name_compiled?>"/>
                                 <label for="selected_character" class="select_character">
                                     <a href="?class=<?=$c->name_compiled?>"><img src="<?=base_url('images/classes/'.$c->name_compiled.".svg");?>" alt="<?=$c->name?>"></a>
                                 </label>
@@ -46,7 +46,7 @@
                 <label for="">CHARACTER NAME</label><br>
                 <input type="text" name="character_name" value="<?= old('character_name') ?>" placeholder="ID" >
             </div>
-            <button type="submit" class="select_btn">Confirm</button>
+            <button type="submit" class="class_btn">Confirm</button>
         </div>                        
     </form>
     <?php if(session('error')): ?>

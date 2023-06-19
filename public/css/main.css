@@ -1,4 +1,4 @@
-* { 
+*:not(dialog){ 
     margin: 0;
     border: 0;
     padding: 0;
@@ -66,10 +66,18 @@ footer{
 }
 
 .alert{
+    border: solid #222 0.2px;
+    background-color: #f1f1f1;
+    padding: 1em;
+    margin: 1em;
     color: #630526;
 }
 
 .success{
+    border: solid #222 0.2px;
+    background-color: #f1f1f1;
+    padding: 1em;
+    margin: 1em;
     color: #347d39;
 }
 
@@ -120,8 +128,13 @@ footer{
     width: 100%;
 }
 
+.select_container{
+    display: flex;
+    flex-direction: column;
+}
+
 .container {
-    margin: 1.5em;
+    margin: 5em 1.5em;
     display: flex;
     justify-content: space-evenly;
 }
@@ -138,12 +151,13 @@ footer{
 }
 
 .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 130%;
+    height: 130%;
+    margin-bottom: 20px;
+    margin-left: -30px;
 }
 
-.card p {
+.card h2 {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -151,6 +165,19 @@ footer{
     padding: 10px 0px;
     margin: 0;
     color: #222;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    text-align: center;
+}
+
+.card > button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    margin: 0;
+    color: #222;
+    text-decoration: none;
     background-color: rgba(255, 255, 255, 0.8);
     font-weight: bold;
     text-align: center;
@@ -291,7 +318,7 @@ footer{
     z-index: 2;
 }
 
-.select_btn{
+.class_btn{
     font-size: 20px;
     padding: 0.5em 2em;
     border: solid #222 2px;
@@ -301,7 +328,12 @@ footer{
     text-decoration: none;
 }
 
-.select_btn:hover{
+.class_btn.select_btn{
+    width: min-content;
+    margin: auto;
+}
+
+.class_btn:hover{
     background-color: rgba(0, 0, 0, 0.155);
 }
 
