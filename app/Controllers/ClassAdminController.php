@@ -30,12 +30,7 @@ class ClassAdminController extends BaseController
         return $results;
     }
 
-    public function createView(){
-        return $this->baseHomeView('');
-    }
-
     public function create(){
-        //dd($updateClass = $this->request->getRawInput());
         if($this->request->getMethod() == "post"){
             $createClass = $this->request->getPost();
             $val = $this->validate_form($createClass, 'createClass');
@@ -71,9 +66,7 @@ class ClassAdminController extends BaseController
                 }
                 $classImage = $this->request->getFile('image');
                 $valImage = $this->validate_form(['image' => $classImage], 'validImage');
-                //dd($classImage, $valImage);
                 if($classImage->isValid() && !$classImage->hasMoved() && $valImage){
-                    dd('valid');
                     $randName = $classImage->getRandomName();
                     $classImage->move('./images/publishedClasses', $randName);
                     $updateClass['image_path'] = $randName;
@@ -82,9 +75,9 @@ class ClassAdminController extends BaseController
                 $this->session->setFlashdata('success', 'Updated!');
                 return redirect('user/admin/classes/manage');
             }else
-                return redirect('user/admin/classes/edit/'.$class_id)->withInput();
+                return redirect()->to('user/admin/classes/edit/'.$class_id)->withInput();
         }
-        
+        return redirect()->to('user/admin/classes/manage');
     }
 
     public function updater($id){

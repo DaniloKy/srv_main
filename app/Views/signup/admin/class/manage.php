@@ -1,7 +1,7 @@
 <div>
+    <h1>Manage Publications</h1>
     <div>
         <table class="table">
-            <caption>Classes Public</caption>
             <thead>
                 <tr>
                     <th>Publication</th>
@@ -16,7 +16,7 @@
                         <tr>
                             <td><a href="<?=base_url("classes/".$class->name_compiled); ?>"><?="classes/".$class->name_compiled?></a></td>
                             <td><?=$class->name; ?></td>
-                            <td><?=word_limiter($class->description, 10, '...'); ?></td>
+                            <td><?=character_limiter($class->description, 30, '...'); ?></td>
                             <td>
                                 <a href="<?=base_url('user/admin/classes/edit/'.$class->id); ?>" class="btn">Edit</a>
                                 <a href="<?=base_url('user/admin/classes/delete'); ?> " class="btn danger">Del</a>
@@ -30,7 +30,6 @@
         </table>
     </div>
     <div>
-        <h1>Manage Publications</h1>
         <?php foreach(validation_errors() as $error): ?>
             <p class="alert"><?=$error?></p>
         <?php endforeach; ?>
