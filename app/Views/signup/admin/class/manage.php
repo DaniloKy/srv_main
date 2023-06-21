@@ -40,7 +40,8 @@
         <?php if(session('success')): ?>
             <p class="success"><?=session('success');?></p>
         <?php endif; ?>        
-        <form action="<?=base_url('user/admin/classes/'). ((isset($isPUT) && $isPUT) ? 'update' : 'create'); ?>" method="post" enctype="multipart/form-data" class="form">
+        <form action="<?=base_url('user/admin/classes/'). ((isset($isPUT) && $isPUT) ? 'update' : 'create'); ?>" method="post" 
+        <?=(isset($isPUT) && $isPUT)?"enctype='multipart/form-data'":"enctype='multipart/form-data'";?> class="form">
                 <?php if(isset($isPUT) && $isPUT):?>
                     <input type="hidden" name="_method" value="PUT">
                 <?php endif;?>
@@ -52,6 +53,10 @@
                 
                 <label for="image">Image</label><br />
                 <input id="image" name="image" type="file"/><br />
+
+                <?php if(isset($isPUT) && $isPUT):?>
+                <img src="<?=base_url('images/publishedClasses/').$classInfo['image_path']?>" alt="<?=$classInfo['name']?>" class="rounded p-4 mx-auto"><br />
+                <?php endif;?>
 
                 <input type="hidden" name="id" value="<?=$classInfo['id'] ?? null; ?>"/>
                 <button id="submit" class="btn green" type="submit"><?=(isset($isPUT) && $isPUT)?"Save Changes":"Publish";?></button>
