@@ -745,17 +745,16 @@ abstract class BaseModel
         if (! $this->skipValidation && ! $this->validate($data)) {
             // Restore $cleanValidationRules
             $this->cleanValidationRules = $cleanValidationRules;
-
             return false;
         }
 
         // Restore $cleanValidationRules
         $this->cleanValidationRules = $cleanValidationRules;
-
+        
         // Must be called first, so we don't
         // strip out created_at values.
         $data = $this->doProtectFields($data);
-
+        
         // doProtectFields() can further remove elements from
         // $data so we need to check for empty dataset again
         if (! $this->allowEmptyInserts && empty($data)) {
@@ -772,7 +771,7 @@ abstract class BaseModel
         if ($this->useTimestamps && $this->updatedField && ! array_key_exists($this->updatedField, $data)) {
             $data[$this->updatedField] = $date;
         }
-
+        
         $eventData = ['data' => $data];
 
         if ($this->tempAllowCallbacks) {
@@ -780,13 +779,13 @@ abstract class BaseModel
         }
 
         $result = $this->doInsert($eventData['data']);
-
+        
         $eventData = [
             'id'     => $this->insertID,
             'data'   => $eventData['data'],
             'result' => $result,
         ];
-
+        
         if ($this->tempAllowCallbacks) {
             // Trigger afterInsert events with the inserted data and new ID
             $this->trigger('afterInsert', $eventData);

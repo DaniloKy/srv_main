@@ -1,0 +1,63 @@
+<div>
+    <div>
+        <table class="table">
+            <caption>Classes Public</caption>
+            <thead>
+                <tr>
+                    <th>Publication</th>
+                    <th>Name</th>
+                    <th>Desciption</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if(isset($classes) && count($classes) > 0): ?>
+                    <?php foreach($classes as $class): ?>
+                        <tr>
+                            <td><a href="<?=base_url("classes/".$class->name_compiled); ?>"><?="classes/".$class->name_compiled?></a></td>
+                            <td><?=$class->name; ?></td>
+                            <td><?=word_limiter($class->description, 10, '...'); ?></td>
+                            <td>
+                                <a href="<?=base_url('user/admin/classes/edit/'.$class->id); ?>" class="btn">Edit</a>
+                                <a href="<?=base_url('user/admin/classes/delete'); ?> " class="btn danger">Del</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr><td>Nothing published yet.</td></tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h1>Manage Publications</h1>
+        <?php foreach(validation_errors() as $error): ?>
+            <p class="alert"><?=$error?></p>
+        <?php endforeach; ?>
+        <?php if(session('error')): ?>
+            <p class="alert"><?=session('error');?></p>
+        <?php endif; ?>
+        <?php if(session('success')): ?>
+            <p class="success"><?=session('success');?></p>
+        <?php endif; ?>        
+        <form action="<?=base_url('user/admin/classes/'). ((isset($isPUT) && $isPUT) ? 'update' : 'create'); ?>" method="post" enctype="multipart/form-data" class="form">
+                <?php if(isset($isPUT) && $isPUT):?>
+                    <input type="hidden" name="_method" value="PUT">
+                <?php endif;?>
+                <label for="name">Name</label><br />
+                <input id="name" name="name" value="<?= $classInfo['name'] ?? old('name') ?>"/><br />
+                
+                <label for="description">Desciption</label><br />
+                <textarea id="description" name="description"><?= $classInfo['description'] ?? old('description') ?></textarea><br />
+                
+                <label for="image">Image</label><br />
+                <input id="image" name="image" type="file"/><br />
+
+                <input type="hidden" name="id" value="<?=$classInfo['id'] ?? null; ?>"/>
+                <button id="submit" class="btn green" type="submit"><?=(isset($isPUT) && $isPUT)?"Save Changes":"Publish";?></button>
+                <?php if(isset($isPUT) && $isPUT):?>
+                    <a href="<?=base_url('user/admin/classes/manage')?>" class="btn">Cancel</a>
+                <?php endif;?>
+        </form>
+    </div>
+</div>

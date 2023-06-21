@@ -756,7 +756,7 @@ class Model extends BaseModel
 
         $this->escape   = $this->tempData['escape'] ?? [];
         $this->tempData = [];
-
+        
         return parent::insert($data, $returnID);
     }
 
