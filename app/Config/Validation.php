@@ -41,6 +41,9 @@ class Validation extends BaseConfig
     public $updateClass = [
         'name' => 'required|max_length[100]',
         'description' => 'required|max_length[500]',
+    ];
+
+    public $validImage = [
         'image' => 'max_size[image, 1024]|ext_in[image,png,jpg,jpeg,svg]',
     ];
     

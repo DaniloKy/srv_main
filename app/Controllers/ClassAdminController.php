@@ -55,29 +55,34 @@ class ClassAdminController extends BaseController
             }else
                 return redirect('user/admin/classes/manage')->withInput();
         }else if($this->request->getMethod() == "put"){
-            $updateClass = $this->request->getRawInput();
-            //dd($updateClass);
-            //return var_dump($updateClass);
-            //$val = $this->validate_form($updateClass, 'updateClass');
-            //if($val){
-                //if(!$this->class_model->getWhere(['name' => $updateClass['name']], true)){
-                    $classImage = $this->request->getFile('image');
-                    dd($updateClass, $classImage);
-                    if($classImage != null && $classImage->isValid() && !$classImage->hasMoved()){
-                        $randName = $classImage->getRandomName();
-                        $classImage->move('./images/publishedClasses', $randName);
-                        $data['image_path'] = $randName;
+            $updateClass = [
+                'name' => $this->request->getVar('name'),
+                'description' => $this->request->getVar('description'),
+            ];
+            $class_id = $this->request->getVar('id');
+            $val = $this->validate_form($updateClass, 'updateClass');
+            if($val){
+                $existing = $this->class_model->getById($class_id);
+                if($existing['name'] !== $updateClass['name']){                    
+                    if($this->class_model->getWhere(['name' => $updateClass['name']], true)){
+                        $this->session->setFlashdata('error', 'Publication with the same name already exists.');
+                        return redirect('user/admin/classes/edit/'.$class_id)->withInput();
                     }
-                    $data['name'] = $updateClass['name'];
-                    $data['description'] = $updateClass['description'];
-                    dd($data);
-                    $this->class_model->update($updateClass['id'], $data);
-                    $this->session->setFlashdata('success', 'Updated!');
-                    return redirect('user/admin/classes/manage');
-                //}else
-                    //$this->session->setFlashdata('error', 'Publication with the same name already exists.');
-            //}else
-                //return redirect('user/admin/classes/edit/'.$updateClass['id'])->withInput();
+                }
+                $classImage = $this->request->getFile('image');
+                $valImage = $this->validate_form(['image' => $classImage], 'validImage');
+                //dd($classImage, $valImage);
+                if($classImage->isValid() && !$classImage->hasMoved() && $valImage){
+                    dd('valid');
+                    $randName = $classImage->getRandomName();
+                    $classImage->move('./images/publishedClasses', $randName);
+                    $updateClass['image_path'] = $randName;
+                }
+                $this->class_model->update($class_id, $updateClass);
+                $this->session->setFlashdata('success', 'Updated!');
+                return redirect('user/admin/classes/manage');
+            }else
+                return redirect('user/admin/classes/edit/'.$class_id)->withInput();
         }
         
     }
