@@ -39,7 +39,16 @@ class ClassAdminController extends BaseController
                     $classImage = $this->request->getFile('image');
                     if($classImage->isValid() && !$classImage->hasMoved()){
                         $randName = $classImage->getRandomName();
-                        $classImage->move('./images/publishedClasses', $randName);
+                        $imageStatus = $classImage->move('./images/publishedClasses', $randName);
+                        if($imageStatus)
+                            $this->makeThumb($randName);
+                        /*try {
+                            $image->withFile(base_url('images/publishedClasses/').$randName)
+                                ->fit(100, 100, 'center')
+                                ->save(base_url('images/thumb/publishedClasses/').$randName);
+                        } catch (CodeIgniter\Images\Exceptions\ImageException $e) {
+                            echo $e->getMessage();
+                        }*/
                         $createClass['image_path'] = $randName;
                         $this->class_model->create($createClass);
                         $this->session->setFlashdata('success', 'Published!');
@@ -69,6 +78,7 @@ class ClassAdminController extends BaseController
                 if($classImage->isValid() && !$classImage->hasMoved() && $valImage){
                     $randName = $classImage->getRandomName();
                     $classImage->move('./images/publishedClasses', $randName);
+                    
                     $updateClass['image_path'] = $randName;
                 }
                 $this->class_model->update($class_id, $updateClass);
@@ -80,14 +90,37 @@ class ClassAdminController extends BaseController
         return redirect()->to('user/admin/classes/manage');
     }
 
+    public function makeThumb($fileName){
+        $image = \Config\Services::image('gd');
+        try {
+            $image->withFile('./images/publishedClasses/'.$fileName)
+                ->fit(100, 100, 'center')
+                ->save('./images/thumb/publishedClasses/'.$fileName);
+        } catch (CodeIgniter\Images\Exceptions\ImageException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function resizeImage($fileName, $width, $height, $path){
+        $image = \Config\Services::image('gd');
+        try {
+            $image->withFile('./images/publishedClasses/'.$fileName)
+                ->fit($width, $height, 'center')
+                ->save('./images/thumb/publishedClasses/'.$fileName);
+        } catch (CodeIgniter\Images\Exceptions\ImageException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     public function updater($id){
         $results = $this->class_model->getById($id);
         $data = $this->list();
         return $this->baseHomeView('signup/admin/class/manage', ['isPUT' => true, 'classes' => $data, 'classInfo' => $results]);
     }
 
-    public function delete(){
-        return null;
+    public function delete($id){
+        $this->class_model->delete(['id' => $id]);
+        return redirect()->to('user/admin/classes/manage');
     }
 
 }

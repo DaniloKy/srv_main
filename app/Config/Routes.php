@@ -52,9 +52,9 @@ $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
         $routes->group('classes', static function ($routes) {
             $routes->get('manage', 'ClassAdminController::manage');
             $routes->post('create', 'ClassAdminController::create');
-            $routes->get('edit/(:any)', 'ClassAdminController::updater/$1');
+            $routes->get('edit/(:num)', 'ClassAdminController::updater/$1');
             $routes->put('update', 'ClassAdminController::create');
-            $routes->delete('delete', 'ClassAdminController::delete');
+            $routes->get('delete/(:num)', 'ClassAdminController::delete/$1');
         });
         $routes->group('announcements', static function ($routes) {
             $routes->get('manage', 'AnnouncementAdmin::manage');

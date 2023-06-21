@@ -13,13 +13,20 @@
             <tbody>
                 <?php if(isset($classes) && count($classes) > 0): ?>
                     <?php foreach($classes as $class): ?>
+                        <dialog data-characterId="<?=$class->id?>">
+                        <form>
+                            <p>Are you sure you want to delete '<?=$class->name?>'?</p>
+                            <a href="<?=base_url('user/admin/classes/delete/'.$class->id); ?> " class="btn danger">YES</a>
+                            <button formmethod="dialog">NO</button>
+                        </form>
+                        </dialog>
                         <tr>
                             <td><a href="<?=base_url("classes/".$class->name_compiled); ?>"><?="classes/".$class->name_compiled?></a></td>
                             <td><?=$class->name; ?></td>
                             <td><?=character_limiter($class->description, 30, '...'); ?></td>
                             <td>
                                 <a href="<?=base_url('user/admin/classes/edit/'.$class->id); ?>" class="btn">Edit</a>
-                                <a href="<?=base_url('user/admin/classes/delete'); ?> " class="btn danger">Del</a>
+                                <button type="button" data-characterId="<?=$class->id?>" class="btn danger">Delete</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -54,7 +61,7 @@
                 <input id="image" name="image" type="file"/><br />
 
                 <?php if(isset($isPUT) && $isPUT):?>
-                <img src="<?=base_url('images/publishedClasses/').$classInfo['image_path']?>" alt="<?=$classInfo['name']?>" class="rounded p-4 mx-auto"><br />
+                <img src="<?=base_url('images/thumb/publishedClasses/').$classInfo['image_path']?>" alt="<?=$classInfo['name']?>" class="rounded p-4 mx-auto"><br />
                 <?php endif;?>
 
                 <input type="hidden" name="id" value="<?=$classInfo['id'] ?? null; ?>"/>

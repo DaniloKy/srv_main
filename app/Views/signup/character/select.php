@@ -2,8 +2,8 @@
 
 <?php foreach($characters as $character): ?>
     <?php if(isset($character)): ?>
-    <dialog data-characterId="<?=$character->id?>">
-        <p>Are you sure you want to delete <?=$character->username?></p>
+    <dialog data-characterId="<?=$character->id?>" class="confirm_delete">
+        <p>Are you sure you want to delete '<?=$character->username?>'?</p>
         <form action="<?=base_url('game/character/delete')?>" method="post">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="character_name" value="<?=$character->username?>">
