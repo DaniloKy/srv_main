@@ -54,7 +54,7 @@ $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
             $routes->post('create', 'ClassAdminController::create');
             $routes->get('edit/(:num)', 'ClassAdminController::updater/$1');
             $routes->put('update', 'ClassAdminController::create');
-            $routes->get('delete/(:num)', 'ClassAdminController::delete/$1');
+            $routes->delete('delete', 'ClassAdminController::delete');
         });
         $routes->group('announcements', static function ($routes) {
             $routes->get('manage', 'AnnouncementAdmin::manage');
@@ -73,6 +73,7 @@ $routes->get('/', 'Home::index');
 $routes->get('home', 'Home::index');
 $routes->get('how-to-play', 'Home::how-to-play');
 $routes->get('classes', 'ClassController::index');
+$routes->get('classes/(:any)', 'ClassController::get/$1');
 $routes->get('announcements/(:segments)/(:segments)', 'Announcement::index/?1/?2');
 
 

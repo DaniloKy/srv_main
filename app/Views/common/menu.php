@@ -7,7 +7,7 @@
             <a href="#">GAME</a>
         </li>
         <li>
-            <a href="#">CLASSES</a>
+            <a href="<?=base_url('classes')?>">CLASSES</a>
         </li>
         <li>
             <a href="#">NEWS</a>

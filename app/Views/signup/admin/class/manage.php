@@ -13,12 +13,14 @@
             <tbody>
                 <?php if(isset($classes) && count($classes) > 0): ?>
                     <?php foreach($classes as $class): ?>
-                        <dialog data-characterId="<?=$class->id?>">
-                        <form>
+                        <dialog data-characterId="<?=$class->id?>" class="delete_confirm">
                             <p>Are you sure you want to delete '<?=$class->name?>'?</p>
-                            <a href="<?=base_url('user/admin/classes/delete/'.$class->id); ?> " class="btn danger">YES</a>
-                            <button formmethod="dialog">NO</button>
-                        </form>
+                            <form action="<?=base_url('user/admin/classes/delete')?>" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="id" value="<?=$class->id?>">
+                                <button type="submit" class="btn danger">YES</button>
+                                <button formmethod="dialog" class="btn">NO</button>
+                            </form>
                         </dialog>
                         <tr>
                             <td><a href="<?=base_url("classes/".$class->name_compiled); ?>"><?="classes/".$class->name_compiled?></a></td>
@@ -60,8 +62,8 @@
                 <label for="image">Image</label><br />
                 <input id="image" name="image" type="file"/><br />
 
-                <?php if(isset($isPUT) && $isPUT):?>
-                <img src="<?=base_url('images/thumb/publishedClasses/').$classInfo['image_path']?>" alt="<?=$classInfo['name']?>" class="rounded p-4 mx-auto"><br />
+                <?php if(isset($isPUT) && $isPUT && isset($classInfo['image_path'])):?>
+                <img src="<?=base_url('images/thumb/classes/').$classInfo['image_path']?>" alt="<?=$classInfo['name']?>" class="rounded p-4 mx-auto"><br />
                 <?php endif;?>
 
                 <input type="hidden" name="id" value="<?=$classInfo['id'] ?? null; ?>"/>

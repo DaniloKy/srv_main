@@ -19,10 +19,14 @@ class ClassController extends BaseController
         parent::initController($request, $response, $logger);
     }
 
-    public function manage(){
+    public function index(){
         $data = $this->list();
-        dd($data);
-        return $this->baseHomeView('signup/admin/manage', $data);
+        return $this->baseHomeView('classes/index', ['classes' => $data]);
+    }
+
+    public function get($name){
+        $data = $this->classe_model->getWhere(['name' => $name]);
+        return $this->baseHomeView('classes/details', ['class' => $data]);
     }
 
     public function list(){

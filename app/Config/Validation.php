@@ -35,7 +35,7 @@ class Validation extends BaseConfig
     public $createClass = [
         'name' => 'required|max_length[100]|alpha_numeric_underscore',
         'description' => 'required|max_length[500]',
-        'image' => 'uploaded[image]|max_size[image, 1024]|ext_in[image,png,jpg,jpeg,svg]',
+        'image' => 'uploaded[image]|max_size[image, 1024]|ext_in[image,png,jpg,jpeg]',
     ];
 
     public $updateClass = [
@@ -44,7 +44,7 @@ class Validation extends BaseConfig
     ];
 
     public $validImage = [
-        'image' => 'max_size[image, 1024]|ext_in[image,png,jpg,jpeg,svg]',
+        'image' => 'max_size[image, 1024]|ext_in[image,png,jpg,jpeg]',
     ];
     
     
