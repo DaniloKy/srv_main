@@ -76,4 +76,28 @@ abstract class BaseController extends Controller
         . view('common/footer');
     }
 
+    public function delteFiles($folder ,$file){
+        unlink('./images/storage/'.$folder.'/'.$file);
+        unlink('./images/thumb/'.$folder.'/'.$file);
+        unlink('./images/publish/'.$folder.'/'.$file);
+    }
+
+    public function resizeImage($fileName, $place, $path, $width, $height){
+        $imageService = \Config\Services::image('gd');
+        $imageService->withFile('./images/storage/'.$path.'/'.$fileName)
+            ->fit($width, $height, 'center')
+            ->save('./images/'.$place.'/'.$path.'/'.$fileName);
+    }
+
+    public function upload_image($path, $image){
+        $randName = $image->getRandomName();
+        //dd('./images/storage/'.$path);
+        $imageStatus = $image->move('./images/storage/'.$path, $randName);
+        if($imageStatus){
+            $this->resizeImage($randName, 'thumb', $path, 250, 250);
+            $this->resizeImage($randName, 'publish', $path, 1650, 1250);
+        }
+        return $randName;
+    }
+
 }

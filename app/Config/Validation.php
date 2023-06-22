@@ -43,6 +43,17 @@ class Validation extends BaseConfig
         'description' => 'required|max_length[500]',
     ];
 
+    public $createAnnouncement = [
+        'title' => 'required|max_length[100]|alpha_numeric_underscore',
+        'description' => 'required|max_length[500]',
+        'image' => 'uploaded[image]|max_size[image, 1024]|ext_in[image,png,jpg,jpeg]',
+    ];
+
+    public $updateAnnouncement = [
+        'title' => 'required|max_length[100]',
+        'description' => 'required|max_length[500]',
+    ];
+
     public $validImage = [
         'image' => 'max_size[image, 1024]|ext_in[image,png,jpg,jpeg]',
     ];

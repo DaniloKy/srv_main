@@ -57,8 +57,11 @@ $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
             $routes->delete('delete', 'ClassAdminController::delete');
         });
         $routes->group('announcements', static function ($routes) {
-            $routes->get('manage', 'AnnouncementAdmin::manage');
-
+            $routes->get('manage', 'AnnouncementAdminController::manage');
+            $routes->post('create', 'AnnouncementAdminController::create');
+            $routes->get('edit/(:num)', 'AnnouncementAdminController::updater/$1');
+            $routes->put('update', 'AnnouncementAdminController::create');
+            $routes->delete('delete', 'AnnouncementAdminController::delete');
         });
         $routes->group('tags', static function ($routes) {
             $routes->get('manage', 'TagsAdmin::manage');
