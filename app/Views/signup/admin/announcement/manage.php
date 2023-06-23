@@ -52,8 +52,7 @@
         <?php if(session('success')): ?>
             <p class="success"><?=session('success');?></p>
         <?php endif; ?>        
-        <form action="<?=base_url('user/admin/announcements/'). ((isset($isPUT) && $isPUT) ? 'update' : 'create'); ?>" method="post" 
-        <?=(isset($isPUT) && $isPUT)?"enctype='multipart/form-data'":"enctype='multipart/form-data'";?> class="form">
+        <form action="<?=base_url('user/admin/announcements/'). ((isset($isPUT) && $isPUT) ? 'update' : 'create'); ?>" method="post" enctype='multipart/form-data' class="form">
                 <?php if(isset($isPUT) && $isPUT):?>
                     <input type="hidden" name="_method" value="PUT">
                 <?php endif;?>
@@ -66,13 +65,18 @@
                 <label for="image">Image</label><br />
                 <input id="image" name="image" type="file"/><br />
 
-                
-                <?php if(isset($tags) && count($tags) > 0): ?>
-                    <?php foreach($tags as $tag): ?>
-                        <label for="<?=$tag->id?>"><?=$tag->tag?></label><br />
-                        <input type="checkbox" name="tags[<?=$tag->tag_compiled;?>]" id="<?=$tag->id;?>"><br />
-                        <?php endforeach; ?>
-                <?php endif; ?>
+                <fieldset class="form">
+                    <legend>Tags</legend>
+                    <?php if(isset($tags) && count($tags) > 0): ?>
+                        <?php foreach($tags as $tag): ?>
+                            <label for="<?=$tag->id?>"><?=$tag->tag?></label>
+                            <input type="checkbox" name="tags[<?=$tag->tag_compiled;?>]" id="<?=$tag->id;?>"><br />
+                            <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No tags</p>
+                    <?php endif; ?>
+                    <a href="<?=base_url('user/admin/tags/manage');?>">Create tags</a>
+                </fieldset>
 
                 <?php if(isset($isPUT) && $isPUT && isset($annInfo['image_path'])):?>
                 <img src="<?=base_url('images/thumb/announcements/').$annInfo['image_path']?>" alt="<?=$annInfo['title']?>" class="rounded p-4 mx-auto"><br />

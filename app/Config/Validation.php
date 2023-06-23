@@ -33,7 +33,7 @@ class Validation extends BaseConfig
     ];
 
     public $createClass = [
-        'name' => 'required|max_length[100]|alpha_numeric_underscore',
+        'name' => 'required|max_length[100]',
         'description' => 'required|max_length[500]',
         'image' => 'uploaded[image]|max_size[image, 1024]|ext_in[image,png,jpg,jpeg]',
     ];
@@ -44,7 +44,7 @@ class Validation extends BaseConfig
     ];
 
     public $createAnnouncement = [
-        'title' => 'required|max_length[100]|alpha_numeric_underscore',
+        'title' => 'required|max_length[100]',
         'description' => 'required|max_length[500]',
         'image' => 'uploaded[image]|max_size[image, 1024]|ext_in[image,png,jpg,jpeg]',
     ];
@@ -53,9 +53,13 @@ class Validation extends BaseConfig
         'title' => 'required|max_length[100]',
         'description' => 'required|max_length[500]',
     ];
-
+    
     public $validImage = [
         'image' => 'max_size[image, 1024]|ext_in[image,png,jpg,jpeg]',
+    ];
+
+    public $createTags = [
+        'tag' => 'required|max_length[100]',
     ];
     
     

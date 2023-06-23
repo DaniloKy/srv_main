@@ -64,8 +64,9 @@ $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
             $routes->delete('delete', 'AnnouncementAdminController::delete');
         });
         $routes->group('tags', static function ($routes) {
-            $routes->get('manage', 'TagsAdmin::manage');
-
+            $routes->get('manage', 'TagsAdminController::manage');
+            $routes->post('create', 'TagsAdminController::create');
+            $routes->delete('delete', 'TagsAdminController::delete');
         });
     });
     $routes->get('manage', 'User::manage');

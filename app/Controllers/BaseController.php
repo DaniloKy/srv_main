@@ -76,10 +76,10 @@ abstract class BaseController extends Controller
         . view('common/footer');
     }
 
-    public function delteFiles($folder ,$file){
-        unlink('./images/storage/'.$folder.'/'.$file);
-        unlink('./images/thumb/'.$folder.'/'.$file);
-        unlink('./images/publish/'.$folder.'/'.$file);
+    public function delteImages($folder ,$file){
+        (file_exists('./images/storage/'.$folder.'/'.$file))?unlink('./images/storage/'.$folder.'/'.$file):log_message('error', '[ERROR] {exception}', ['exception' => 'Error on image delete']);
+        (file_exists('./images/storage/'.$folder.'/'.$file))?unlink('./images/thumb/'.$folder.'/'.$file):log_message('error', '[ERROR] {exception}', ['exception' => 'Error on image delete']);
+        (file_exists('./images/storage/'.$folder.'/'.$file))?unlink('./images/publish/'.$folder.'/'.$file):log_message('error', '[ERROR] {exception}', ['exception' => 'Error on image delete']);
     }
 
     public function resizeImage($fileName, $place, $path, $width, $height){

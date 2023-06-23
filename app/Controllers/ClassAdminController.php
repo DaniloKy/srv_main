@@ -67,7 +67,7 @@ class ClassAdminController extends BaseController
                 if($classImage->isValid() && !$classImage->hasMoved()){
                     $valImage = $this->validate_form(['image' => $classImage], 'validImage');
                     if($valImage){
-                        $this->delteFiles('classes', $existing['image_path']);
+                        $this->delteImages($this->ann_model->table, $existing['image_path']);
                         $updateClass['image_path'] = $this->upload_image($this->class_model->table, $classImage);
                     }else
                         return redirect()->to('user/admin/classes/edit/'.$class_id)->withInput();                
@@ -91,7 +91,7 @@ class ClassAdminController extends BaseController
         $deleteChar = $this->request->getPost();
         $class = $this->class_model->getById($deleteChar['id']);
         if($class){
-            $this->delteFiles('classes', $class['image_path']);
+            $this->delteImages('classes', $class['image_path']);
             $this->class_model->delete(['id' => $deleteChar['id']]);
         }
         return redirect()->to('user/admin/classes/manage');

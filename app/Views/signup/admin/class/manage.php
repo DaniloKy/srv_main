@@ -48,8 +48,7 @@
         <?php if(session('success')): ?>
             <p class="success"><?=session('success');?></p>
         <?php endif; ?>        
-        <form action="<?=base_url('user/admin/classes/'). ((isset($isPUT) && $isPUT) ? 'update' : 'create'); ?>" method="post" 
-        <?=(isset($isPUT) && $isPUT)?"enctype='multipart/form-data'":"enctype='multipart/form-data'";?> class="form">
+        <form action="<?=base_url('user/admin/classes/'). ((isset($isPUT) && $isPUT) ? 'update' : 'create'); ?>" method="post" enctype='multipart/form-data' class="form">
                 <?php if(isset($isPUT) && $isPUT):?>
                     <input type="hidden" name="_method" value="PUT">
                 <?php endif;?>
