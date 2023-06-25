@@ -135,6 +135,12 @@ class CreateDatabase extends Migration
         }
 
         $this->forge->addField([
+            "id" => [
+                "type" => "INT",
+                "constraint" => 11,
+                "unsigned" => true,
+                "auto_increment" => true,
+            ],
             "announcement_id" => [
                 "type" => "INT",
                 "constraint" => 11,
@@ -146,7 +152,7 @@ class CreateDatabase extends Migration
                 "unsigned" => true,
             ],
             
-        ])->addPrimaryKey("announcement_id, tag_id");
+        ])->addPrimaryKey("id");
 
         if ($this->forge->createTable("announcements_tags", true, ["ENGINE" => "InnoDB",]) === false) {
             throw new \RuntimeException("Could not create users table.");

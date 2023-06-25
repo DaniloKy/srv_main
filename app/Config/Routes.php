@@ -75,11 +75,13 @@ $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
 
 $routes->get('/', 'Home::index');
 $routes->get('home', 'Home::index');
-$routes->get('how-to-play', 'Home::how-to-play');
+$routes->get('how-to-play', 'Home::howToPlay');
 $routes->get('classes', 'ClassController::index');
 $routes->get('classes/(:any)', 'ClassController::get/$1');
-$routes->get('announcements/(:segments)/(:segments)', 'Announcement::index/?1/?2');
 
+$routes->get('announcements', 'Announcement::index');
+$routes->get('announcements/(:any)', 'Announcement::getByTag/$1');
+$routes->get('announcements/(:any)/(:any)', 'Announcement::getByTagAndName/$1/$2');
 
 $routes->get('login', 'Session::login');
 $routes->post('login', 'Session::logining');

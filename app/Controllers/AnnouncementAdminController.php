@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\AnnouncementsTagsModel;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
@@ -11,6 +12,7 @@ class AnnouncementAdminController extends BaseController
 {
     protected $ann_model;
     protected $tag_model;
+    protected $ann_tag_model;
     
     public function initController(
         RequestInterface $request,
@@ -19,6 +21,7 @@ class AnnouncementAdminController extends BaseController
     ) {
         $this->ann_model = model(AnnouncementsModel::class);
         $this->tag_model = model(TagsModel::class);
+        $this->ann_tag_model = model(AnnouncementsTagsModel::class);
         parent::initController($request, $response, $logger);
     }
 
@@ -43,7 +46,14 @@ class AnnouncementAdminController extends BaseController
                     if($annImage->isValid() && !$annImage->hasMoved()){
                         $createAnn['image_path'] = $this->upload_image($this->ann_model->table, $annImage);
                         $createAnn['created_by'] = session('userdata')['user']['id'];
-                        $this->ann_model->create($createAnn);
+                        $id = $this->ann_model->create($createAnn);
+                        if(count($createAnn['tags']) > 0){
+                            foreach($createAnn['tags'] as $tag => $on){
+                                if($etag = $this->tag_model->getById($tag)){
+                                    $this->ann_tag_model->create(['announcement_id' => $id, 'tag_id' => $etag['id']]);
+                                }
+                            }
+                        }
                         $this->session->setFlashdata('success', 'Published!');
                         return redirect('user/admin/announcements/manage');
                     }
@@ -53,15 +63,16 @@ class AnnouncementAdminController extends BaseController
             return redirect()->to('user/admin/announcements/manage')->withInput();
         }else if($this->request->getMethod() == "put"){
             $updateAnn = [
-                'name' => $this->request->getVar('name'),
+                'title' => $this->request->getVar('title'),
                 'description' => $this->request->getVar('description'),
+                'tags' => $this->request->getVar('tags'),
             ];
             $ann_id = $this->request->getVar('id');
             $val = $this->validate_form($updateAnn, 'updateAnnouncement');
             if($val){
                 $existing = $this->ann_model->getById($ann_id);
-                if($existing['name'] !== $updateAnn['name']){
-                    if($this->ann_model->getWhere(['name' => $updateAnn['name']], true)){
+                if($existing['title'] !== $updateAnn['title']){
+                    if($this->ann_model->getWhere(['title' => $updateAnn['title']], true)){
                         $this->session->setFlashdata('error', 'Publication with the same name already exists.');
                         return redirect()->to('user/admin/announcements/edit/'.$ann_id)->withInput();
                     }
@@ -75,6 +86,21 @@ class AnnouncementAdminController extends BaseController
                     }else
                         return redirect()->to('user/admin/announcements/edit/'.$ann_id)->withInput();                
                 }
+                //dd($updateAnn['tags'], );
+                /*
+                $currentTags = $this->containTags($ann_id);
+                foreach($updateAnn['tags'] as $tag => $on){
+                    foreach($currentTags as $cTag => $on){
+                        if($tag == $cTag){
+                            return "has";
+                        }else{
+                            return "no ghas";
+                        }
+                            $this->ann_tag_model->delete(['announcement_id' => $ann_id, 'tag_id' => $etag['id']]);
+                            $this->ann_tag_model->delete(['announcement_id' => $ann_id, 'tag_id' => $etag['id']]);
+                    }
+                }
+                */
                 $this->ann_model->update($ann_id, $updateAnn);
                 $this->session->setFlashdata('success', 'Updated!');
                 return redirect('user/admin/announcements/manage');
@@ -87,7 +113,18 @@ class AnnouncementAdminController extends BaseController
     public function updater($id){
         $results = $this->ann_model->getById($id);
         $data = $this->list();
-        return $this->baseHomeView('signup/admin/announcement/manage', ['isPUT' => true, 'announcements' => $data, 'annInfo' => $results], ['title' => 'Update Announcement']);
+        $tags = $this->tag_model->listAll();
+        $check_tags = $this->containTags($id);
+        return $this->baseHomeView('signup/admin/announcement/manage', ['isPUT' => true, 'announcements' => $data, 'tags' => $tags, 'annInfo' => $results, 'check_tags' => $check_tags], ['title' => 'Update Announcement']);
+    }
+
+    public function containTags($id){
+        $check_tags = $this->ann_tag_model->getWhere(['announcement_id' => $id]);
+        $tags = [];
+        foreach($check_tags as $tag){
+            $tags[] = $this->tag_model->getById($tag->tag_id);
+        }
+        return $tags;
     }
 
     public function delete(){
@@ -96,6 +133,7 @@ class AnnouncementAdminController extends BaseController
         if($ann){
             $this->delteImages('announcements', $ann['image_path']);
             $this->ann_model->delete(['id' => $deleteChar['id']]);
+            $this->ann_tag_model->delete(['announcement_id' => $deleteChar['id']]);
         }
         return redirect()->to('user/admin/announcements/manage');
     }

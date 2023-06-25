@@ -4,16 +4,16 @@
             <a href="<?=base_url('/')?>">SRV UTP</a>
         </li>
         <li>
-            <a href="#">GAME</a>
+            <a href="<?=base_url('how-to-play')?>">GAME</a>
         </li>
         <li>
             <a href="<?=base_url('classes')?>">CLASSES</a>
         </li>
         <li>
-            <a href="#">NEWS</a>
+            <a href="<?=base_url('announcements/news')?>">NEWS</a>
         </li>
         <li>
-            <a href="#">PATCH NOTES</a>
+            <a href="<?=base_url('announcements/path_notes')?>">PATCH NOTES</a>
         </li>
         <?php if(session('userdata') == null || !session('userdata')['logged_in']): ?>
         <li>

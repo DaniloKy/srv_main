@@ -11,10 +11,10 @@ class AnnouncementsTagsModel extends Model
     protected $allowedFields = ['announcement_id', 'tag_id'];
 
     public function create($validated){
-        $data = array(
+        $data = [
             'announcement_id' => $validated['announcement_id'],
             'tag_id' => $validated['tag_id'],
-        );
+        ];
         return $this->insert($data);
     }
     
