@@ -9,3 +9,15 @@ writable/debugbar/
 writable/cache/
 writable/session/
 writable/uploads/
+public/publish/announcements/*
+public/publish/classes/*
+public/storage/announcements/*
+public/storage/classes/*
+public/thumb/announcements/*
+public/thumb/classes/*
+!public/publish/announcements/.gitkeep
+!public/publish/classes/.gitkeep
+!public/storage/announcements/.gitkeep
+!public/storage/classes/.gitkeep
+!public/thumb/announcements/.gitkeep
+!public/thumb/classes/.gitkeep
