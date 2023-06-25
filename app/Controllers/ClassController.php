@@ -21,12 +21,15 @@ class ClassController extends BaseController
 
     public function index(){
         $data = $this->list();
-        return $this->baseHomeView('classes/index', ['classes' => $data]);
+        return $this->baseHomeView('classes/index', ['classes' => $data], ['title' => 'Classes', 'cssPath' => 'css/characters.css']);
     }
 
     public function get($name){
-        $data = $this->classe_model->getWhere(['name' => $name]);
-        return $this->baseHomeView('classes/details', ['class' => $data]);
+        $data = $this->classe_model->getWhere(['name' => $name], true);
+        if($data){
+            return $this->baseHomeView('classes/details', ['class' => $data], ['title' => $name.' - Class', 'cssPath' => 'css/characters.css']);
+        }
+        return redirect('classes');
     }
 
     public function list(){

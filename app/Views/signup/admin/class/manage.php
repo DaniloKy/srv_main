@@ -54,6 +54,9 @@
                 <?php endif;?>
                 <label for="name">Name</label><br />
                 <input id="name" name="name" value="<?= $classInfo['name'] ?? old('name') ?>"/><br />
+
+                <label for="nickname">Nickname</label><br />
+                <input id="nickname" name="nickname" value="<?= $classInfo['nickname'] ?? old('nickname') ?>"/><br />
                 
                 <label for="description">Desciption</label><br />
                 <textarea id="description" name="description"><?= $classInfo['description'] ?? old('description') ?></textarea><br />

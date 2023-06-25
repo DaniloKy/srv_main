@@ -17,7 +17,7 @@ class Admin extends BaseController
     }
 
     public function manage(){
-        return $this->baseHomeView('signup/admin/manage');
+        return $this->baseHomeView('signup/admin/manage', [], ['title' => 'Admin Dashboard']);
     }
 
 }

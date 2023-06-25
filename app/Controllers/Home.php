@@ -9,6 +9,6 @@ class Home extends BaseController
 
     public function index()
     {
-        return $this->baseHomeView('index');
+        return $this->baseHomeView('index', [], ['title' => 'Survive Utopia']);
     }
 }

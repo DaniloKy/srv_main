@@ -37,10 +37,9 @@ class Character extends BaseController
             $response = $this->client->get('character/belong_to/'.session('userdata')['user']['id']);
             $data = json_decode($response->getBody());
         }catch(Exception $e){
-            var_dump($e);
             return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
         }
-        return $this->baseHomeView('signup/character/select', ["characters" => $data]);
+        return $this->baseHomeView('signup/character/select', ["characters" => $data], ['title' => 'Select Your Character']);
     }
 
     public function select(){
@@ -70,7 +69,7 @@ class Character extends BaseController
         }catch(Exception $e){
             return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
         }
-        return $this->baseHomeView('signup/character/create', ["classes" => $data, 'class' => $_GET['class']??false]);
+        return $this->baseHomeView('signup/character/create', ["classes" => $data, 'class' => $_GET['class']??false], ['title' => 'Create Your Character']);
     }
 
     public function create(){

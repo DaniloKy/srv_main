@@ -62,15 +62,15 @@ abstract class BaseController extends Controller
         return $validation->run($data, $str);
     }
 
-    public function baseHomeView($body, $data = []){
-        return view('common/header', ['title' => 'Home', 'cssPath' => 'css/main.css', 'jsPath' => 'js/script.js'])
+    public function baseHomeView($body, $data = [], $header = []){
+        return view('common/header', $header)
         . view('common/menu')
         . view($body, $data)
         . view('common/footer');
     }
 
-    public function baseGameView($body, $data = []){
-        return view('common/header', ['title' => 'Home', 'cssPath' => 'css/main.css', 'jsPath' => 'js/script.js'])
+    public function baseGameView($body, $data = [], $header = []){
+        return view('common/header', $header)
         . view('signup/game/menu')
         . view($body, $data)
         . view('common/footer');
@@ -78,8 +78,8 @@ abstract class BaseController extends Controller
 
     public function delteImages($folder ,$file){
         (file_exists('./images/storage/'.$folder.'/'.$file))?unlink('./images/storage/'.$folder.'/'.$file):log_message('error', '[ERROR] {exception}', ['exception' => 'Error on image delete']);
-        (file_exists('./images/storage/'.$folder.'/'.$file))?unlink('./images/thumb/'.$folder.'/'.$file):log_message('error', '[ERROR] {exception}', ['exception' => 'Error on image delete']);
-        (file_exists('./images/storage/'.$folder.'/'.$file))?unlink('./images/publish/'.$folder.'/'.$file):log_message('error', '[ERROR] {exception}', ['exception' => 'Error on image delete']);
+        (file_exists('./images/thumb/'.$folder.'/'.$file))?unlink('./images/thumb/'.$folder.'/'.$file):log_message('error', '[ERROR] {exception}', ['exception' => 'Error on image delete']);
+        (file_exists('./images/publish/'.$folder.'/'.$file))?unlink('./images/publish/'.$folder.'/'.$file):log_message('error', '[ERROR] {exception}', ['exception' => 'Error on image delete']);
     }
 
     public function resizeImage($fileName, $place, $path, $width, $height){
@@ -94,8 +94,8 @@ abstract class BaseController extends Controller
         //dd('./images/storage/'.$path);
         $imageStatus = $image->move('./images/storage/'.$path, $randName);
         if($imageStatus){
-            $this->resizeImage($randName, 'thumb', $path, 250, 250);
-            $this->resizeImage($randName, 'publish', $path, 1650, 1250);
+            $this->resizeImage($randName, 'thumb', $path, 250, 280);
+            $this->resizeImage($randName, 'publish', $path, 1215, 715);
         }
         return $randName;
     }

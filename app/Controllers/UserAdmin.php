@@ -22,7 +22,7 @@ class UserAdmin extends BaseController
     }
 
     public function manage(){
-        return $this->baseHomeView('signup/admin/user/manage');
+        return $this->baseHomeView('signup/admin/user/manage', [], ['title' => 'Users Dashboard']);
     }
 
     public function list(){

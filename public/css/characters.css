@@ -1,0 +1,104 @@
+.classes_intro{
+    cursor: default;
+    position: relative;
+    display: block;
+    text-align: center;
+    margin: 0px 0px 24px;
+}
+
+.classes_subtitle{
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    margin: 0px auto;
+}
+
+.classes_title{
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 6em;
+    margin: 0px auto;
+}
+
+.classes_description{
+    max-width: 580px;
+    margin: 12px auto;
+}
+
+.classes_list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.class_card{
+    cursor: pointer;
+    width: 300px;
+    text-decoration: none;
+    height: auto;
+    margin: 10px 50px;
+    padding: 0px;
+    background-color: #061C25;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.class_card:hover {
+    background-color: #114d65;
+}
+
+.class_card img{
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.class_card h2{
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0px 10px 10px 0px;
+}
+
+.class_details_info{
+    text-align: center;
+    margin: 0px 14%;
+}
+
+.class_details_info img{
+    width: 100%;
+    max-height: 100vh;
+    margin-bottom: 10px;
+}
+
+.class_intro{
+    top: -175px;
+    cursor: default;
+    position: relative;
+    display: block;
+    text-align: center;
+    margin: 0px 0px 24px;
+}
+
+.class_subtitle{
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    margin: 0px auto;
+    color: #fff;
+}
+
+.class_title{
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 6em;
+    margin: 0px auto;
+    color: #fff;
+}
+
+.class_description{
+    max-width: 800px;
+    margin: 50px auto;
+}
+

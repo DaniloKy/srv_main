@@ -23,7 +23,7 @@ class ClassAdminController extends BaseController
 
     public function manage(){
         $data = $this->list();
-        return $this->baseHomeView('signup/admin/class/manage', ['classes' => $data]);
+        return $this->baseHomeView('signup/admin/class/manage', ['classes' => $data], ['title' => 'Classes Dashboard']);
     }
 
     public function list(){
@@ -67,7 +67,7 @@ class ClassAdminController extends BaseController
                 if($classImage->isValid() && !$classImage->hasMoved()){
                     $valImage = $this->validate_form(['image' => $classImage], 'validImage');
                     if($valImage){
-                        $this->delteImages($this->ann_model->table, $existing['image_path']);
+                        $this->delteImages($this->class_model->table, $existing['image_path']);
                         $updateClass['image_path'] = $this->upload_image($this->class_model->table, $classImage);
                     }else
                         return redirect()->to('user/admin/classes/edit/'.$class_id)->withInput();                
@@ -84,7 +84,7 @@ class ClassAdminController extends BaseController
     public function updater($id){
         $results = $this->class_model->getById($id);
         $data = $this->list();
-        return $this->baseHomeView('signup/admin/class/manage', ['isPUT' => true, 'classes' => $data, 'classInfo' => $results]);
+        return $this->baseHomeView('signup/admin/class/manage', ['isPUT' => true, 'classes' => $data, 'classInfo' => $results], ['title' => 'Update Class']);
     }
 
     public function delete(){

@@ -31,6 +31,7 @@ class LoginModel extends Model
 				$this->update($user['id'], ['sId' => '']);
 				$this->session->destroy();
 				return false;
+				//return true;
 			}
 			return true;
 		}

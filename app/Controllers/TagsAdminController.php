@@ -22,7 +22,7 @@ class TagsAdminController extends BaseController
 
     public function manage(){
         $tags = $this->tag_model->listAll();
-        return $this->baseHomeView('signup/admin/tags/manage', ['tags' => $tags]);
+        return $this->baseHomeView('signup/admin/tags/manage', ['tags' => $tags], ['title' => 'Tags Dashboard']);
     }
 
     public function create(){

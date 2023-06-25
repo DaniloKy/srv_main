@@ -169,6 +169,10 @@ class CreateDatabase extends Migration
                 "constraint" => "100",
                 "unique" => true,
             ],
+            "nickname" => [
+                "type" => "VARCHAR",
+                "constraint" => "100",
+            ],
             "description" => [
                 "type" => "TEXT",
             ],

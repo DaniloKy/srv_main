@@ -29,7 +29,7 @@ class User extends BaseController
         if(!$results){
             $this->login_model->logout();
         }
-        return $this->baseHomeView('signup/user/manage', ['userInfo' => $results]);
+        return $this->baseHomeView('signup/user/manage', ['userInfo' => $results], ['title' => 'Profile Management']);
     }
 
     public function update(){

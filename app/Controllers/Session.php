@@ -88,7 +88,7 @@ class Session extends BaseController
         if($this->login_model->isLoggedIn())
             return redirect()->to('/');
 
-        return $this->baseHomeView('login');
+        return $this->baseHomeView('login', [], ['title' => 'Sing in']);
     }
 
     public function register()
@@ -96,7 +96,7 @@ class Session extends BaseController
         if($this->login_model->isLoggedIn())
             return redirect()->to('/');
 
-        return $this->baseHomeView('register');
+        return $this->baseHomeView('register', [], ['title' => 'Sing up']);
     }
 
     public function logout(){

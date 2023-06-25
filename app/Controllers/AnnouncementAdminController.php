@@ -25,7 +25,7 @@ class AnnouncementAdminController extends BaseController
     public function manage(){
         $data = $this->list();
         $tags = $this->tag_model->listAll();
-        return $this->baseHomeView('signup/admin/announcement/manage', ['announcements' => $data, 'tags' => $tags]);
+        return $this->baseHomeView('signup/admin/announcement/manage', ['announcements' => $data, 'tags' => $tags], ['title' => 'Announcements Dashboard']);
     }
 
     public function list(){
@@ -87,7 +87,7 @@ class AnnouncementAdminController extends BaseController
     public function updater($id){
         $results = $this->ann_model->getById($id);
         $data = $this->list();
-        return $this->baseHomeView('signup/admin/announcement/manage', ['isPUT' => true, 'announcements' => $data, 'annInfo' => $results]);
+        return $this->baseHomeView('signup/admin/announcement/manage', ['isPUT' => true, 'announcements' => $data, 'annInfo' => $results], ['title' => 'Update Announcement']);
     }
 
     public function delete(){
