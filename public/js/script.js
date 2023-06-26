@@ -1,4 +1,4 @@
-window.onload = (event) => {
+window.addEventListener('load', function(event){
 
     const dropdown = document.querySelector(".dropdown");
     const dropdown_content = document.querySelector(".dropdown_content");
@@ -18,4 +18,4 @@ window.onload = (event) => {
             dialog.showModal();
         });
     }
-};
+});

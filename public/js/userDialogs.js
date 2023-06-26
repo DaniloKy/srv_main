@@ -1,4 +1,4 @@
-window.onload = (event) => {
+window.addEventListener('load', function(event){
 
     const buttons1 = document.querySelectorAll('button[type="button"][data-banId]');
     for(const i of buttons1){
@@ -33,4 +33,4 @@ window.onload = (event) => {
         });
     }
 
-};
+});

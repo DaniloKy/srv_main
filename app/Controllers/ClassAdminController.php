@@ -40,6 +40,7 @@ class ClassAdminController extends BaseController
                     $classImage = $this->request->getFile('image');
                     if($classImage->isValid() && !$classImage->hasMoved()){
                         $createClass['image_path'] = $this->upload_image($this->class_model->table, $classImage);
+                        $this->resizeImage($createClass['image_path'], 'thumb', 'classes', 250, 280);
                         $this->class_model->create($createClass);
                         $this->session->setFlashdata('success', 'Published!');
                         return redirect('user/admin/classes/manage');
@@ -68,7 +69,8 @@ class ClassAdminController extends BaseController
                     $valImage = $this->validate_form(['image' => $classImage], 'validImage');
                     if($valImage){
                         $this->delteImages($this->class_model->table, $existing['image_path']);
-                        $updateClass['image_path'] = $this->upload_image($this->class_model->table, $classImage);
+                        $updateClass['image_path'] = $this->upload_image('classes', $classImage);
+                        $this->resizeImage($updateClass['image_path'], 'thumb', 'classes', 250, 280);
                     }else
                         return redirect()->to('user/admin/classes/edit/'.$class_id)->withInput();                
                 }

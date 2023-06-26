@@ -1,5 +1,11 @@
 <div>
     <h1>Users Dashboard</h1>
+    <?php if(session('error')): ?>
+            <p class="alert"><?=session('error');?></p>
+        <?php endif; ?>
+        <?php if(session('success')): ?>
+            <p class="success"><?=session('success');?></p>
+        <?php endif; ?>
     <div>
         <table class="table">
             <thead>

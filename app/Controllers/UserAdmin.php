@@ -32,25 +32,48 @@ class UserAdmin extends BaseController
         ->where($array)
         ->get();
         $result = $query->getResult();
-        dd($result);
+        //dd($result);
         return $result;
     }
 
     public function ban(){
         $post = $this->request->getPost();
-        dd($post);
+        $status = $this->users_model->update($post['id'], ['status' => -1]);
+        if($status)
+            $this->session->setFlashdata('success', 'User banned.');
+        else
+            $this->session->setFlashdata('error', 'Something went wrong.');
+        return redirect()->to('user/admin/users/manage');
     }
 
-    public function unban(){
+    public function removeBan(){
         $post = $this->request->getPost();
+        $status = $this->users_model->update($post['id'], ['status' => 1]);
+        if($status)
+            $this->session->setFlashdata('success', 'User unbanned.');
+        else
+            $this->session->setFlashdata('error', 'Something went wrong.');
+        return redirect()->to('user/admin/users/manage');
     }
 
     public function makeSuper(){
         $post = $this->request->getPost();
+        $status = $this->users_model->update($post['id'], ['super' => 1]);
+        if($status)
+            $this->session->setFlashdata('success', 'Super admin added.');
+        else
+            $this->session->setFlashdata('error', 'Something went wrong.');
+        return redirect()->to('user/admin/users/manage');
     }
 
     public function removeSuper(){
         $post = $this->request->getPost();
+        $status = $this->users_model->update($post['id'], ['super' => 0]);
+        if($status)
+            $this->session->setFlashdata('success', 'Super admin removed.');
+        else
+            $this->session->setFlashdata('error', 'Something went wrong.');
+        return redirect()->to('user/admin/users/manage');
     }
 
 }

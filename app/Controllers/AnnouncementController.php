@@ -11,7 +11,6 @@ class AnnouncementController extends BaseController
 {
     protected $ann_model;
     protected $tag_model;
-    protected $ann_tag_model;
 
     public function initController(
         RequestInterface $request,
@@ -19,33 +18,31 @@ class AnnouncementController extends BaseController
         LoggerInterface $logger
     ) {
         $this->ann_model = model(AnnouncementsModel::class);
+        $this->tag_model = model(TagsModel::class);
         parent::initController($request, $response, $logger);
     }
 
     public function index(){
         $data = $this->list();
-        return $this->baseHomeView('announcements/index', ['announcements' => $data], ['title' => 'Announcements', 'cssPath' => 'css/announcements.css']);
+        $tags = $this->listTags();
+        return $this->baseHomeView('announcements/index', ['announcements' => $data, 'tags' => $tags], ['title' => 'Announcements', 'cssPath' => 'css/announcements.css']);
     }
 
     public function getByTag($tag){
-        $query = $this->ann_model->select('announcements.*')
-        ->join('announcements_tags', 'announcements.id = announcements_tags.announcement_id')
-        ->join('tags', 'announcements_tags.tag_id = tags.id')
-        ->where('tags.tag_compiled', $tag)
-        ->get();
-        $result = $query->getResult();
-        if($result){
-            return $this->baseHomeView('announcements/index', ['announcements' => $result], ['title' => $tag.' - Announcement', 'cssPath' => 'css/announcements.css']);
+        $eTag = $this->tag_model->getWhere(['tag_compiled' => $tag], true);
+        $results = $this->ann_model->getWhere(['tag_id' => $eTag['id']]);
+        if($results){
+            return $this->baseHomeView('announcements/indexWTag', ['announcements' => $results, 'tag' => $eTag['tag']], ['title' => $tag.' - Announcement', 'cssPath' => 'css/announcements.css']);
         }
         return redirect('announcements');
     }
 
     public function getByTagAndName($tag, $name){
-        $query = $this->ann_model->select('announcements.*')
-        ->join('announcements_tags', 'announcements.id = announcements_tags.announcement_id')
-        ->join('tags', 'announcements_tags.tag_id = tags.id')
-        ->where('tags.tag_compiled', $tag)
-        ->where('announcements.title_compiled', $name)
+        dd($tag, $name);
+        $eTag = $this->tag_model->getWhere(['tag_compiled' => $tag], true);
+        $anns = $this->ann_model->getWhere(['tag_id' => $eTag['id']]);
+        $query = $this->ann_model->select()
+        ->where(['title_compiled' => $name])
         ->get();
         $result = $query->getResult();
         dd($result);
@@ -59,5 +56,12 @@ class AnnouncementController extends BaseController
         $results = $this->ann_model->listAll();
         return $results;
     }
+
+    public function listTags(){
+        $results = $this->tag_model->listAll();
+        return $results;
+    }
+
+
 
 }

@@ -37,7 +37,6 @@ class Validation extends BaseConfig
         'nickname' => 'required|min_length[4]|max_length[20]',
         'description' => 'required|min_length[75]|max_length[500]',
         'image' => 'uploaded[image]|max_size[image, 1024]|ext_in[image,png,jpg,jpeg]',
-        'tag' => 'required',
     ];
 
     public $updateClass = [
@@ -50,11 +49,13 @@ class Validation extends BaseConfig
         'title' => 'required|max_length[100]',
         'description' => 'required|max_length[500]',
         'image' => 'uploaded[image]|max_size[image, 1024]|ext_in[image,png,jpg,jpeg]',
+        'tag_id' => 'required',
     ];
 
     public $updateAnnouncement = [
         'title' => 'required|max_length[100]',
         'description' => 'required|max_length[500]',
+        'tag_id' => 'required',
     ];
     
     public $validImage = [

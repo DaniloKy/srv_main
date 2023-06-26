@@ -42,7 +42,8 @@ class AnnouncementAdminController extends BaseController
                 if(!$this->ann_model->getWhere(['title' => $createAnn['title']], true)){
                     $annImage = $this->request->getFile('image');
                     if($annImage->isValid() && !$annImage->hasMoved()){
-                        $createAnn['image_path'] = $this->upload_image($this->ann_model->table, $annImage);
+                        $createAnn['image_path'] = $this->upload_image('announcements', $annImage);
+                        $this->resizeImage($createAnn['image_path'], 'thumb', 'announcements', 300, 260);
                         $createAnn['created_by'] = session('userdata')['user']['id'];
                         $id = $this->ann_model->create($createAnn);
                         $this->session->setFlashdata('success', 'Published!');
@@ -73,7 +74,8 @@ class AnnouncementAdminController extends BaseController
                     $valImage = $this->validate_form(['image' => $annImage], 'validImage');
                     if($valImage){
                         $this->delteImages($this->ann_model->table, $existing['image_path']);
-                        $updateAnn['image_path'] = $this->upload_image($this->ann_model->table, $annImage);
+                        $updateAnn['image_path'] = $this->upload_image('announcements', $annImage);
+                        $this->resizeImage($updateAnn['image_path'], 'thumb', 'announcements', 300, 260);
                     }else
                         return redirect()->to('user/admin/announcements/edit/'.$ann_id)->withInput();                
                 }

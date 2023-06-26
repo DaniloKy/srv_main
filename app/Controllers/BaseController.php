@@ -91,10 +91,8 @@ abstract class BaseController extends Controller
 
     public function upload_image($path, $image){
         $randName = $image->getRandomName();
-        //dd('./images/storage/'.$path);
         $imageStatus = $image->move('./images/storage/'.$path, $randName);
         if($imageStatus){
-            $this->resizeImage($randName, 'thumb', $path, 250, 280);
             $this->resizeImage($randName, 'publish', $path, 1215, 715);
         }
         return $randName;
