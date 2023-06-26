@@ -23,30 +23,34 @@ class UserAdmin extends BaseController
 
     public function manage(){
         $users = $this->list();
-        return $this->baseHomeView('signup/admin/user/manage', ['users' => $users], ['title' => 'Users Dashboard']);
+        return $this->baseHomeView('signup/admin/user/manage', ['users' => $users], ['title' => 'Users Dashboard', 'jsPath' => 'js/userDialogs.js']);
     }
 
     public function list(){
-        $results = $this->users_model->listAll();
-        //$results = $this->users_model->getWhere(['status' => 1]);
-        //dd($results);
-        return $results;
+        $array = ['status !=' => 0];
+        $query = $this->users_model->select()
+        ->where($array)
+        ->get();
+        $result = $query->getResult();
+        dd($result);
+        return $result;
     }
 
     public function ban(){
-
+        $post = $this->request->getPost();
+        dd($post);
     }
 
     public function unban(){
-
+        $post = $this->request->getPost();
     }
 
     public function makeSuper(){
-
+        $post = $this->request->getPost();
     }
 
     public function removeSuper(){
-
+        $post = $this->request->getPost();
     }
 
 }
