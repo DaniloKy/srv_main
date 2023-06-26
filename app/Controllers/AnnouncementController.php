@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AnnouncementsModel;
+use App\Models\UsersModel;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -11,6 +12,7 @@ class AnnouncementController extends BaseController
 {
     protected $ann_model;
     protected $tag_model;
+    protected $user_model;
 
     public function initController(
         RequestInterface $request,
@@ -19,6 +21,7 @@ class AnnouncementController extends BaseController
     ) {
         $this->ann_model = model(AnnouncementsModel::class);
         $this->tag_model = model(TagsModel::class);
+        $this->user_model = model(UsersModel::class);
         parent::initController($request, $response, $logger);
     }
 
@@ -29,6 +32,12 @@ class AnnouncementController extends BaseController
     }
 
     public function getByTag($tag){
+        $query = $this->ann_model->select()
+        ->join('users', 'users.id = announcements.created_by')
+        ->join('tags', 'tags.id = announcements.tag_id')
+        ->get();
+        $results = $query->getResult();
+        dd($results);
         $eTag = $this->tag_model->getWhere(['tag_compiled' => $tag], true);
         $results = $this->ann_model->getWhere(['tag_id' => $eTag['id']]);
         if($results){
@@ -38,16 +47,19 @@ class AnnouncementController extends BaseController
     }
 
     public function getByTagAndName($tag, $name){
-        dd($tag, $name);
         $eTag = $this->tag_model->getWhere(['tag_compiled' => $tag], true);
-        $anns = $this->ann_model->getWhere(['tag_id' => $eTag['id']]);
-        $query = $this->ann_model->select()
-        ->where(['title_compiled' => $name])
-        ->get();
-        $result = $query->getResult();
-        dd($result);
-        if($result){
-            return $this->baseHomeView('announcements/details', ['announcement' => $result], ['title' => $name.' - Announcement', 'cssPath' => 'css/announcements.css']);
+        if($eTag){
+            $query = $this->ann_model->select()
+            ->where(['title_compiled' => $name, 'tag_id' => $eTag['id']])
+            ->get();
+            $result = $query->getRow();
+            $result->tag = $eTag;
+            $user = $this->user_model->getById($result->id);
+            if($user)
+                $result->author = $user['username'];
+            if($result){
+                return $this->baseHomeView('announcements/details', ['announcement' => $result], ['title' => $name.' - Announcement', 'cssPath' => 'css/announcements.css']);
+            }
         }
         return redirect('announcements');
     }

@@ -6,7 +6,7 @@
     <?php if($announcements && count($announcements) > 0): ?>
         <?php foreach($announcements as $ann): ?>
         <a href="<?=base_url('announcement/'.$ann->title_compiled.'/'.$ann->title_compiled);?>" class="ann_card">
-            <img src="https://picsum.photos/350/200<?//=base_url('images/thumb/announcements/'.$ann->image_path)?>" alt="<?=$ann->title_compiled?>">
+            <img src="<?=base_url('images/thumb/announcements/'.$ann->image_path)?>" alt="<?=$ann->title_compiled?>">
             <h2><?=$ann->title?></h2>
         </a>
         <?php endforeach; ?>
