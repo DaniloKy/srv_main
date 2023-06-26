@@ -1,5 +1,5 @@
 <div>
-    <h1>Manage Tags</h1>
+    <h1>Tags Dashboard</h1>
     <div>
         <table class="table">
             <thead>
@@ -11,7 +11,7 @@
             <tbody>
                 <?php if(isset($tags) && count($tags) > 0): ?>
                     <?php foreach($tags as $tag): ?>
-                        <dialog data-characterId="<?=$tag->id?>" class="delete_confirm">
+                        <dialog data-characterId="<?=$tag->id?>" class="confirmation_box">
                             <p>Are you sure you want to delete '<?=$tag->tag?>'?</p>
                             <form action="<?=base_url('user/admin/tags/delete')?>" method="post">
                                 <input type="hidden" name="_method" value="DELETE">

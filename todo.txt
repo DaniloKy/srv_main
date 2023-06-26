@@ -1,3 +1,17 @@
+--PAGINATION EVERYWHERE--
+
+--ANNOUNCEMENTS ADMIN/PUBLIC--
+
+x announcement can only have 1 tag
+
+list of all announcements = announcements/
+list of all announcements with x tag = announcements/tag/
+details of the announcement with x tag and name = announcements/tag/name
+
+--USER ADMIN?PUBIC--
+
+make ban, unban, makeSuper, removeSuper
+
 set password after the email verif
 
 on register
@@ -9,7 +23,7 @@ on password_reset when submit your email generate random code send an email and 
 
     'ban'/'suspent' user = status -1
 
-
-
 captcha on register
+
+--ORGANIZE CSS--
 

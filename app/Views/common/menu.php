@@ -13,7 +13,7 @@
             <a href="<?=base_url('announcements/news')?>">NEWS</a>
         </li>
         <li>
-            <a href="<?=base_url('announcements/path_notes')?>">PATCH NOTES</a>
+            <a href="<?=base_url('announcements/patch_notes')?>">PATCH NOTES</a>
         </li>
         <?php if(session('userdata') == null || !session('userdata')['logged_in']): ?>
         <li>

@@ -1,5 +1,5 @@
 <div>
-    <h1>Manage Publications</h1>
+    <h1>Classes Dashboard</h1>
     <div>
         <table class="table">
             <thead>
@@ -13,7 +13,7 @@
             <tbody>
                 <?php if(isset($classes) && count($classes) > 0): ?>
                     <?php foreach($classes as $class): ?>
-                        <dialog data-characterId="<?=$class->id?>" class="delete_confirm">
+                        <dialog data-characterId="<?=$class->id?>" class="confirmation_box">
                             <p>Are you sure you want to delete '<?=$class->name?>'?</p>
                             <form action="<?=base_url('user/admin/classes/delete')?>" method="post">
                                 <input type="hidden" name="_method" value="DELETE">

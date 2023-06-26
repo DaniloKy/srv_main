@@ -68,11 +68,18 @@ footer{
 }
 
 .btn.danger{
-    color: #e5534b;
-}
-.btn.danger:hover{
     background-color: #e5534b;
     color: #312927;
+}
+.btn.danger:hover{
+    background-color: #bc2e27;
+}
+.btn.special{
+    background-color: #e5d04b;
+    color: #312927;
+}
+.btn.special:hover{
+    background-color: #c4b133;
 }
 
 table {

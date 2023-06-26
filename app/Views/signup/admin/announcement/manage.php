@@ -1,5 +1,5 @@
 <div>
-    <h1>Manage Announcements</h1>
+    <h1>Announcements Dashboard</h1>
     <div>
         <table class="table">
             <thead>
@@ -15,7 +15,7 @@
             <tbody>
                 <?php if(isset($announcements) && count($announcements) > 0): ?>
                     <?php foreach($announcements as $ann): ?>
-                        <dialog data-characterId="<?=$ann->id?>" class="delete_confirm">
+                        <dialog data-characterId="<?=$ann->id?>" class="confirmation_box">
                             <p>Are you sure you want to delete '<?=$ann->title?>'?</p>
                             <form action="<?=base_url('user/admin/announcements/delete')?>" method="post">
                                 <input type="hidden" name="_method" value="DELETE">

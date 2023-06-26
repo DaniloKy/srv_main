@@ -22,13 +22,31 @@ class UserAdmin extends BaseController
     }
 
     public function manage(){
-        return $this->baseHomeView('signup/admin/user/manage', [], ['title' => 'Users Dashboard']);
+        $users = $this->list();
+        return $this->baseHomeView('signup/admin/user/manage', ['users' => $users], ['title' => 'Users Dashboard']);
     }
 
     public function list(){
+        $results = $this->users_model->listAll();
+        //$results = $this->users_model->getWhere(['status' => 1]);
+        //dd($results);
+        return $results;
+    }
+
+    public function ban(){
 
     }
 
+    public function unban(){
 
+    }
+
+    public function makeSuper(){
+
+    }
+
+    public function removeSuper(){
+
+    }
 
 }

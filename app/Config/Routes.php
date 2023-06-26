@@ -47,7 +47,10 @@ $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
         $routes->get('manage', 'Admin::manage');
         $routes->group('users', static function ($routes) {
             $routes->get('manage', 'UserAdmin::manage');
-
+            $routes->put('ban', 'UserAdmin::ban');
+            $routes->put('makeSuper', 'UserAdmin::makeSuper');
+            $routes->put('removeBan', 'UserAdmin::manage');
+            $routes->put('removeSuper', 'UserAdmin::removeSuper');
         });
         $routes->group('classes', static function ($routes) {
             $routes->get('manage', 'ClassAdminController::manage');
@@ -79,9 +82,9 @@ $routes->get('how-to-play', 'Home::howToPlay');
 $routes->get('classes', 'ClassController::index');
 $routes->get('classes/(:any)', 'ClassController::get/$1');
 
-$routes->get('announcements', 'Announcement::index');
-$routes->get('announcements/(:any)', 'Announcement::getByTag/$1');
-$routes->get('announcements/(:any)/(:any)', 'Announcement::getByTagAndName/$1/$2');
+$routes->get('announcements', 'AnnouncementController::index');
+$routes->get('announcements/(:any)', 'AnnouncementController::getByTag/$1');
+$routes->get('announcements/(:any)/(:any)', 'AnnouncementController::getByTagAndName/$1/$2');
 
 $routes->get('login', 'Session::login');
 $routes->post('login', 'Session::logining');
