@@ -12,7 +12,6 @@ class AnnouncementAdminController extends BaseController
 {
     protected $ann_model;
     protected $tag_model;
-    protected $ann_tag_model;
     
     public function initController(
         RequestInterface $request,
@@ -21,7 +20,6 @@ class AnnouncementAdminController extends BaseController
     ) {
         $this->ann_model = model(AnnouncementsModel::class);
         $this->tag_model = model(TagsModel::class);
-        $this->ann_tag_model = model(AnnouncementsTagsModel::class);
         parent::initController($request, $response, $logger);
     }
 
@@ -47,13 +45,6 @@ class AnnouncementAdminController extends BaseController
                         $createAnn['image_path'] = $this->upload_image($this->ann_model->table, $annImage);
                         $createAnn['created_by'] = session('userdata')['user']['id'];
                         $id = $this->ann_model->create($createAnn);
-                        if(count($createAnn['tags']) > 0){
-                            foreach($createAnn['tags'] as $tag => $on){
-                                if($etag = $this->tag_model->getById($tag)){
-                                    $this->ann_tag_model->create(['announcement_id' => $id, 'tag_id' => $etag['id']]);
-                                }
-                            }
-                        }
                         $this->session->setFlashdata('success', 'Published!');
                         return redirect('user/admin/announcements/manage');
                     }
@@ -65,7 +56,7 @@ class AnnouncementAdminController extends BaseController
             $updateAnn = [
                 'title' => $this->request->getVar('title'),
                 'description' => $this->request->getVar('description'),
-                'tags' => $this->request->getVar('tags'),
+                'tag_id' => $this->request->getVar('tag_id'),
             ];
             $ann_id = $this->request->getVar('id');
             $val = $this->validate_form($updateAnn, 'updateAnnouncement');
@@ -86,21 +77,6 @@ class AnnouncementAdminController extends BaseController
                     }else
                         return redirect()->to('user/admin/announcements/edit/'.$ann_id)->withInput();                
                 }
-                //dd($updateAnn['tags'], );
-                /*
-                $currentTags = $this->containTags($ann_id);
-                foreach($updateAnn['tags'] as $tag => $on){
-                    foreach($currentTags as $cTag => $on){
-                        if($tag == $cTag){
-                            return "has";
-                        }else{
-                            return "no ghas";
-                        }
-                            $this->ann_tag_model->delete(['announcement_id' => $ann_id, 'tag_id' => $etag['id']]);
-                            $this->ann_tag_model->delete(['announcement_id' => $ann_id, 'tag_id' => $etag['id']]);
-                    }
-                }
-                */
                 $this->ann_model->update($ann_id, $updateAnn);
                 $this->session->setFlashdata('success', 'Updated!');
                 return redirect('user/admin/announcements/manage');
@@ -114,17 +90,12 @@ class AnnouncementAdminController extends BaseController
         $results = $this->ann_model->getById($id);
         $data = $this->list();
         $tags = $this->tag_model->listAll();
-        $check_tags = $this->containTags($id);
-        return $this->baseHomeView('signup/admin/announcement/manage', ['isPUT' => true, 'announcements' => $data, 'tags' => $tags, 'annInfo' => $results, 'check_tags' => $check_tags], ['title' => 'Update Announcement']);
-    }
-
-    public function containTags($id){
-        $check_tags = $this->ann_tag_model->getWhere(['announcement_id' => $id]);
-        $tags = [];
-        foreach($check_tags as $tag){
-            $tags[] = $this->tag_model->getById($tag->tag_id);
-        }
-        return $tags;
+        return $this->baseHomeView('signup/admin/announcement/manage', 
+            ['isPUT' => true, 'announcements' => $data, 
+            'tags' => $tags, 
+            'annInfo' => $results
+        ], ['title' => 'Update Announcement'
+        ]);
     }
 
     public function delete(){

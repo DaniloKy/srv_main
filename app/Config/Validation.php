@@ -37,6 +37,7 @@ class Validation extends BaseConfig
         'nickname' => 'required|min_length[4]|max_length[20]',
         'description' => 'required|min_length[75]|max_length[500]',
         'image' => 'uploaded[image]|max_size[image, 1024]|ext_in[image,png,jpg,jpeg]',
+        'tag' => 'required',
     ];
 
     public $updateClass = [

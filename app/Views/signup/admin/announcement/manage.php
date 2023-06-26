@@ -64,32 +64,21 @@
                 
                 <label for="image">Image</label><br />
                 <input id="image" name="image" type="file"/><br />
-
                 <fieldset class="form">
                     <legend>Add Tags</legend>
                     <?php if(isset($tags) && count($tags) > 0): ?>
                         <?php foreach($tags as $tag): ?>
                             <label for="<?=$tag->id?>"><?=$tag->tag?></label>
-                            <input type="checkbox" name="tags[<?=$tag->id;?>]"><br />
+                            <input type="radio" id="<?=$tag->id?>" name="tag_id" value="<?=$tag->id?>" <?=(isset($annInfo) && $annInfo['tag_id'] == $tag->id)?'checked':'';?>><br />
                         <?php endforeach; ?>
                     <?php else: ?>
                         <p>No tags</p>
                     <?php endif; ?>
                     <a href="<?=base_url('user/admin/tags/manage');?>">Create tags</a>
                 </fieldset>
-                <?php if(isset($isPUT) && $isPUT && isset($check_tags) && count($check_tags) > 0):?>
-                    <fieldset class="form">
-                    <legend>Remove Tags</legend>
-                        <?php foreach($check_tags as $check_tag): ?>
-                            <label for="<?=$check_tag['id']?>"><?=$check_tag['tag']?></label>
-                            <a id="<?=$check_tag['id']?>" href="<?=base_url('user/admin/announcements/delete_tag/'.$check_tag['id'])?>" class="btn danger">Remove Tag</a>
-                        <?php endforeach; ?>
-                </fieldset>
-                <?php endif;?>    
                 <?php if(isset($isPUT) && $isPUT && isset($annInfo['image_path'])):?>
                 <img src="<?=base_url('images/thumb/announcements/').$annInfo['image_path']?>" alt="<?=$annInfo['title']?>" class="rounded p-4 mx-auto"><br />
                 <?php endif;?>
-
                 <input type="hidden" name="id" value="<?=$annInfo['id'] ?? null; ?>"/>
                 <button id="submit" class="btn green" type="submit"><?=(isset($isPUT) && $isPUT)?"Save Changes":"Publish";?></button>
                 <?php if(isset($isPUT) && $isPUT):?>
