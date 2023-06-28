@@ -93,7 +93,7 @@ abstract class BaseController extends Controller
         $randName = $image->getRandomName();
         $imageStatus = $image->move('./images/storage/'.$path, $randName);
         if($imageStatus){
-            $this->resizeImage($randName, 'publish', $path, 1215, 715);
+            $this->resizeImage($randName, 'publish', $path, 1100, 600);
         }
         return $randName;
     }

@@ -26,46 +26,34 @@ class AnnouncementController extends BaseController
     }
 
     public function index(){
-        $data = $this->list();
+        $data = $this->list([]);
         $tags = $this->listTags();
         return $this->baseHomeView('announcements/index', ['announcements' => $data, 'tags' => $tags], ['title' => 'Announcements', 'cssPath' => 'css/announcements.css']);
     }
 
     public function getByTag($tag){
-        $query = $this->ann_model->select()
-        ->join('users', 'users.id = announcements.created_by')
-        ->join('tags', 'tags.id = announcements.tag_id')
-        ->get();
-        $results = $query->getResult();
-        dd($results);
-        $eTag = $this->tag_model->getWhere(['tag_compiled' => $tag], true);
-        $results = $this->ann_model->getWhere(['tag_id' => $eTag['id']]);
+        $results = $this->list(['tag_compiled' => $tag]);
         if($results){
-            return $this->baseHomeView('announcements/indexWTag', ['announcements' => $results, 'tag' => $eTag['tag']], ['title' => $tag.' - Announcement', 'cssPath' => 'css/announcements.css']);
+            return $this->baseHomeView('announcements/indexWTag', ['announcements' => $results], ['title' => $tag.' - Announcement', 'cssPath' => 'css/announcements.css']);
         }
         return redirect('announcements');
     }
 
     public function getByTagAndName($tag, $name){
-        $eTag = $this->tag_model->getWhere(['tag_compiled' => $tag], true);
-        if($eTag){
-            $query = $this->ann_model->select()
-            ->where(['title_compiled' => $name, 'tag_id' => $eTag['id']])
-            ->get();
-            $result = $query->getRow();
-            $result->tag = $eTag;
-            $user = $this->user_model->getById($result->id);
-            if($user)
-                $result->author = $user['username'];
-            if($result){
-                return $this->baseHomeView('announcements/details', ['announcement' => $result], ['title' => $name.' - Announcement', 'cssPath' => 'css/announcements.css']);
-            }
+        $result = $this->list(['tags.tag_compiled' => $tag, 'announcements.title_compiled' => $name]);
+        if($result[0]){            
+            return $this->baseHomeView('announcements/details', ['announcement' => $result[0]], ['title' => $name.' - Announcement', 'cssPath' => 'css/announcements.css']);
         }
         return redirect('announcements');
     }
 
-    public function list(){
-        $results = $this->ann_model->listAll();
+    public function list($where){
+        $query = $this->ann_model->select('announcements.*, tags.*, users.username')
+            ->join('users', 'users.id = announcements.created_by')
+            ->join('tags', 'tags.id = announcements.tag_id')
+            ->where($where)
+            ->get();
+        $results = $query->getResult();
         return $results;
     }
 

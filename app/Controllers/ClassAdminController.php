@@ -53,6 +53,7 @@ class ClassAdminController extends BaseController
             $updateClass = [
                 'name' => $this->request->getVar('name'),
                 'description' => $this->request->getVar('description'),
+                'nickname' => $this->request->getVar('nickname')
             ];
             $class_id = $this->request->getVar('id');
             $val = $this->validate_form($updateClass, 'updateClass');
