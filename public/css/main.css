@@ -22,6 +22,10 @@ footer{
     margin-top: auto;
 }
 
+.bx{
+    color: #fff;
+}
+
 .form{
     margin: 1em 0em;
     padding: 1em;
@@ -130,47 +134,75 @@ tr:hover {
 }
 
 .navbar-list {
+    text-transform: uppercase;
+    padding: 0px 12px;
     display: flex;
-    background-color: #f1f1f1;
+    background-color: #222;
     list-style: none;
     justify-content: center;
     align-items: center;
 }
 
-.navbar-list li:last-child {
+.navbar-list .last {
     margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-list .last a{
+    border-radius: 1em;
+    margin-right: 12px;
+}
+.navbar-list .last a:hover{
+    background-color: rgba(85, 85, 85, 0.5);
+}
+
+.navbar-list li span:last-child {
+    border-radius: 1em;
+}
+
+.navbar-list .last .play_btn{
+    background-color: #e5d04b;
+    color: #312927;
+}
+.navbar-list .last .play_btn:hover{
+    background-color: #e5d04be5;
+    color: #312927;
 }
 
 .navbar-list li a{
+    font-family: 'Courier New', Courier, monospace;
     padding: 1em;
     display: inline-block;
     text-decoration: none;
-    color: #000;
+    color: #fff;
 }
 
-
-.navbar-list li a:hover {
-    background-color: #ccc;
+.navbar-list li{
+    border-radius: 1em;
 }
 
-.navbar-list li a:active {
-    background-color: #888;
+.navbar-list li:not(:first-child, :last-child):hover {
+    background-color: rgba(85, 85, 85, 0.5);
 }
 
 .dropdown {
+    margin-right: 12px;
     padding: 1em;
     display: inline-block;
-    text-decoration: none;
-    color: #000;
+    color: #fff;
+    border-radius: 1em;
 }
 
 .dropdown:hover{
-    background-color: #ccc;
+    background-color: rgba(85, 85, 85, 0.5);
 }
 
-.dropdown_content { 
+.dropdown_content {
+    padding: 1em;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #222;
+    
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -178,6 +210,8 @@ tr:hover {
 .dropdown_content a{
     position: relative;
     box-sizing: border-box;
+    color: #fff;
+    text-decoration: none;
     width: 100%;
 }
 
