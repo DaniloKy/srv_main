@@ -16,4 +16,7 @@
         <button id="submit_form" class="btn green" type="submit">Update profile</button>
     </form>
     <a href="<?=base_url('user/change_password')?>">Change password</a>
+    <div class="logout">
+        <a href="<?=base_url('logout')?>" class="btn danger">Logout</a>
+    </div>
 </div>

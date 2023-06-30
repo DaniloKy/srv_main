@@ -28,14 +28,10 @@
             <?php if(session('userdata')['user']['super']):?>
                 <a href="<?=base_url('user/admin/manage');?>"><i class="bx bx-crown bx-sm"></i></a>
             <?php endif;?>
-            <span class="dropdown"><i class="bx bx-user-circle bx-sm"></i></span>        
+            <a href="<?=base_url('user/manage')?>"><i class="bx bx-user-circle bx-sm"></i></a>
             <a class="play_btn" href="<?=base_url('game/character/list')?>">PLAY</a>
         </li>
         <?php endif; ?>
     </ul>
-    <div class="dropdown_content visually-hidden">
-        <a href="<?=base_url('user/manage')?>"><p>Account</p></a>
-        <a href="<?=base_url('logout')?>"><p>Logout</p></a>
-    </div>
 </nav>
 <main>
