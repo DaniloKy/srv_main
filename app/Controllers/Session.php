@@ -24,7 +24,7 @@ class Session extends BaseController
         $this->users_model = model(UsersModel::class);
     }
 
-    public function logining(){
+    public function loggining(){
         if($this->login_model->isLoggedIn())
             return redirect()->to('/');
 
@@ -40,7 +40,7 @@ class Session extends BaseController
                     $rememberToken = bin2hex(random_bytes(32));
                     $user['remember_token'] = $rememberToken;
                     $this->users_model->save($user);
-                    setcookie('remember_token', $rememberToken, time()+(env('REMEMBER_EXPIRES')*86400));
+                    setcookie('remember_token', $rememberToken, time()+(env('REMEMBER_EXPIRES')*86400));//env('REMEMBER_EXPIRES') * 1 day
                 }
                 if(session_regenerate_id()){
                     $user['sId'] = session_id();

@@ -22,6 +22,21 @@ class Main extends BaseController
 
     public function index()
     {
-        return $this->baseGameView('signup/game/lobby');
+        $playerInfo = session()->get('playerInfo')['player'];
+        return $this->baseGameView('signup/game/lobby', ['playerInfo' => $playerInfo], ['title' => 'Lobby', 'cssPath' => 'css/game_lobby.css']);
     }
+
+    public function career()
+    {
+        $playerInfo = session()->get('playerInfo')['player'];
+        $playerInfo->wl = $playerInfo->games_lost!=0?number_format(($playerInfo->games_won/$playerInfo->games_lost), 2):0;
+        $playerInfo->kd = $playerInfo->deaths!=0?number_format(($playerInfo->kills/$playerInfo->deaths), 2):0;
+        return $this->baseGameView('signup/game/career', ['playerInfo' => $playerInfo], ['title' => 'Career', 'cssPath' => 'css/game_career.css']);
+    }
+
+    public function changeClass(){
+        session()->remove('playerInfo');
+        return redirect()->to('user/character/list');
+    }
+
 }

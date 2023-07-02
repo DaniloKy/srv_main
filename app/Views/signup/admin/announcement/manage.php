@@ -25,10 +25,10 @@
                             </form>
                         </dialog>
                         <tr>
-                            <td><a href="<?=base_url("announcements/".$ann->title_compiled); ?>"><?="announcements/".$ann->title_compiled?></a></td>
+                            <td><a href="<?=base_url("announcements/".$ann->tag_compiled."/".$ann->title_compiled); ?>"><?="announcements/".$ann->tag_compiled."/".$ann->title_compiled?></a></td>
                             <td><?=$ann->title; ?></td>
                             <td><?=character_limiter($ann->description, 30, '...'); ?></td>
-                            <td><?=$ann->created_by; ?></td>
+                            <td><?=$ann->username; ?></td>
                             <td><?=$ann->created_at; ?></td>
                             <td>
                                 <a href="<?=base_url('user/admin/announcements/edit/'.$ann->id); ?>" class="btn">Edit</a>
@@ -57,10 +57,10 @@
                     <input type="hidden" name="_method" value="PUT">
                 <?php endif;?>
                 <label for="title">Title</label><br />
-                <input id="title" name="title" value="<?= $annInfo['title'] ?? old('title') ?>"/><br />
+                <input id="title" name="title" value="<?= $annInfo->title ?? old('title') ?>"/><br />
                 
                 <label for="description">Desciption</label><br />
-                <textarea id="description" name="description"><?= $annInfo['description'] ?? old('description') ?></textarea><br />
+                <textarea id="description" name="description"><?= $annInfo->description ?? old('description') ?></textarea><br />
                 
                 <label for="image">Image</label><br />
                 <input id="image" name="image" type="file"/><br />
@@ -69,17 +69,17 @@
                     <?php if(isset($tags) && count($tags) > 0): ?>
                         <?php foreach($tags as $tag): ?>
                             <label for="<?=$tag->id?>"><?=$tag->tag?></label>
-                            <input type="radio" id="<?=$tag->id?>" name="tag_id" value="<?=$tag->id?>" <?=(isset($annInfo) && $annInfo['tag_id'] == $tag->id)?'checked':'';?>><br />
+                            <input type="radio" id="<?=$tag->id?>" name="tag_id" value="<?=$tag->id?>" <?=(isset($annInfo) && $annInfo->tag_id == $tag->id)?'checked':'';?>><br />
                         <?php endforeach; ?>
                     <?php else: ?>
                         <p>No tags</p>
                     <?php endif; ?>
                     <a href="<?=base_url('user/admin/tags/manage');?>">Create tags</a>
                 </fieldset>
-                <?php if(isset($isPUT) && $isPUT && isset($annInfo['image_path'])):?>
-                <img src="<?=base_url('images/thumb/announcements/').$annInfo['image_path']?>" alt="<?=$annInfo['title']?>" class="rounded p-4 mx-auto"><br />
+                <?php if(isset($isPUT) && $isPUT && isset($annInfo->image_path)):?>
+                    <img src="<?=base_url('images/thumb/announcements/').$annInfo->image_path?>" alt="<?=$annInfo->title?>" class="rounded p-4 mx-auto"><br />
                 <?php endif;?>
-                <input type="hidden" name="id" value="<?=$annInfo['id'] ?? null; ?>"/>
+                <input type="hidden" name="id" value="<?=$annInfo->id ?? null; ?>"/>
                 <button id="submit" class="btn green" type="submit"><?=(isset($isPUT) && $isPUT)?"Save Changes":"Publish";?></button>
                 <?php if(isset($isPUT) && $isPUT):?>
                     <a href="<?=base_url('user/admin/announcements/manage')?>" class="btn">Cancel</a>

@@ -30,6 +30,12 @@ class Character extends BaseController
         ]);
     }
 
+    public function index(){
+        if(session()->has('playerInfo'))
+            return redirect()->to('game/lobby');
+        return redirect()->to('user/character/list');
+    }
+
     public function list()
     {
         $data = [];
@@ -43,17 +49,15 @@ class Character extends BaseController
     }
 
     public function select(){
-        $id = $this->request->getPost();
-        //if(empty($id) || !$this->character_model->getWhere(['game_id' => $id])){
-            $this->session->setFlashdata('error', 'You can not do that!');
-            return redirect('game/character/list');
-        //}
-        
-        $response = $this->client->get('character'.$id);
-        $data = json_decode($response->getBody());
-        
-        dd(["characters"=> $data]);
-        return redirect('game/character/list');
+        $characterId = $this->request->getVar('character');
+        try{
+            $response = $this->client->get('character/'.$characterId.'/'.session('userdata')['user']['id']);
+            $data = json_decode($response->getBody());
+            session()->set('playerInfo', ["player" => $data]);
+            return redirect()->to('game/lobby');
+        }catch(Exception $e){
+            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+        }
     }
 
     public function createView(){
@@ -62,7 +66,7 @@ class Character extends BaseController
             $response = $this->client->get('character/belong_to/'.session('userdata')['user']['id']);
             $char_data = json_decode($response->getBody());
             if(count($char_data) >= env('MAX_CHARACTERS')){
-                return redirect('game/character/list');
+                return redirect()->to('user/character/list');
             }
             $response = $this->client->get('classes');
             $data = json_decode($response->getBody());
@@ -82,15 +86,14 @@ class Character extends BaseController
                 $response = $this->client->get('character/belong_to/'.$userId);
                 $char_data = json_decode($response->getBody());
                 if(count($char_data) >= env('MAX_CHARACTERS')){
-                    return redirect('game/character/list');
+                    return redirect()->to('user/character/list');
                 }
                 if(!$this->client->get('classes/'.$createChar['character'].'?name=true')){
                     $this->session->setFlashdata('creation_error', 'Class does not exist.');
-                    return redirect('game/character/create');
+                    return redirect()->to('user/character/create');
                 }
                 
                 if($this->client->get('character/'.$createChar['character_name'].'?username=true')->getBody() == "null"){
-                    //dd("post");
                     $this->client->post('character', [
                         'body' => 
                             json_encode([
@@ -99,14 +102,14 @@ class Character extends BaseController
                                 'class_name' => $createChar['character'],
                             ])
                         ]);
-                    return redirect()->to('game/character/list');
+                    return redirect()->to('user/character/list');
                 }else
                     $this->session->setFlashdata('creation_error', 'Username already in use.');
             }catch(Exception $e){
                 return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
             }
         }
-        return redirect('game/character/create')->withInput();
+        return redirect()->to('user/character/create')->withInput();
     }
 
     public function delete(){
@@ -116,7 +119,7 @@ class Character extends BaseController
         }catch(Exception $e){
             return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
         }
-        return redirect()->to('game/character/list');
+        return redirect()->to('user/character/list');
     }
 
 }

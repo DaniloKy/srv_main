@@ -29,7 +29,7 @@
                 <a href="<?=base_url('user/admin/manage');?>"><i class="bx bx-crown bx-sm"></i></a>
             <?php endif;?>
             <a href="<?=base_url('user/manage')?>"><i class="bx bx-user-circle bx-sm"></i></a>
-            <a class="play_btn" href="<?=base_url('game/character/list')?>">PLAY</a>
+            <a class="play_btn" href="<?=base_url('user/character')?>">PLAY</a>
         </li>
         <?php endif; ?>
     </ul>

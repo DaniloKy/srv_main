@@ -25,6 +25,7 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'isLogged' => \App\Filters\isLoggedFilter::class,
         'isAdmin' => \App\Filters\isAdminFilter::class,
+        'hasPlayer' => \App\Filters\hasPlayer::class,
         'checkRemberMe' => \App\Filters\checkRemberMeFilter::class
     ];
 
@@ -73,8 +74,8 @@ class Filters extends BaseConfig
         'isAdmin' => [
             
         ],
-        /*'notLogged' => [
-            
-        ],*/
+        'hasPlayer' => [
+
+        ],
     ];
 }

@@ -70,10 +70,10 @@ abstract class BaseController extends Controller
     }
 
     public function baseGameView($body, $data = [], $header = []){
-        return view('common/header', $header)
-        . view('signup/game/menu')
+        return view('signup/game/common/header', $header)
+        . view('signup/game/common/menu')
         . view($body, $data)
-        . view('common/footer');
+        . view('signup/game/common/footer');
     }
 
     public function delteImages($folder ,$file){

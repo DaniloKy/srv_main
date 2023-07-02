@@ -22,6 +22,16 @@ class AnnouncementsModel extends Model
         ];
         return $this->insert($data);
     }
+
+    public function list($where){
+        $query = $this->select('announcements.*, tags.*, users.username')
+            ->join('users', 'users.id = announcements.created_by')
+            ->join('tags', 'tags.id = announcements.tag_id')
+            ->where($where)
+            ->get();
+        $results = $query->getResult();
+        return $results;
+    }
     
 }
 

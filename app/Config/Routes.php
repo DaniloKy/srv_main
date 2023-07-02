@@ -30,16 +30,10 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->group('game', ['filter' => 'isLogged'], static function ($routes) {
-    $routes->group('character', static function ($routes) {
-        $routes->post('select', 'Character::select');
-        $routes->get('list', 'Character::list');
-        $routes->get('create', 'Character::createView');
-        $routes->post('create', 'Character::create');
-        $routes->delete('delete', 'Character::delete');
-    });
+$routes->group('game', ['filter' => ['isLogged', 'hasPlayer']], static function ($routes) {
     $routes->get('lobby', 'Main::index');
-    $routes->get('/', 'Main::index');
+    $routes->get('career', 'Main::career');
+    $routes->get('change_class', 'Main::changeClass');
 });
 
 $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
@@ -74,6 +68,15 @@ $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
     });
     $routes->get('manage', 'User::manage');
     $routes->put('update', 'User::update');
+
+    $routes->group('character', static function ($routes) {
+        $routes->get('', 'Character::index');
+        $routes->post('select', 'Character::select');
+        $routes->get('list', 'Character::list');
+        $routes->get('create', 'Character::createView');
+        $routes->post('create', 'Character::create');
+        $routes->delete('delete', 'Character::delete');
+    });
 });
 
 $routes->get('/', 'Home::index');
@@ -87,7 +90,7 @@ $routes->get('announcements/(:any)', 'AnnouncementController::getByTag/$1');
 $routes->get('announcement/(:any)/(:any)', 'AnnouncementController::getByTagAndName/$1/$2');
 
 $routes->get('login', 'Session::login');
-$routes->post('login', 'Session::logining');
+$routes->post('login', 'Session::loggining');
 $routes->get('register', 'Session::register');
 $routes->post('register', 'Session::registering');
 $routes->get('logout', 'Session::logout');

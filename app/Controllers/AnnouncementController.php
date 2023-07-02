@@ -26,13 +26,13 @@ class AnnouncementController extends BaseController
     }
 
     public function index(){
-        $data = $this->list([]);
+        $data = $this->ann_model->list([]);
         $tags = $this->listTags();
         return $this->baseHomeView('announcements/index', ['announcements' => $data, 'tags' => $tags], ['title' => 'Announcements', 'cssPath' => 'css/announcements.css']);
     }
 
     public function getByTag($tag){
-        $results = $this->list(['tag_compiled' => $tag]);
+        $results = $this->ann_model->list(['tag_compiled' => $tag]);
         if($results){
             return $this->baseHomeView('announcements/indexWTag', ['announcements' => $results], ['title' => $tag.' - Announcement', 'cssPath' => 'css/announcements.css']);
         }
@@ -40,22 +40,14 @@ class AnnouncementController extends BaseController
     }
 
     public function getByTagAndName($tag, $name){
-        $result = $this->list(['tags.tag_compiled' => $tag, 'announcements.title_compiled' => $name]);
+        $result = $this->ann_model->list(['tags.tag_compiled' => $tag, 'announcements.title_compiled' => $name]);
         if($result[0]){            
             return $this->baseHomeView('announcements/details', ['announcement' => $result[0]], ['title' => $name.' - Announcement', 'cssPath' => 'css/announcements.css']);
         }
         return redirect('announcements');
     }
 
-    public function list($where){
-        $query = $this->ann_model->select('announcements.*, tags.*, users.username')
-            ->join('users', 'users.id = announcements.created_by')
-            ->join('tags', 'tags.id = announcements.tag_id')
-            ->where($where)
-            ->get();
-        $results = $query->getResult();
-        return $results;
-    }
+    
 
     public function listTags(){
         $results = $this->tag_model->listAll();

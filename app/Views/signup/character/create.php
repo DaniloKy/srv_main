@@ -6,7 +6,7 @@
     <?php if(session('creation_error')): ?>
     <p class="alert"><?=session('creation_error');?></p>
     <?php endif; ?>
-    <form class="create_container form" action="<?=base_url("game/character/create")?>" method="POST">
+    <form class="create_container form" action="<?=base_url("user/character/create")?>" method="POST">
         <div class="main_info">
             <div class="class_head">    
                 <h3>Class List</h3>
@@ -41,7 +41,7 @@
             <?php endif;?>
         </div>
         <div class="main_inputs">
-            <a href="<?=base_url('game/character/list')?>" class="btn">Back</a>
+            <a href="<?=base_url('user/character/list')?>" class="btn">Back</a>
             <div>
                 <label for="">CHARACTER NAME</label><br>
                 <input type="text" name="character_name" value="<?= old('character_name') ?>" placeholder="ID" >

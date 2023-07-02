@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+*{ 
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-family: 'MedievalSharp', cursive;
+    color: #ffefcc;
+}
+
+body{
+    background-image:  linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/bk2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background: ratio ;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+main{
+    margin: 26px;
+    height: 100%;
+}
+
+footer{
+    margin-top: auto;
+}
+footer:where(body.lobby){
+    margin-top: 0;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.btn{
+    display: flex;
+    border-radius: 4px;
+    border: solid rgba(255, 255, 255, 0.2) 0.2px;
+    padding: 5px 16px;
+    text-decoration: none;
+    color: #312927;
+}
+
+.navbar-list {
+    text-transform: uppercase;
+    padding: 0px 16px;
+    display: flex;
+    background-color: #000000;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #a8a8a8;
+}
+
+.navbar-list li a{
+    padding: 10px 18px;
+    display: inline-block;
+    text-decoration: none;
+    color: #a8a8a8;
+}
+
+.navbar-list li{
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
+.navbar-list li:hover {
+    background-color: rgba(85, 85, 85, 0.5);
+}
+
+.navbar-list .select{
+    background-color: rgba(229, 208, 75, 0.3);
+    box-shadow: 0 0 1px #000000;
+    
+}
+.navbar-list .select a{
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px #fff;
+}
+.navbar-list .select:hover{
+    background-color: rgba(229, 208, 75, 0.5);
+}
+.navbar-list #players_list_btn{
+    transform:rotate(45deg);
+    border-radius: 2px;
+    padding: 4px;
+}
+.navbar-list #players_list_btn i{
+    transform: rotate(-45deg);
+}
+
+.navbar-list #players_list_btn:hover{
+    background-color: rgba(85, 85, 85, 0.5);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.active{
+    box-shadow: inset 0 0 8px rgba(229, 208, 75, 0.8);
+    background-color: rgba(229, 208, 75, 0.5);
+}
+.active:hover{
+    box-shadow: inset 0 0 8px rgba(229, 208, 75, 0.5);
+    background-color: rgba(229, 208, 75, 0.5);
+}
+
+.players_list{
+    position: absolute;
+    border: 1px solid rgba(85, 85, 85, 0.5);
+    background-color: rgb(0,0,0, 0.5);
+    padding: 12px;
+    width: 160px;
+    height: 560px;
+    border-radius: 12px;
+    right: 30px;
+    top: 100px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.players_list h2{
+    padding-bottom: 16px;
+}
+.online_circle{
+    color: rgba(38, 255, 0, 0.5);
+}
+

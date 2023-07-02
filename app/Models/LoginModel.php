@@ -50,7 +50,7 @@ class LoginModel extends Model
 	}
 
 	public function createSession($user_data){
-		$this->session->set('userdata', array('logged_in' =>TRUE, 'user'=>$user_data));
+		$this->session->set('userdata', ['logged_in' =>TRUE, 'user'=>$user_data]);
 	}
 
 }

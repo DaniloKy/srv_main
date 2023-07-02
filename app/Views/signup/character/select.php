@@ -4,7 +4,7 @@
     <?php if(isset($character)): ?>
     <dialog data-characterId="<?=$character->id?>" class="confirm_delete">
         <p>Are you sure you want to delete '<?=$character->username?>'?</p>
-        <form action="<?=base_url('game/character/delete')?>" method="post">
+        <form action="<?=base_url('user/character/delete')?>" method="post">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="character_name" value="<?=$character->username?>">
             <button type="submit">YES</button>
@@ -15,7 +15,7 @@
 <?php endforeach;?>
 
 <div>
-    <form action="<?=base_url("game/character/select")?>" method="POST" class="select_container">
+    <form action="<?=base_url("user/character/select")?>" method="POST" class="select_container">
         <div class="container">
         <?php for($i = 0; $i < env('MAX_CHARACTERS'); $i++): ?>
             <?php $character = $characters[$i]??null;?>
@@ -30,7 +30,7 @@
             </div>
             <?php else:?>
                 <div class="card">
-                    <a href="<?=base_url('game/character/create')?>" class="plus-icon"><div>+</div></a>
+                    <a href="<?=base_url('user/character/create')?>" class="plus-icon"><div>+</div></a>
                 </div>
             <?php endif; ?>
         <?php endfor;?>

@@ -24,14 +24,9 @@ class AnnouncementAdminController extends BaseController
     }
 
     public function manage(){
-        $data = $this->list();
+        $data = $this->ann_model->list([]);
         $tags = $this->tag_model->listAll();
         return $this->baseHomeView('signup/admin/announcement/manage', ['announcements' => $data, 'tags' => $tags], ['title' => 'Announcements Dashboard']);
-    }
-
-    public function list(){
-        $results = $this->ann_model->listAll();
-        return $results;
     }
 
     public function create(){
@@ -89,15 +84,17 @@ class AnnouncementAdminController extends BaseController
     }
 
     public function updater($id){
-        $results = $this->ann_model->getById($id);
-        $data = $this->list();
-        $tags = $this->tag_model->listAll();
-        return $this->baseHomeView('signup/admin/announcement/manage', 
-            ['isPUT' => true, 'announcements' => $data, 
-            'tags' => $tags, 
-            'annInfo' => $results
-        ], ['title' => 'Update Announcement'
-        ]);
+        $annInfo = $this->ann_model->list(['announcements.id' => $id]);
+        if($annInfo[0]){
+            $announcements = $this->ann_model->list([]);
+            $tags = $this->tag_model->listAll();
+            return $this->baseHomeView('signup/admin/announcement/manage', 
+                ['isPUT' => true, 'announcements' => $announcements, 
+                'tags' => $tags,
+                'annInfo' => $annInfo[0]
+            ], ['title' => 'Update Announcement']);
+        }
+        return redirect()->to('user/admin/announcements/manage');
     }
 
     public function delete(){
@@ -105,8 +102,7 @@ class AnnouncementAdminController extends BaseController
         $ann = $this->ann_model->getById($deleteChar['id']);
         if($ann){
             $this->delteImages('announcements', $ann['image_path']);
-            $this->ann_model->delete(['id' => $deleteChar['id']]);
-            $this->ann_tag_model->delete(['announcement_id' => $deleteChar['id']]);
+            $this->ann_model->delete(['id' => $ann['id']]);
         }
         return redirect()->to('user/admin/announcements/manage');
     }
