@@ -23,6 +23,12 @@ class Main extends BaseController
     public function index()
     {
         $playerInfo = session()->get('playerInfo')['player'];
+        $playerInfo->playerLevel = [
+            "level" => $playerInfo->level,
+            "nextLevel" => $playerInfo->level+1,
+            "xpTo" => $playerInfo->xpToLvl - $playerInfo->xp,
+            "progress" => ( $playerInfo->xp * 1)/$playerInfo->xpToLvl,
+        ];
         return $this->baseGameView('signup/game/lobby', ['playerInfo' => $playerInfo], ['title' => 'Lobby', 'cssPath' => 'css/game_lobby.css']);
     }
 

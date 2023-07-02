@@ -94,6 +94,7 @@ footer:where(body.lobby){
 }
 .navbar-list #players_list_btn{
     transform:rotate(45deg);
+    cursor: pointer;
     border-radius: 2px;
     padding: 4px;
 }

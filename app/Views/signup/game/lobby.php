@@ -12,12 +12,12 @@
         <div class="level">
             <label for="player_xp">
             <div class="level_txt">
-                <p>Lvl. <span class="level_number">1</span></p>
-                <p><span class="level_number">420</span>xp To</p>
-                <p>Lvl. <span class="level_number">2</span></p>
+                <p>Lvl. <span class="level_number"><?=$playerInfo->playerLevel['level'] ?></span></p>
+                <p><span class="level_number"><?=$playerInfo->playerLevel['xpTo'] ?></span>xp To</p>
+                <p>Lvl. <span class="level_number"><?=$playerInfo->playerLevel['nextLevel'] ?></span></p>
             </div>
             </label>
-            <progress id="disk_d" class="xp-bar" value="0.3" max="1">60%</progress>
+            <progress id="disk_d" class="xp-bar" value="<?=$playerInfo->playerLevel['progress'] ?>" max="1"></progress>
         </div>
         <div>
             <a class="btn changeClass" href="<?=base_url('game/change_class')?>">
