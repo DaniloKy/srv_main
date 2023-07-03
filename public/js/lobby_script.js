@@ -31,8 +31,7 @@ window.onload = () => {
                     timestamp: currDate
                 }),
                 headers: {
-                    "Content-Type": "application/json; charset=UTF-8",
-                    'Authorization': AUTHORIZATION_TOKEN,
+                    "Content-Type": "application/json; charset=UTF-8"
                 },
             });
             return response.json();
