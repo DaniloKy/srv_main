@@ -1,6 +1,4 @@
-import { SERVER_URL, AUTHORIZATION_TOKEN } from "./env.js";
-
-console.log(AUTHORIZATION_TOKEN)
+import { SERVER_URL } from "./env.js";
 
 const url = new URL(SERVER_URL);
 
@@ -20,13 +18,11 @@ window.onload = () => {
     };
 
     connection().then((data) => {
-        console.log("THEN", data);
         processMessage(data);
         interval = setIntervalTimes(update, 1000*rps);
     })
 
     async function connection(){
-        console.log("CONNECTIPN");
         try{
             const currDate = new Date();
             const response = await fetch(url+"lobby/connection", {
@@ -47,7 +43,6 @@ window.onload = () => {
     }
 
     async function update(){
-        console.log("UPDATE");
         try{
             const currDate = new Date();
             await fetch(url+"lobby/update", {
@@ -71,24 +66,15 @@ window.onload = () => {
     }
 
     function processMessage(message) {
-
-        //const data = JSON.parse(message.data);
-        console.log(`[message] Data received from server: ${JSON.stringify(message)}`);
     
         const { type, response } = message;
     
-        console.log(`[response] Response: ${response}`);
-    
         switch (type) {
             case "connection": {
-                console.log("connection", response.online);
                 const list = document.querySelector("#players_list");
                 list.innerHTML = "";
                 if(response.online && (response.online).length > 0){
-                    console.log("AFTER IF")
                     for (var user of response.online) {
-                        console.log("USER", user)
-    //<p>xXGamerXx<i class='bx bxs-circle online_circle'></i></p>
                         const li = document.createElement("li");
                         const p = document.createElement("p");
                         const i = document.createElement("i");

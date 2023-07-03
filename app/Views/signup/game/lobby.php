@@ -30,7 +30,7 @@
     </div>
     <div class="playBtn">
         <span id="players_list_btn" class="players_list_btn"><i class='bx bx-group bx-sm'></i></span>
-        <a class="btn play-btn" href="<?=base_url('')?>">Play</a>
+        <a class="btn play-btn" href="<?=base_url('game/play')?>">Play</a>
     </div>
 </div>
 <div class="players_list visually-hidden">

@@ -34,6 +34,7 @@ $routes->group('game', ['filter' => ['isLogged', 'hasPlayer']], static function 
     $routes->get('lobby', 'Main::index');
     $routes->get('career', 'Main::career');
     $routes->get('change_class', 'Main::changeClass');
+    $routes->get('play', 'Game::play');
 });
 
 $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {

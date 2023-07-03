@@ -147,6 +147,10 @@
 .players_list h2{
     padding-bottom: 22px;
 }
+.players_list ul{
+    list-style: none;
+}
+
 .online_circle{
     margin-left: 12px;
     text-shadow: 0 0 6px rgba(144, 255, 8, 0.6);

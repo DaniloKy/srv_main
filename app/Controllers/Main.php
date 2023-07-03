@@ -11,6 +11,7 @@ class Main extends BaseController
 {
 
     protected $login_model;
+    private $client;
 
     public function initController(
         RequestInterface $request,
@@ -18,30 +19,48 @@ class Main extends BaseController
         LoggerInterface $logger
     ) {
         parent::initController($request, $response, $logger);
+        $this->client = \Config\Services::curlrequest();
     }
 
     public function index()
     {
-        $playerInfo = session()->get('playerInfo')['player'];
-        $playerInfo->playerLevel = [
-            "level" => $playerInfo->level,
-            "nextLevel" => $playerInfo->level+1,
-            "xpTo" => $playerInfo->xpToLvl - $playerInfo->xp,
-            "progress" => ( $playerInfo->xp * 1)/$playerInfo->xpToLvl,
-        ];
-        return $this->baseGameView('signup/game/lobby', 
-            ['playerInfo' => $playerInfo], 
-            ['title' => 'Lobby', 'cssPath' => 'css/game_lobby.css', 
-                'jsPath' => ['type' => 'module', 'script' => 'js/lobby_script.js']
-            ]);
+        try{
+            $response = $this->client->head(env('SERVER_URL'));
+            if($response->getStatusCode() != 200)
+                return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+
+            $playerInfo = session()->get('playerInfo')['player'];
+            $playerInfo->playerLevel = [
+                "level" => $playerInfo->level,
+                "nextLevel" => $playerInfo->level+1,
+                "xpTo" => $playerInfo->xpToLvl - $playerInfo->xp,
+                "progress" => ( $playerInfo->xp * 1)/$playerInfo->xpToLvl,
+            ];
+            return $this->baseGameView('signup/game/lobby',
+                ['playerInfo' => $playerInfo], 
+                ['title' => 'Lobby', 'cssPath' => 'css/game_lobby.css', 
+                    'jsPath' => ['type' => 'module', 'script' => 'js/lobby_script.js']
+                ]
+            );
+        }catch(\Exception $e){
+            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+        }
     }
 
     public function career()
     {
-        $playerInfo = session()->get('playerInfo')['player'];
-        $playerInfo->wl = $playerInfo->games_lost!=0?number_format(($playerInfo->games_won/$playerInfo->games_lost), 2):0;
-        $playerInfo->kd = $playerInfo->deaths!=0?number_format(($playerInfo->kills/$playerInfo->deaths), 2):0;
-        return $this->baseGameView('signup/game/career', ['playerInfo' => $playerInfo], ['title' => 'Career', 'cssPath' => 'css/game_career.css']);
+        try{
+            $response = $this->client->head(env('SERVER_URL'));
+            if($response->getStatusCode() != 200)
+                return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+
+            $playerInfo = session()->get('playerInfo')['player'];
+            $playerInfo->wl = $playerInfo->games_lost!=0?number_format(($playerInfo->games_won/$playerInfo->games_lost), 2):0;
+            $playerInfo->kd = $playerInfo->deaths!=0?number_format(($playerInfo->kills/$playerInfo->deaths), 2):0;
+            return $this->baseGameView('signup/game/career', ['playerInfo' => $playerInfo], ['title' => 'Career', 'cssPath' => 'css/game_career.css']);
+        }catch(\Exception $e){
+            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+        }
     }
 
     public function changeClass(){

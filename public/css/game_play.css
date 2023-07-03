@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: sans-serif;
+}
+
+.container{
+    position: relative;
+}
+
+.container canvas{
+    position: absolute;
+}
+
+#users_list{
+    background-color: rgba(90, 90, 90, 0.2);
+    border-radius: 0.8em;
+    border: solid black 1px;
+    padding: 1.2em;
+    top: 1.5em;
+    position: fixed;
+}
+
+#users_list li.you{
+    font-weight: bold;
+}
+
+#users_list.hide{
+    display: none;
+}
+
+#users_list.show{
+    display: initial;
+}

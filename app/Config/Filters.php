@@ -26,7 +26,7 @@ class Filters extends BaseConfig
         'isLogged' => \App\Filters\isLoggedFilter::class,
         'isAdmin' => \App\Filters\isAdminFilter::class,
         'hasPlayer' => \App\Filters\hasPlayer::class,
-        'checkRemberMe' => \App\Filters\checkRemberMeFilter::class
+        'checkRemberMe' => \App\Filters\checkRemberMeFilter::class,
     ];
 
     /**
