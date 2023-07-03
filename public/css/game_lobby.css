@@ -6,7 +6,8 @@
     justify-content: space-evenly;
 }
 
-.lobby .logo{
+.lobby .logo a{
+    text-decoration: none;
     display: flex;
     gap: 32px;
     margin: 32px 0px;
@@ -80,6 +81,8 @@
 .playBtn{
     display: flex;
     justify-content: end;
+    align-items: end;
+    gap: 5em;
     margin-top: auto;
 }
 
@@ -98,4 +101,54 @@
 .playBtn a:hover{
     text-shadow: 0 0 20px #ffefcc;
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.players_list_btn{
+    transform:rotate(45deg);
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: rgba(85, 85, 85, 0.2);
+    border: 1px solid #323232;
+    padding: 4px;
+}
+.players_list_btn i{
+    transform: rotate(-45deg);
+}
+
+.players_list_btn:hover{
+    background-color: rgba(85, 85, 85, 0.3);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.active{
+    background-color: rgba(229, 208, 75, 0.3);
+    box-shadow: 0 0 1px #000000;
+    /* transition: background 0.3s ease, box-shadow 0.3s ease; */
+}
+.active:hover{
+    background-color: rgba(229, 208, 75, 0.5);
+    /* box-shadow: 0 0 8px rgba(229, 208, 75, 0.5); */
+    /* border: none; */
+}
+
+.players_list{
+    position: absolute;
+    border: 1px solid rgba(85, 85, 85, 0.5);
+    background-color: rgb(0,0,0, 0.5);
+    padding: 12px;
+    width: 220px;
+    height: 560px;
+    border-radius: 12px;
+    right: 30px;
+    top: 100px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.players_list h2{
+    padding-bottom: 22px;
+}
+.online_circle{
+    margin-left: 12px;
+    text-shadow: 0 0 6px rgba(144, 255, 8, 0.6);
+    color: rgba(144, 255, 8, 0.25);
 }

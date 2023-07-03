@@ -1,0 +1,373 @@
+let interval;
+let fps = 30;
+let rps = 8;
+let AUTOSAVE = 60;
+let player;
+let socket;
+let name = "user";
+let aframeUnits = 100;
+
+const url = "127.0.0.1:8787";
+
+window.onclick = function(event) {
+    if(socket){
+        socket.send(JSON.stringify(
+          {
+            action: "window_click",
+            body: {
+                player_name: name,
+            }
+          },
+        ));
+        var aBox = document.querySelector(`a-box[data-id="${name}"]`);
+        var scale = aBox.getAttribute("scale");
+        var y_ = scale.y != 2? 2 : 3;
+        aBox.setAttribute("scale", {x: scale.x, y: y_, z: scale.z});
+    }
+}
+
+addEventListener("DOMContentLoaded", async () => {
+  AFRAME.registerComponent("follow-box", {
+    init: function () {
+      this.position;
+      this.frames = fps;
+      this.sendPos_ = AFRAME.utils.throttle(
+        this.sendPos,
+        1000 / this.frames,
+        this,
+      );
+    },
+    schema: {
+      target: { type: "selector" },
+    },
+    tick: (function () {
+      const tmpv = new THREE.Vector3();
+      return function (t, dt) {
+        if (!this.data.target) return;
+        const target = this.data.target.getObject3D("mesh");
+        this.position = target.getWorldPosition(tmpv);
+        this.el.object3D.position.lerp(tmpv, 1);
+        this.sendPos_();
+      };
+    })(),
+    sendPos: function () {
+      if (!player) {
+        return;
+      }
+      var currPos = {
+        x: (this.position.x * aframeUnits).toFixed(8),
+        y: (this.position.y * aframeUnits).toFixed(8),
+        z: (this.position.z * aframeUnits).toFixed(8),
+      };
+      player.pos_axis = currPos;
+    },
+  });
+
+  AFRAME.registerComponent("rotate-with-camera", {
+    init: function () {
+      this.tmpe;
+      this.sendRot_ = AFRAME.utils.throttle(this.sendRot, 1000 / fps, this);
+    },
+    tick: (function () {
+      const tmpq = new THREE.Quaternion();
+      const tmpe = new THREE.Euler();
+      return function (t, dt) {
+        if (!this.el.sceneEl.camera) return;
+        const cam = this.el.sceneEl.camera.el;
+        cam.object3D.getWorldQuaternion(tmpq);
+        this.tmpe = tmpe.setFromQuaternion(tmpq, "YXZ");
+
+        this.el.object3D.rotation.set(
+          THREE.Math.degToRad(0),
+          THREE.Math.degToRad(tmpe.y * 180 / Math.PI),
+          THREE.Math.degToRad(0),
+        );
+        this.sendRot_();
+      };
+    })(),
+    sendRot: function () {
+      if (!player) {
+        return;
+      }
+      var currRot = {
+        x: (this.tmpe.x).toFixed(8),
+        y: (this.tmpe.y * 180 / Math.PI).toFixed(8),
+        z: (this.tmpe.z).toFixed(8),
+      };
+      player.rot_axis = currRot;
+    },
+  });
+}); //onload
+
+async function createPlayer(player_info) {
+  const aScene = document.querySelector("#scene_");
+  const aBox = document.createElement("a-box");
+  var player_pos = player_info.pos_axis;
+  var player_rot = player_info.rot_axis;
+  aBox.setAttribute("data-id", player_info.id);
+  aBox.setAttribute("color", "#" + player_info.color);
+  aBox.setAttribute("scale", { x: 1, y: 2, z: 1 });
+  aBox.object3D.position.set(player_pos.x / aframeUnits, player_pos.y / aframeUnits, player_pos.z / aframeUnits);
+  aBox.object3D.rotation.set(
+    THREE.Math.degToRad(player_rot.x / aframeUnits),
+    THREE.Math.degToRad(player_rot.y / aframeUnits),
+    THREE.Math.degToRad(player_rot.z / aframeUnits),
+  );
+
+  aScene.appendChild(aBox);
+  return aBox;
+}
+
+/*
+ * Socket logic
+ */
+
+connectToWebSocket(`ws://${url}/ws`).then((webSocket) => {
+
+  socket = webSocket;
+
+  socket.onmessage = (i) => processMessage(i);
+
+  socket.onerror = (message) => {
+    console.error(`[error] ${message.message}`);
+  };
+
+  socket.onclose = (message) => {
+
+    if (message.wasClean) {
+      console.log(
+        `[close] Connection closed cleanly, code=${message.code} reason=${message.reason}`,
+      );
+    } else {
+      console.log("[close] Connection died");
+      alert("You got disconnected");
+    }
+    socket = null;
+  };
+  socket.send(JSON.stringify(
+    {
+      action: "connected",
+      body: {
+        name,
+        platform: "aframe",
+      },
+    },
+  ));
+
+}).catch((e) => {
+  console.error(e);
+});
+
+function connectToWebSocket(url, onopen = function () {}) {
+  return new Promise(async (resolve, reject) => {
+
+      do{
+          name = await prompt("Please enter your name:");
+      }while(!name);
+
+    const uri = new URL(url);
+
+    if (!["ws:", "wss:"].includes(uri.protocol)) {
+      return reject(new Error("Unsupported URL"));
+    }
+
+    try {
+      socket = ((uri) => new WebSocket(uri))(uri.href);
+    } catch (e) {
+      if (e instanceof SyntaxError) {
+        return reject(
+          new Error(
+            "https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/WebSocket#exceptions",
+          ),
+        );
+      } else {
+        return reject(new Error("Unknown error"));
+      }
+    }
+
+    if (!socket) {
+      return reject(new Error("Unknown error"));
+    }
+
+    socket.onopen = (message) => {
+      console.log("[open] Connection established");
+      onopen(socket, message);
+      resolve(socket);
+    };
+  });
+}
+
+async function closeConnection(socket, force = false, code, reason) {
+  try {
+    socket.close(code, reason);
+  } catch (e) {
+    if (e instanceof InvalidAccessError) {
+      if (!force) {
+        throw new Error("Invalid code");
+      }
+      closeConnection(socket, force, 1000, reason);
+    } else if (e instanceof SyntaxError) {
+      if (!force) {
+        throw new Error("Invalid reason");
+      }
+
+      const reader = new FileReader(), utf8 = new Blob([reason]).slice(0, 123);
+
+      reader.onload = () => closeConnection(socket, force, 1000, reader.result);
+
+      reader.readAsText(utf8);
+    } else {
+      throw new Error("Unknown error");
+    }
+  }
+}
+
+async function setIntervalTimes(callable, ms) {
+  interval = setTimeout(() => {
+    callable();
+    setIntervalTimes(callable, ms);
+  }, ms);
+}
+
+function autoSave(){
+    console.log("autoSave")
+    if (!socket) {
+      return;
+    }
+    socket.send(JSON.stringify(
+      {
+        action: "autoSave",
+      },
+    ));
+}
+
+async function sendAndRequest() {
+    console.log(player.pos_axis)
+  if (!socket) {
+    return;
+  }
+  socket.send(JSON.stringify(
+    {
+      action: "sendAndRequest",
+      body: {
+        player,
+      },
+    },
+  ));
+}
+
+async function processMessage(message) {
+    //console.log(message);
+  const data = JSON.parse(message.data);
+  //console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
+  const { type, response } = data;
+  switch (type) {
+    case "connected": {
+      //you
+      player = response.me;
+      const camera = document.querySelector("a-entity#camera_");
+      camera.setAttribute("follow-box", {
+        target: `a-box[data-id="${player.id}"]`,
+      });
+      //list
+      addToList(player.name, player.id, true);
+      const aBox = await createPlayer(player);
+      aBox.setAttribute("rotate-with-camera", "");
+      aBox.setAttribute("wasd-controls", { acceleration: 60 });
+      //other users
+      createThem(response.users, player.id);
+      socket.send(JSON.stringify(
+          {
+              action: "connection"
+          }
+      ));
+      console.log(response.chunks_arround);
+      /*for(var a of response.chucks_arround){
+          console.log(a);
+      }*/
+      setIntervalTimes(sendAndRequest, 1000 / rps);
+      setIntervalTimes(autoSave, 1000 * AUTOSAVE);
+      break;
+    }
+
+    case "connection": {
+        const player_info = response.player;
+        addToList(player_info.name, player_info.id, false);
+        createPlayer(player_info);
+        break;
+    }
+
+    case "sendAndRequest": {
+      const users = response.users;
+      if (users <= 0)
+        return;
+      const player_id = response.player_id;
+      for (const user of users) {
+        if (user.id != player_id)
+            updatePos(user);
+      }
+      break;
+    }
+
+    case "click": {
+        console.log("click by: "+response.by);
+        var aBox = document.querySelector(`a-box[data-id="${response.by}"]`);
+        var scale = aBox.getAttribute("scale");
+        var y_ = scale.y != 2? 2 : 3;
+        aBox.setAttribute("scale", {x: scale.x, y: y_, z: scale.z});
+        break;
+    }
+
+    case "disconnect": {
+      document.querySelector(`li[data-id="${response.id}"]`).remove();
+      document.querySelector(`a-box[data-id="${response.id}"]`).remove();
+      break;
+    }
+
+    default: {
+      console.log("default", message);
+    }
+  }
+}
+
+async function addToList(text, id, you = false) {
+  const list = document.querySelector("#users_list .users");
+  const li = document.createElement("li");
+  if (you) {
+    text += " (me)";
+  }
+  li.appendChild(document.createTextNode(text));
+  li.setAttribute("data-id", id);
+  list.appendChild(li);
+}
+
+async function createThem(users, player_id) {
+    // multi users
+    for (const user of users) {
+        if (user.id != player_id) {
+            addToList(user.name, user.id, false);
+            createPlayer(user);
+        }
+    }
+}
+
+async function updatePos(user) {
+  const aBox = document.querySelector(`a-box[data-id="${user.id}"]`);
+  if (aBox == null) {
+    return;
+  }
+  //possition
+  var pos = user.pos_axis;
+  aBox.object3D.position.set(pos.x / aframeUnits, pos.y / aframeUnits, pos.z / aframeUnits);
+  //rotation
+  var rot = user.rot_axis;
+  aBox.object3D.rotation.set(
+    THREE.Math.degToRad(rot.x / aframeUnits),
+    THREE.Math.degToRad(rot.y / aframeUnits),
+    THREE.Math.degToRad(rot.z / aframeUnits),
+  );
+}
+
+window.onerror = function (message, url, line, col, error) {
+  console.error(message, url, line, col, error);
+};

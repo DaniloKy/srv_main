@@ -29,7 +29,11 @@ class Main extends BaseController
             "xpTo" => $playerInfo->xpToLvl - $playerInfo->xp,
             "progress" => ( $playerInfo->xp * 1)/$playerInfo->xpToLvl,
         ];
-        return $this->baseGameView('signup/game/lobby', ['playerInfo' => $playerInfo], ['title' => 'Lobby', 'cssPath' => 'css/game_lobby.css']);
+        return $this->baseGameView('signup/game/lobby', 
+            ['playerInfo' => $playerInfo], 
+            ['title' => 'Lobby', 'cssPath' => 'css/game_lobby.css', 
+                'jsPath' => ['type' => 'module', 'script' => 'js/lobby_script.js']
+            ]);
     }
 
     public function career()

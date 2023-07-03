@@ -1,7 +1,9 @@
 <div class="lobby">
     <div class="logo">
-        <i class="bx bx-lg bxl-postgresql"></i>
-        <h1>Survive Utopia</h1>
+        <a href="<?=base_url('/');?>">
+            <i class="bx bx-lg bxl-postgresql"></i>
+            <h1>Survive Utopia</h1>
+        </a>
     </div>
     <div class="player_info">
         <div class="intro">
@@ -27,6 +29,11 @@
         </div>
     </div>
     <div class="playBtn">
+        <span id="players_list_btn" class="players_list_btn"><i class='bx bx-group bx-sm'></i></span>
         <a class="btn play-btn" href="<?=base_url('')?>">Play</a>
     </div>
+</div>
+<div class="players_list visually-hidden">
+    <h2>Online</h2>
+    <p>xXGamerXx<i class='bx bxs-circle online_circle'></i></p>
 </div>

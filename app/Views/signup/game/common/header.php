@@ -11,8 +11,8 @@
             <link rel="stylesheet" href="/<?=esc($cssPath)?>">
         <?php endif; ?>
         <script src="/js/gameScript.js"></script>
-        <?php if(esc(isset($jsPath))): ?>
-            <script src="/<?=esc($jsPath)?>"></script>
+        <?php if(esc(isset($jsPath['type'])) && esc(isset($jsPath['script'])) ): ?>
+            <script type="<?=esc($jsPath['type'])?>" src="/<?=esc($jsPath['script'])?>"></script>
         <?php endif; ?>
         <title><?=esc($title)?></title>
     </head>

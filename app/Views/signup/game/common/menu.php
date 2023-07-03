@@ -18,13 +18,6 @@
     <li class="<?=active_link('career'); ?>">
         <a href="<?=base_url('game/career')?>">CAREER</a>
     </li>
-    <li id="players_list_btn">
-        <span><i class='bx bx-group bx-sm'></i></span>
-    </li>
   </ul>
 </nav>
-<div class="players_list visually-hidden">
-    <h2>Online</h2>
-    <p>xXGamerXx<i class='bx bxs-circle online_circle'></i></p>
-</div>
 <main>

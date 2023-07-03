@@ -7,5 +7,4 @@ window.addEventListener('load', function(event){
         player_list_btn.classList.toggle('active');
         player_list.classList.toggle('visually-hidden');
     });
-
 });
