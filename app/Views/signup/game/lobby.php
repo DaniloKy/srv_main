@@ -35,5 +35,8 @@
 </div>
 <div class="players_list visually-hidden">
     <h2>Online</h2>
-    <p>xXGamerXx<i class='bx bxs-circle online_circle'></i></p>
+    <ul id="players_list">
+        <p>No Users online</p>
+    </ul>
 </div>
+<input class="visually-hidden" id="playerUsername" type="hidden" value="<?=$playerInfo->username;?>">
