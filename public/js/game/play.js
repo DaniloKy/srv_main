@@ -1,6 +1,6 @@
 import { SERVER_URL } from "../env.js";
 
-const url = SERVER_URL;
+console.log(SERVER_URL);
 
 let socket;
 
@@ -10,23 +10,11 @@ let player;
   *GAME*
 */
 
+import Player from "./Player.js";
+
 window.onload = () => {
 
-  spinBlade_skill = new Skill('spinBlade');
-  seflHeal_skill = new Skill('selfHeal');
-  protectionOrb_skill = new Skill('protectionOrb');
-
-  fighter_skills = [
-    spinBlade_skill, seflHeal_skill, protectionOrb_skill
-  ];
-
-  fighter_class = new Player_class("fighter", fighter_skills);
-
-  for(const skill of fighter_class.skills){
-    
-  }
-
-  player = new Player(123, "Ben", fighter_class.class_name)
+  player = new Player(123, "Ben")
 
   console.log(player);
 
@@ -42,19 +30,34 @@ window.onload = () => {
   mainCanvas.width = window.innerWidth;
   mainCanvas.height = window.innerHeight;
 
-  function updatePlayerPos(){
-    ctx.save();
-    ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-    
+  let lastRender = null;
+  let lastUpdate = null;
+  function updatePlayerPos(frame){
+    if (lastUpdate == null || frame - lastUpdate >= (1 * 1000 / 24)) {
+        lastUpdate = frame;
+        update();
+    }
+    if (lastRender == null || frame - lastRender >= (1 * 1000 / 15)) {
+        lastRender = frame;
+        render();
+    }
+    requestAnimationFrame(updatePlayerPos)
+  }
+
+  function update() {
     //x
     positions.x += velocity.vxl;
     positions.x += velocity.vxr;
     //y
     positions.y += velocity.vyl;
     positions.y += velocity.vyr;
+  }
+  function render() {
+    ctx.save();
+    ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
     ctx.fillRect(positions.x, positions.y, 30, 50);
+    ctx.fillRect(positions.x+622, positions.y+123, 30, 50);
     ctx.restore();
-    requestAnimationFrame(updatePlayerPos)
   }
   
   updatePlayerPos();
@@ -104,8 +107,8 @@ function createPlayer(){
   *SOCKET*
 
 */
-
-/*connectToWebSocket(`ws://${url}/ws`).then(webSocket => {
+/*
+connectToWebSocket(`ws://${url}/ws`).then(webSocket => {
 
     socket = webSocket;
 
@@ -139,8 +142,8 @@ function createPlayer(){
 
 }).catch(e => {
   console.error(e);
-});*/
-
+});
+*/
 function connectToWebSocket(url, onopen = function() {}) {
   return new Promise(async (resolve, reject) => {
     var uri = new URL(url);

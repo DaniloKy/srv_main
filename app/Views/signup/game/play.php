@@ -7,7 +7,7 @@
         <link rel="icon" href="/images/postgresql-logo-24.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <link rel="stylesheet" href="/css/game_play.css">
-        <script type="moule" src="/game/play.js"></script>
+        <script type="module" src="/js/game/play.js"></script>
         <title>Survive Utopia</title>
     </head>
     <body>

@@ -1,4 +1,4 @@
-class Player{
+export default class Player{
     #id;
     name;
     
@@ -25,7 +25,6 @@ class Player{
         this.#id = id;
         this.name = name;
         this.player_class = player_class;
-        this.whatClassAmI(player_class);
     }
 
     //Gets/Sets
