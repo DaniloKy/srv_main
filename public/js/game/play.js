@@ -27,6 +27,16 @@ window.onload = () => {
   mainCanvas.width = window.innerWidth;
   mainCanvas.height = window.innerHeight;
 
+  const backgroundImage = new Image();
+  backgroundImage.src = "../../images/game/Map/Pd3a0K.png";
+  const scaleX = mainCanvas.width / backgroundImage.width;
+  const scaleY = mainCanvas.height / backgroundImage.height;
+  const scale = Math.max(scaleX, scaleY);
+  const backgroundWidth = backgroundImage.width * scale;
+  const backgroundHeight = backgroundImage.height * scale;
+  const offsetX = (mainCanvas.width - backgroundWidth) / 2;
+  const offsetY = (mainCanvas.height - backgroundHeight) / 2;
+
   let lastRender = null;
   let lastAnimationRender = null
   let lastUpdate = null;
@@ -52,10 +62,6 @@ window.onload = () => {
     requestAnimationFrame(updatePlayerPos);
   }
 
-  //const backgroundImage = new Image();
-  //backgroundImage.src = "path/to/background/image.jpg";
-  //ctx.drawImage(backgroundImage, 0, 0, mainCanvas.width, mainCanvas.height);
-
   function update() {
     // FOR EACH PLAYER update()
     player.update();
@@ -64,6 +70,8 @@ window.onload = () => {
   function render() {
     ctx.save();
     ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+    ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width/1.5, backgroundImage.height/1.5);
+    //ctx.drawImage(backgroundImage, offsetX, offsetY, backgroundWidth, backgroundHeight);
     // FOR EACH PLAYER render()
     player.render(ctx);
     ctx.restore();
@@ -126,12 +134,10 @@ connectToWebSocket(`ws://${SERVER_URL}/ws`).then(webSocket => {
     socket.onmessage = i => processMessage(i);
 
     socket.onerror = message => {
-      console.log('ERROR BEn')
       console.log(`[error] ${message.message}`);
     };
 
     socket.onclose = message => {
-        alert("You got disconnected");
         if (message.wasClean)
             console.log(`[close] Connection closed cleanly, code=${message.code} reason=${message.reason}`);
         else
@@ -144,13 +150,13 @@ connectToWebSocket(`ws://${SERVER_URL}/ws`).then(webSocket => {
           action: "connected"
       }
     ));
-
+/*
     socket.send(JSON.stringify(
       {
           action: "connection"
       }
     ));
-
+*/
 }).catch(e => {
   console.error(e);
 });
@@ -161,7 +167,7 @@ function connectToWebSocket(url, onopen = function() {}) {
     
     if (!["ws:", "wss:"].includes(uri.protocol))
       return reject(new Error ("Unsupported URL"));
-
+    console.log(uri);
     try {
       socket = new WebSocket(uri.href);
     } catch (e) {
@@ -169,7 +175,7 @@ function connectToWebSocket(url, onopen = function() {}) {
       if (e instanceof SyntaxError)
         return reject(new Error("https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/WebSocket#exceptions"));
       else
-        return reject(new Error("Unknown error"));
+        return reject(e);
     }
 
     if (!socket)
@@ -218,7 +224,7 @@ function processMessage(message) {
 
       const list = document.querySelector('#users_list ul');
       if((response.users).length > 0){
-        createPlayer();
+        //createPlayer();
         for(const i of response.users){
           const li = document.createElement('li');
           li.appendChild(document.createTextNode(i.name));

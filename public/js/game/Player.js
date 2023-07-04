@@ -114,7 +114,10 @@ export default class Player{
         const stateImagePath = this.states[this.currentState]['src'];
         const stateWidth = this.states[this.currentState]['spriteWidth'];
         const stateHeight = this.states[this.currentState]['spriteHeight'];
-        this.totalFrames = this.states[this.currentState]['totalFrames'];
+        this.totalFrames = this.states[this.currentState]['totalFrames']; 
+
+        const characterWidth = 0.15 * 1600;
+        const characterHeight = (characterWidth / stateWidth) * stateHeight;
 
         ctx.drawImage(
             stateImagePath,
@@ -124,8 +127,10 @@ export default class Player{
             stateHeight, 
             this.pos_axis.x,
             this.pos_axis.y,
-            stateWidth/this.totalFrames, 
-            stateHeight
+            characterWidth/this.totalFrames,
+            characterHeight
+            //stateWidth/this.totalFrames, 
+            //stateHeight
         );
     };
 
