@@ -1,6 +1,6 @@
 import { SERVER_URL } from "./env.js";
 
-const url = new URL(SERVER_URL);
+const url = new URL("http://"+SERVER_URL);
 
 const rps = 10;
 

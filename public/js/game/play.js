@@ -1,9 +1,9 @@
 import { SERVER_URL } from "../env.js";
 
-console.log(SERVER_URL);
+const UPS = 30;
+const RPS = 30;
 
 let socket;
-
 let player;
 
 /*
@@ -14,13 +14,10 @@ import Player from "./Player.js";
 
 window.onload = () => {
 
-  player = new Player(123, "Ben")
+  player = new Player(123, "Ben", "mage")
 
   console.log(player);
 
-  let positions = {x: 0, y: 0};
-  const MAX_VEL = 0.5;
-  let velocity = {vxl: 0, vxr: 0, vyl: 0, vyr: 0};
 
   //Canvas
   const mainCanvas = document.getElementById("game");
@@ -31,35 +28,47 @@ window.onload = () => {
   mainCanvas.height = window.innerHeight;
 
   let lastRender = null;
+  let lastAnimationRender = null
   let lastUpdate = null;
+
   function updatePlayerPos(frame){
-    if (lastUpdate == null || frame - lastUpdate >= (1 * 1000 / 24)) {
+    if (lastUpdate == null || frame - lastUpdate >= (1000 / UPS)) {
         lastUpdate = frame;
         update();
     }
-    if (lastRender == null || frame - lastRender >= (1 * 1000 / 15)) {
+    
+    if (lastRender == null || frame - lastRender >= (1000 / RPS)) {
         lastRender = frame;
         render();
     }
-    requestAnimationFrame(updatePlayerPos)
+
+    if (lastAnimationRender == null || frame - lastAnimationRender >= (1000/4)) {
+      lastAnimationRender = frame;
+      player.currentFrame++;
+      if(player.currentFrame >= player.totalFrames)
+        player.currentFrame = 0;
+      
+    }
+    requestAnimationFrame(updatePlayerPos);
   }
 
+  //const backgroundImage = new Image();
+  //backgroundImage.src = "path/to/background/image.jpg";
+  //ctx.drawImage(backgroundImage, 0, 0, mainCanvas.width, mainCanvas.height);
+
   function update() {
-    //x
-    positions.x += velocity.vxl;
-    positions.x += velocity.vxr;
-    //y
-    positions.y += velocity.vyl;
-    positions.y += velocity.vyr;
+    // FOR EACH PLAYER update()
+    player.update();
   }
+
   function render() {
     ctx.save();
     ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-    ctx.fillRect(positions.x, positions.y, 30, 50);
-    ctx.fillRect(positions.x+622, positions.y+123, 30, 50);
+    // FOR EACH PLAYER render()
+    player.render(ctx);
     ctx.restore();
   }
-  
+
   updatePlayerPos();
 
   /*
@@ -72,24 +81,26 @@ window.onload = () => {
         users_list.style.left = `${window.innerWidth/2}px`;
         users_list.classList.remove('hide');
         users_list.classList.add('show');
+        player.setState("run");
     }
     //MOVEMENT
-    if(e.code == "KeyD") velocity.vxr = MAX_VEL;
-    if(e.code == "KeyA") velocity.vxl = -MAX_VEL;
-    if(e.code == "KeyS") velocity.vyr = MAX_VEL;
-    if(e.code == "KeyW") velocity.vyl = -MAX_VEL;
+    if(e.code == "KeyD") player.velocity.vxr = player.walk_vel;
+    if(e.code == "KeyA") player.velocity.vxl = -player.walk_vel;
+    if(e.code == "KeyS") player.velocity.vyr = player.walk_vel;
+    if(e.code == "KeyW") player.velocity.vyl = -player.walk_vel;
   });
   window.addEventListener('keyup', function(e){
     //USER LIST
     if (e.keyCode == 84) {
         users_list.classList.remove('show');
         users_list.classList.add('hide');
+        player.setState("idle");
     }
     //MOVEMENT
-    if(e.code == "KeyD") velocity.vxr = 0;
-    if(e.code == "KeyA") velocity.vxl = 0;
-    if(e.code == "KeyS") velocity.vyr = 0;
-    if(e.code == "KeyW") velocity.vyl = 0;
+    if(e.code == "KeyD") player.velocity.vxr = 0;
+    if(e.code == "KeyA") player.velocity.vxl = 0;
+    if(e.code == "KeyS") player.velocity.vyr = 0;
+    if(e.code == "KeyW") player.velocity.vyl = 0;
   });
 
 
@@ -107,8 +118,8 @@ function createPlayer(){
   *SOCKET*
 
 */
-/*
-connectToWebSocket(`ws://${url}/ws`).then(webSocket => {
+
+connectToWebSocket(`ws://${SERVER_URL}/ws`).then(webSocket => {
 
     socket = webSocket;
 
@@ -143,16 +154,11 @@ connectToWebSocket(`ws://${url}/ws`).then(webSocket => {
 }).catch(e => {
   console.error(e);
 });
-*/
+
 function connectToWebSocket(url, onopen = function() {}) {
   return new Promise(async (resolve, reject) => {
     var uri = new URL(url);
     
-    let params = (new URL(document.location)).searchParams;
-    let server = params.get("server_id");
-    console.log(server, uri);
-    uri.searchParams.set("server_id", server?server:null);
-
     if (!["ws:", "wss:"].includes(uri.protocol))
       return reject(new Error ("Unsupported URL"));
 
