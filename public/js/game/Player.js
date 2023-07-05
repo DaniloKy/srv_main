@@ -5,6 +5,7 @@ export default class Player{
     #id;
     name;
     player_class;
+    level;
 
     //Player stats
     health = 100;
@@ -21,15 +22,18 @@ export default class Player{
     velocity = {vxl: 0, vxr: 0, vyl: 0, vyr: 0};
 
     //Player Frame/State
+    animationCount = 0;
+    playerRotationAngle = 0;
     currentFrame;
     currentState;
     states;
 
-    constructor(id, name, player_class){
-        this.#id = id;
+    constructor(name, player_class, level, pos){
         this.name = name;
         this.player_class = player_class;
+        this.level = level;
         this.whatClassAmI(player_class);
+        this.pos_axis = pos;
         this.currentFrame = 0;
         this.currentState = "idle";
         this.states = {
@@ -38,23 +42,26 @@ export default class Player{
                 totalFrames: 4,
                 spriteWidth: 128,
                 spriteHeight: 32,
+                animationSpeed: 6,
             },
             run: {
                 src: new Image(),
                 totalFrames: 6,
                 spriteWidth: 384,
                 spriteHeight: 64,
+                animationSpeed: 4,
             },
             death:{
                 src: new Image(),
                 totalFrames: 6,
                 spriteWidth: 288,
                 spriteHeight: 32,
+                animationSpeed: 6,
             }
         };
-        this.states.idle.src.src = IMAGE_PATH+this.player_class+"/Idle/Idle-Sheet.png";
-        this.states.run.src.src = IMAGE_PATH+this.player_class+"/Run/Run-Sheet.png"
-        this.states.death.src.src = IMAGE_PATH+this.player_class+"/Death/Death-Sheet.png";
+        this.states.idle.src.src = IMAGE_PATH+player_class+"/Idle/Idle-Sheet.png";
+        this.states.run.src.src = IMAGE_PATH+player_class+"/Run/Run-Sheet.png"
+        this.states.death.src.src = IMAGE_PATH+player_class+"/Death/Death-Sheet.png";
     }
 
     update(){
@@ -104,8 +111,9 @@ export default class Player{
     
     setState(newState) {
         if (this.currentState !== newState) {
-          this.currentState = newState;
-          this.currentFrame = 0;
+            this.animationCount = 0;
+            this.currentState = newState;
+            this.currentFrame = 0;
         }
     }
 
@@ -116,8 +124,11 @@ export default class Player{
         const stateHeight = this.states[this.currentState]['spriteHeight'];
         this.totalFrames = this.states[this.currentState]['totalFrames']; 
 
-        const characterWidth = 0.15 * 1600;
+        const characterWidth = 32*3;
         const characterHeight = (characterWidth / stateWidth) * stateHeight;
+
+        //ctx.rotate(this.playerRotationAngle);
+        //ctx.scale(3, 3);
 
         ctx.drawImage(
             stateImagePath,
@@ -129,9 +140,15 @@ export default class Player{
             this.pos_axis.y,
             characterWidth/this.totalFrames,
             characterHeight
-            //stateWidth/this.totalFrames, 
-            //stateHeight
         );
+        var speed = this.states[this.currentState]['animationSpeed']
+        if (this.animationCount == speed) {
+            this.animationCount = 0;
+            this.currentFrame++;
+            if(this.currentFrame >= this.totalFrames)
+                this.currentFrame = 0;
+        }
+        this.animationCount++;
     };
 
 }

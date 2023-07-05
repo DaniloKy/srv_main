@@ -5,6 +5,7 @@ const RPS = 30;
 
 let socket;
 let player;
+let players_list = new Map();
 
 /*
   *GAME*
@@ -14,10 +15,11 @@ import Player from "./Player.js";
 
 window.onload = () => {
 
-  player = new Player(123, "Ben", "mage")
+  const username = document.querySelector("input[name='username']");
 
-  console.log(player);
+  const class_name = document.querySelector("input[name='class_name']");
 
+  const level = document.querySelector("input[name='level']");
 
   //Canvas
   const mainCanvas = document.getElementById("game");
@@ -29,16 +31,13 @@ window.onload = () => {
 
   const backgroundImage = new Image();
   backgroundImage.src = "../../images/game/Map/Pd3a0K.png";
-  const scaleX = mainCanvas.width / backgroundImage.width;
-  const scaleY = mainCanvas.height / backgroundImage.height;
-  const scale = Math.max(scaleX, scaleY);
-  const backgroundWidth = backgroundImage.width * scale;
-  const backgroundHeight = backgroundImage.height * scale;
-  const offsetX = (mainCanvas.width - backgroundWidth) / 2;
-  const offsetY = (mainCanvas.height - backgroundHeight) / 2;
+  var scale = Math.min(mainCanvas.width / backgroundImage.width, mainCanvas.height / backgroundImage.height);
+  var scaledWidth = backgroundImage.width * scale;
+  var scaledHeight = backgroundImage.height * scale;
+  var offsetX = (mainCanvas.width - scaledWidth) / 2;
+  var offsetY = (mainCanvas.height - scaledHeight) / 2;
 
   let lastRender = null;
-  let lastAnimationRender = null
   let lastUpdate = null;
 
   function updatePlayerPos(frame){
@@ -52,213 +51,280 @@ window.onload = () => {
         render();
     }
 
-    if (lastAnimationRender == null || frame - lastAnimationRender >= (1000/4)) {
-      lastAnimationRender = frame;
-      player.currentFrame++;
-      if(player.currentFrame >= player.totalFrames)
-        player.currentFrame = 0;
-      
-    }
     requestAnimationFrame(updatePlayerPos);
   }
 
   function update() {
-    // FOR EACH PLAYER update()
     player.update();
   }
 
   function render() {
     ctx.save();
     ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-    ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width/1.5, backgroundImage.height/1.5);
-    //ctx.drawImage(backgroundImage, offsetX, offsetY, backgroundWidth, backgroundHeight);
-    // FOR EACH PLAYER render()
-    player.render(ctx);
+    ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width/3, backgroundImage.height/3);
+    //ctx.drawImage(backgroundImage, offsetX, offsetY, scaledWidth, scaledHeight);
+    for(const player of [...players_list.values()])
+      player.render(ctx);
     ctx.restore();
   }
 
-  updatePlayerPos();
+  
 
   /*
     INPUTS
   */
+    // Define flags to track the key states
+let isKeyDPressed = false;
+let isKeyAPressed = false;
+let isKeySPressed = false;
+let isKeyWPressed = false;
 
-  window.addEventListener('keydown', function(e){
-    //USER LIST
-    if (e.keyCode == 84) {
-        users_list.style.left = `${window.innerWidth/2}px`;
-        users_list.classList.remove('hide');
-        users_list.classList.add('show');
-        player.setState("run");
-    }
-    //MOVEMENT
-    if(e.code == "KeyD") player.velocity.vxr = player.walk_vel;
-    if(e.code == "KeyA") player.velocity.vxl = -player.walk_vel;
-    if(e.code == "KeyS") player.velocity.vyr = player.walk_vel;
-    if(e.code == "KeyW") player.velocity.vyl = -player.walk_vel;
-  });
-  window.addEventListener('keyup', function(e){
-    //USER LIST
-    if (e.keyCode == 84) {
-        users_list.classList.remove('show');
-        users_list.classList.add('hide');
-        player.setState("idle");
-    }
-    //MOVEMENT
-    if(e.code == "KeyD") player.velocity.vxr = 0;
-    if(e.code == "KeyA") player.velocity.vxl = 0;
-    if(e.code == "KeyS") player.velocity.vyr = 0;
-    if(e.code == "KeyW") player.velocity.vyl = 0;
-  });
+// Keydown event listener
+window.addEventListener('keydown', function(e) {
+  //USER LIST
+  if (e.code == "KeyT") {
+    users_list.style.left = `${window.innerWidth / 2}px`;
+    users_list.classList.remove('hide');
+    users_list.classList.add('show');
+  }
 
-
-};//On load
-
-function createPlayer(){
-  const mainCanvas = document.getElementById("game");
-  const ctx = mainCanvas.getContext("2d");
-  ctx.fillRect(50, 50, 30, 50);
-
-}
-
-/*
-
-  *SOCKET*
-
-*/
-
-connectToWebSocket(`ws://${SERVER_URL}/ws`).then(webSocket => {
-
-    socket = webSocket;
-
-    socket.onmessage = i => processMessage(i);
-
-    socket.onerror = message => {
-      console.log(`[error] ${message.message}`);
-    };
-
-    socket.onclose = message => {
-        if (message.wasClean)
-            console.log(`[close] Connection closed cleanly, code=${message.code} reason=${message.reason}`);
-        else
-            console.log("[close] Connection died");
-        socket = null;
-    };
-
-    socket.send(JSON.stringify(
-      {
-          action: "connected"
-      }
-    ));
-/*
-    socket.send(JSON.stringify(
-      {
-          action: "connection"
-      }
-    ));
-*/
-}).catch(e => {
-  console.error(e);
+  //MOVEMENT
+  if (e.code == "KeyD" && !isKeyDPressed) {
+    player.velocity.vxr = player.walk_vel;
+    player.playerRotationAngle = 0;
+    isKeyDPressed = true;
+    player.setState("run");
+  }
+  if (e.code == "KeyA" && !isKeyAPressed) {
+    player.velocity.vxl = -player.walk_vel;
+    player.playerRotationAngle = Math.PI;
+    isKeyAPressed = true;
+    player.setState("run");
+  }
+  if (e.code == "KeyS" && !isKeySPressed) {
+    player.velocity.vyr = player.walk_vel;
+    isKeySPressed = true;
+    player.setState("run");
+  }
+  if (e.code == "KeyW" && !isKeyWPressed) {
+    player.velocity.vyl = -player.walk_vel;
+    isKeyWPressed = true;
+    player.setState("run");
+  }
 });
 
-function connectToWebSocket(url, onopen = function() {}) {
-  return new Promise(async (resolve, reject) => {
-    var uri = new URL(url);
-    
-    if (!["ws:", "wss:"].includes(uri.protocol))
-      return reject(new Error ("Unsupported URL"));
-    console.log(uri);
-    try {
-      socket = new WebSocket(uri.href);
-    } catch (e) {
-      console.error('ERROR BEn')
-      if (e instanceof SyntaxError)
-        return reject(new Error("https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/WebSocket#exceptions"));
-      else
-        return reject(e);
-    }
-
-    if (!socket)
-      return reject(new Error("Unknown error"));
-
-    socket.onopen = message => {
-      console.log("[open] Connection established");
-      onopen(socket, message);
-      resolve(socket);
-    };
-  });
-}
-
-async function closeConnection(socket, force = false, code, reason) {
-  try {
-    socket.close(code, reason);
-  } catch (e) {
-    if (e instanceof InvalidAccessError) {
-      if (!force)
-        throw new Error("Invalid code");
-      closeConnection(socket, force, 1000, reason);
-    } else if (e instanceof SyntaxError) {
-      if (!force)
-        throw new Error("Invalid reason");
-
-      const reader = new FileReader(), utf8 = new Blob([reason]).slice(0, 123);
-
-      reader.onload = () => closeConnection(socket, force, 100000, reader.result);
-
-      reader.readAsText(utf8);
-    } else
-      throw new Error("Unknown error");
+// Keyup event listener
+window.addEventListener('keyup', function(e) {
+  //USER LIST
+  if (e.code == "KeyT") {
+    users_list.classList.remove('show');
+    users_list.classList.add('hide');
   }
-}
 
-function processMessage(message) {
-  const data = JSON.parse(message.data);
-  console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
-  const { type, response } = data;
+  //MOVEMENT
+  if (e.code == "KeyD") {
+    player.velocity.vxr = 0;
+    isKeyDPressed = false;
+  }
+  if (e.code == "KeyA") {
+    player.velocity.vxl = 0;
+    isKeyAPressed = false;
+  }
+  if (e.code == "KeyS") {
+    player.velocity.vyr = 0;
+    isKeySPressed = false;
+  }
+  if (e.code == "KeyW") {
+    player.velocity.vyl = 0;
+    isKeyWPressed = false;
+  }
 
-  switch (type) {
+  // Check if any movement key is still pressed
+  if (!isKeyDPressed && !isKeyAPressed && !isKeySPressed && !isKeyWPressed) {
+    player.setState("idle");
+  }
+});
+  /*
 
-    case "connected":{
-      var me = response.me;
-      player = new Player(me.id, me.name);
+    *SOCKET*
 
-      const list = document.querySelector('#users_list ul');
-      if((response.users).length > 0){
-        //createPlayer();
-        for(const i of response.users){
-          const li = document.createElement('li');
-          li.appendChild(document.createTextNode(i.name));
-          li.setAttribute("data-id", i.id);
-          list.appendChild(li);
+  */
+
+  connectToWebSocket(`ws://${SERVER_URL}/ws`).then(webSocket => {
+
+      socket = webSocket;
+
+      socket.onmessage = i => processMessage(i);
+
+      socket.onerror = message => {
+        console.log(`[error] ${message.message}`);
+      };
+
+      socket.onclose = message => {
+          if (message.wasClean)
+              console.log(`[close] Connection closed cleanly, code=${message.code} reason=${message.reason}`);
+          else
+              console.log("[close] Connection died");
+          socket = null;
+      };
+
+      socket.send(JSON.stringify(
+        {
+            action: "connected",
+            body: {
+              player_info: {
+                name: username.value,
+                class_name: class_name.value,
+                level: level.value,
+                pos: {
+                  x: 23,
+                  y: 23
+                }
+              }
+            }
         }
+      ));
+  
+  }).catch(e => {
+    console.error(e);
+  });
+
+  function connectToWebSocket(url, onopen = function() {}) {
+    return new Promise(async (resolve, reject) => {
+      var uri = new URL(url);
+      
+      if (!["ws:", "wss:"].includes(uri.protocol))
+        return reject(new Error ("Unsupported URL"));
+      console.log(uri);
+      try {
+        socket = new WebSocket(uri.href);
+      } catch (e) {
+        console.error('ERROR BEn')
+        if (e instanceof SyntaxError)
+          return reject(new Error("https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/WebSocket#exceptions"));
+        else
+          return reject(e);
       }
-      const li = document.createElement('li');
-      li.appendChild(document.createTextNode(response.me.name + " (me)"));
-      li.classList.add("you");
-      list.appendChild(li);
-      break;
-    }
 
-    case "connection":{
-      const list = document.getElementById('users_list');
-      const li = document.createElement('li');
-      li.appendChild(document.createTextNode(response.player.name));
-      li.setAttribute("data-id", response.player.id);
-      list.appendChild(li);
-      break;
-    }
+      if (!socket)
+        return reject(new Error("Unknown error"));
 
-    case "moving": {
-      break;
-    }
+      socket.onopen = message => {
+        console.log("[open] Connection established");
+        onopen(socket, message);
+        resolve(socket);
+      };
+    });
+  }
 
-    case "disconnect": {
-      document.querySelector(`li[data-id="${response.id}"]`).remove();
-      break;
-    }
+  function setIntervalTimes(callable, ms) {
+    setTimeout(() => {
+      callable();
+      setIntervalTimes(callable, ms);
+    }, ms)
+  };
 
-    default: {
-      console.log("default");
+  function sendUpdated(){
+    socket.send(JSON.stringify(
+      {
+          action: "update",
+          body: {
+            player_info: {
+              id: player.getId(),
+              currentState: player.currentState,
+              pos: player.pos_axis
+            }
+          }
+      }
+    ));
+  }
+
+  async function closeConnection(socket, force = false, code, reason) {
+    try {
+      socket.close(code, reason);
+    } catch (e) {
+      if (e instanceof InvalidAccessError) {
+        if (!force)
+          throw new Error("Invalid code");
+        closeConnection(socket, force, 1000, reason);
+      } else if (e instanceof SyntaxError) {
+        if (!force)
+          throw new Error("Invalid reason");
+
+        const reader = new FileReader(), utf8 = new Blob([reason]).slice(0, 123);
+
+        reader.onload = () => closeConnection(socket, force, 100000, reader.result);
+
+        reader.readAsText(utf8);
+      } else
+        throw new Error("Unknown error");
     }
   }
-}
+
+  function processMessage(message) {
+    const data = JSON.parse(message.data);
+    //console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
+    const { type, response } = data;
+
+    switch (type) {
+
+      case "connected":{
+        var me = response.me;
+        player = new Player(me.name, me.my_class, me.level, me.pos_axis);
+        player.setId(me.id);
+        players_list.set(me.id, player);
+        updatePlayerPos();
+        setIntervalTimes(sendUpdated, 1000/24);
+        const list = document.querySelector('#users_list ul');
+        if((response.users).length > 0){
+          for(const i of response.users){
+            players_list.set(i.id, new Player(i.name, i.my_class, i.level, i.pos_axis));
+            const li = document.createElement('li');
+            li.appendChild(document.createTextNode(i.name));
+            li.setAttribute("data-id", i.id);
+            list.appendChild(li);
+          }
+        }
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(response.me.name + " (me)"));
+        li.classList.add("you");
+        list.appendChild(li);
+        break;
+      }
+
+      case "connection":{
+        const player_info = response.player;
+        players_list.set(player_info.id, new Player(player_info.name, player_info.my_class, player_info.level, player_info.pos_axis));
+        const list = document.getElementById('users_list');
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(player_info.name));
+        li.setAttribute("data-id", player_info.id);
+        list.appendChild(li);
+        break;
+      }
+
+      case "update": {
+        if((response.users).length > 0){
+          for(const i of response.users){
+            const player = players_list.get(i.id);
+            player.currentState = i.currentState;
+            player.pos_axis = i.pos_axis;
+            players_list.set(i.id, player);
+          }
+        }
+        break;
+      }
+
+      case "disconnect": {
+        players_list.delete(response.id);
+        document.querySelector(`li[data-id="${response.id}"]`).remove();
+        break;
+      }
+
+      default: {
+        console.log("default");
+      }
+    }
+  }
+
+};//On load

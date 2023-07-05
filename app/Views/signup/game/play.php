@@ -17,6 +17,8 @@
                 <ul></ul>
             </div>
         </div>
-        <?php print_r($playerInfo) ?>
+        <input type="hidden" class="visually-hidden" name="username" value="<?=$playerInfo->username?>">
+        <input type="hidden" class="visually-hidden" name="class_name" value="<?=$playerInfo->class_name?>">
+        <input type="hidden" class="visually-hidden" name="level" value="<?=$playerInfo->level?>">
     </body>
 </html>
