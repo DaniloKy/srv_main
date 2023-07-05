@@ -30,7 +30,7 @@ window.onload = () => {
   mainCanvas.height = window.innerHeight;
 
   const backgroundImage = new Image();
-  backgroundImage.src = "../../images/game/Map/Pd3a0K.png";
+  backgroundImage.src = "../../images/game/Map/map.png";
   var scale = Math.min(mainCanvas.width / backgroundImage.width, mainCanvas.height / backgroundImage.height);
   var scaledWidth = backgroundImage.width * scale;
   var scaledHeight = backgroundImage.height * scale;
