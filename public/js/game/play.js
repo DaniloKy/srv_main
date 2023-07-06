@@ -1,10 +1,12 @@
 import { SERVER_URL } from "../env.js";
+import Game from "./Game.js";
 
 const UPS = 30;
 const RPS = 30;
 
 let socket;
 let player;
+let game = new Game();
 let players_list = new Map();
 
 /*
@@ -31,11 +33,6 @@ window.onload = () => {
 
   const backgroundImage = new Image();
   backgroundImage.src = "../../images/game/Map/map.png";
-  var scale = Math.min(mainCanvas.width / backgroundImage.width, mainCanvas.height / backgroundImage.height);
-  var scaledWidth = backgroundImage.width * scale;
-  var scaledHeight = backgroundImage.height * scale;
-  var offsetX = (mainCanvas.width - scaledWidth) / 2;
-  var offsetY = (mainCanvas.height - scaledHeight) / 2;
 
   let lastRender = null;
   let lastUpdate = null;
@@ -57,93 +54,99 @@ window.onload = () => {
   function update() {
     player.update();
   }
-
+  var scale = 1.5;
   function render() {
     ctx.save();
     ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-    ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width/3, backgroundImage.height/3);
-    //ctx.drawImage(backgroundImage, offsetX, offsetY, scaledWidth, scaledHeight);
+    ctx.translate(-player.pos_axis.x + mainCanvas.width / 2, -player.pos_axis.y + mainCanvas.height / 2);
+    ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width * scale, backgroundImage.height *scale);
     for(const player of [...players_list.values()])
       player.render(ctx);
     ctx.restore();
   }
 
-  
-
   /*
     INPUTS
   */
-    // Define flags to track the key states
-let isKeyDPressed = false;
-let isKeyAPressed = false;
-let isKeySPressed = false;
-let isKeyWPressed = false;
 
-// Keydown event listener
-window.addEventListener('keydown', function(e) {
-  //USER LIST
-  if (e.code == "KeyT") {
-    users_list.style.left = `${window.innerWidth / 2}px`;
-    users_list.classList.remove('hide');
-    users_list.classList.add('show');
-  }
+  // Define flags to track the key states
+  let isKeyDPressed = false;
+  let isKeyAPressed = false;
+  let isKeySPressed = false;
+  let isKeyWPressed = false;
 
-  //MOVEMENT
-  if (e.code == "KeyD" && !isKeyDPressed) {
-    player.velocity.vxr = player.walk_vel;
-    player.playerRotationAngle = 0;
-    isKeyDPressed = true;
-    player.setState("run");
-  }
-  if (e.code == "KeyA" && !isKeyAPressed) {
-    player.velocity.vxl = -player.walk_vel;
-    player.playerRotationAngle = Math.PI;
-    isKeyAPressed = true;
-    player.setState("run");
-  }
-  if (e.code == "KeyS" && !isKeySPressed) {
-    player.velocity.vyr = player.walk_vel;
-    isKeySPressed = true;
-    player.setState("run");
-  }
-  if (e.code == "KeyW" && !isKeyWPressed) {
-    player.velocity.vyl = -player.walk_vel;
-    isKeyWPressed = true;
-    player.setState("run");
-  }
-});
+  // Keydown event listener
+  window.addEventListener('keydown', function(e) {
+    //USER LIST
+    if (e.code == "KeyT") {
+      users_list.style.left = `${window.innerWidth / 2}px`;
+      users_list.classList.remove('hide');
+      users_list.classList.add('show');
+    }
 
-// Keyup event listener
-window.addEventListener('keyup', function(e) {
-  //USER LIST
-  if (e.code == "KeyT") {
-    users_list.classList.remove('show');
-    users_list.classList.add('hide');
-  }
+    //MOVEMENT
+    if (e.code == "KeyD" && !isKeyDPressed) {
+      player.velocity.vxr = player.walk_vel;
+      player.playerRotationAngle = 0;
+      isKeyDPressed = true;
+      player.setState("run");
+    }
+    if (e.code == "KeyA" && !isKeyAPressed) {
+      player.velocity.vxl = -player.walk_vel;
+      player.playerRotationAngle = Math.PI;
+      isKeyAPressed = true;
+      player.setState("run");
+    }
+    if (e.code == "KeyS" && !isKeySPressed) {
+      player.velocity.vyr = player.walk_vel;
+      isKeySPressed = true;
+      player.setState("run");
+    }
+    if (e.code == "KeyW" && !isKeyWPressed) {
+      player.velocity.vyl = -player.walk_vel;
+      isKeyWPressed = true;
+      player.setState("run");
+    }
+  });
 
-  //MOVEMENT
-  if (e.code == "KeyD") {
-    player.velocity.vxr = 0;
-    isKeyDPressed = false;
-  }
-  if (e.code == "KeyA") {
-    player.velocity.vxl = 0;
-    isKeyAPressed = false;
-  }
-  if (e.code == "KeyS") {
-    player.velocity.vyr = 0;
-    isKeySPressed = false;
-  }
-  if (e.code == "KeyW") {
-    player.velocity.vyl = 0;
-    isKeyWPressed = false;
-  }
+  // Keyup event listener
+  window.addEventListener('keyup', function(e) {
+    //USER LIST
+    if (e.code == "KeyT") {
+      users_list.classList.remove('show');
+      users_list.classList.add('hide');
+    }
 
-  // Check if any movement key is still pressed
-  if (!isKeyDPressed && !isKeyAPressed && !isKeySPressed && !isKeyWPressed) {
-    player.setState("idle");
-  }
-});
+    //MOVEMENT
+    if (e.code == "KeyD") {
+      player.velocity.vxr = 0;
+      isKeyDPressed = false;
+    }
+    if (e.code == "KeyA") {
+      player.velocity.vxl = 0;
+      isKeyAPressed = false;
+    }
+    if (e.code == "KeyS") {
+      player.velocity.vyr = 0;
+      isKeySPressed = false;
+    }
+    if (e.code == "KeyW") {
+      player.velocity.vyl = 0;
+      isKeyWPressed = false;
+    }
+
+    // Check if any movement key is still pressed
+    if (!isKeyDPressed && !isKeyAPressed && !isKeySPressed && !isKeyWPressed) {
+      player.setState("idle");
+    }
+  });
+
+  mainCanvas.addEventListener('mousedown', function(e) {
+      const rect = mainCanvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      player.clickHandle({x, y});
+  })
   /*
 
     *SOCKET*
@@ -177,13 +180,13 @@ window.addEventListener('keyup', function(e) {
                 class_name: class_name.value,
                 level: level.value,
                 pos: {
-                  x: 23,
-                  y: 23
+                  x: 0,
+                  y: 0
                 }
               }
             }
         }
-      ));
+      )); 
   
   }).catch(e => {
     console.error(e);
@@ -270,10 +273,10 @@ window.addEventListener('keyup', function(e) {
 
       case "connected":{
         var me = response.me;
+        game.disableKeyboard();
         player = new Player(me.name, me.my_class, me.level, me.pos_axis);
         player.setId(me.id);
         players_list.set(me.id, player);
-        updatePlayerPos();
         setIntervalTimes(sendUpdated, 1000/24);
         const list = document.querySelector('#users_list ul');
         if((response.users).length > 0){
@@ -312,6 +315,27 @@ window.addEventListener('keyup', function(e) {
             players_list.set(i.id, player);
           }
         }
+        break;
+      }
+
+      case "startGameCountDown": {
+        console.log("BROAD CAST START COUNT", response);
+        response.countDownStart===true?game.startCountdown(response.time):game.stopCountdown();
+
+        break;
+      }
+
+      case "startGame": {
+        game.gameStarted = true;
+        console.log("START GAME", response.users);
+        for(const i of response.users){
+          const player = players_list.get(i.id);
+            player.pos_axis = i.pos_axis;
+            players_list.set(i.id, player);
+        }
+        updatePlayerPos();
+        //game.startGame();
+
         break;
       }
 

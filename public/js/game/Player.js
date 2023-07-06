@@ -1,3 +1,5 @@
+import { Projectile } from "./Projectile.js";
+
 const IMAGE_PATH = "../../images/game/Heroes/";
 
 export default class Player{
@@ -28,6 +30,8 @@ export default class Player{
     currentState;
     states;
 
+    projectiles = [];
+
     constructor(name, player_class, level, pos){
         this.name = name;
         this.player_class = player_class;
@@ -40,22 +44,16 @@ export default class Player{
             idle: {
                 src: new Image(),
                 totalFrames: 4,
-                spriteWidth: 128,
-                spriteHeight: 32,
                 animationSpeed: 6,
             },
             run: {
                 src: new Image(),
                 totalFrames: 6,
-                spriteWidth: 384,
-                spriteHeight: 64,
                 animationSpeed: 4,
             },
             death:{
                 src: new Image(),
                 totalFrames: 6,
-                spriteWidth: 288,
-                spriteHeight: 32,
                 animationSpeed: 6,
             }
         };
@@ -120,12 +118,9 @@ export default class Player{
     render(ctx){
         
         const stateImagePath = this.states[this.currentState]['src'];
-        const stateWidth = this.states[this.currentState]['spriteWidth'];
-        const stateHeight = this.states[this.currentState]['spriteHeight'];
+        const stateWidth = stateImagePath.width;
+        const stateHeight = stateImagePath.height;
         this.totalFrames = this.states[this.currentState]['totalFrames']; 
-
-        const characterWidth = 32*3;
-        const characterHeight = (characterWidth / stateWidth) * stateHeight;
 
         //ctx.rotate(this.playerRotationAngle);
         //ctx.scale(3, 3);
@@ -138,8 +133,8 @@ export default class Player{
             stateHeight, 
             this.pos_axis.x,
             this.pos_axis.y,
-            characterWidth/this.totalFrames,
-            characterHeight
+            stateWidth/this.totalFrames,
+            stateHeight
         );
         var speed = this.states[this.currentState]['animationSpeed']
         if (this.animationCount == speed) {
@@ -149,6 +144,19 @@ export default class Player{
                 this.currentFrame = 0;
         }
         this.animationCount++;
+
+        for (const i of this.projectiles) {
+            i.render(ctx);
+        }
     };
 
+    clickHandle({x, y}) {
+        //console.log(`CLICK:\nx: ${x}\ty: ${y}`);
+        //console.log(`PLAYER:\nx: ${this.pos_axis.x}\ty: ${this.pos_axis.y}`);
+        const dx = x - this.pos_axis.x;
+        const dy = y - this.pos_axis.y;
+        const angle = Math.atan2(dy, dx);
+
+        //this.projectiles.push(new Projectile(this.pos_axis.x, this.pos_axis.y, /*angle*/ dx, dy));
+    }
 }

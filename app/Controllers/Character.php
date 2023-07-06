@@ -39,11 +39,12 @@ class Character extends BaseController
     public function list()
     {
         $data = [];
+        $response = null;
         try{
             $response = $this->client->get('character/belong_to/'.session('userdata')['user']['id']);
             $data = json_decode($response->getBody());
         }catch(Exception $e){
-            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance. ' . $e . $response?->getBody()]);
         }
         return $this->baseHomeView('signup/character/select', ["characters" => $data], ['title' => 'Select Your Character']);
     }

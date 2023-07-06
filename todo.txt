@@ -7,7 +7,15 @@ on password_reset when submit your email generate random code send an email and 
     before authentication status 0
     after authentication status 1
 
-    'ban'/'suspent' user = status -1
-
 captcha on register
+
+fazer logo
+
+fazer main page
+
+fazer how to play
+
+organizar annuncios
+
+jogo + bonito
 
