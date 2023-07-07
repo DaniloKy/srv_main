@@ -32,7 +32,8 @@ window.onload = () => {
                     timestamp: currDate
                 }),
                 headers: {
-                    "Content-Type": "application/json; charset=UTF-8"
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
                 },
             });
             return response.json();
