@@ -6,7 +6,7 @@ const RPS = 30;
 
 let socket;
 let player;
-let game = new Game();
+let queue_list = new Map();
 let players_list = new Map();
 
 /*
@@ -76,7 +76,10 @@ window.onload = () => {
   let isKeyWPressed = false;
 
   // Keydown event listener
-  window.addEventListener('keydown', function(e) {
+  window.removeEventListener('keydown', keyDown)
+
+  function keyDown(e){
+
     //USER LIST
     if (e.code == "KeyT") {
       users_list.style.left = `${window.innerWidth / 2}px`;
@@ -107,10 +110,12 @@ window.onload = () => {
       isKeyWPressed = true;
       player.setState("run");
     }
-  });
+  }
 
   // Keyup event listener
-  window.addEventListener('keyup', function(e) {
+  window.removeEventListener('keyup', keyUp);
+
+  function keyUp(e){
     //USER LIST
     if (e.code == "KeyT") {
       users_list.classList.remove('show');
@@ -134,19 +139,22 @@ window.onload = () => {
       player.velocity.vyl = 0;
       isKeyWPressed = false;
     }
-
+    
     // Check if any movement key is still pressed
     if (!isKeyDPressed && !isKeyAPressed && !isKeySPressed && !isKeyWPressed) {
       player.setState("idle");
     }
-  });
+  }
 
-  mainCanvas.addEventListener('mousedown', function(e) {
-      const rect = mainCanvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      player.clickHandle({x, y});
-  })
+  mainCanvas.removeEventListener('mousedown', clickScreen);
+
+  function clickScreen(){
+    const rect = mainCanvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    player.clickHandle({x, y});
+  }
+
   /*
 
     *SOCKET*
@@ -266,30 +274,28 @@ window.onload = () => {
 
   function processMessage(message) {
     const data = JSON.parse(message.data);
-    //console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
+    console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
     const { type, response } = data;
 
     switch (type) {
 
       case "connected":{
         var me = response.me;
-        game.disableKeyboard();
         player = new Player(me.name, me.my_class, me.level, me.pos_axis);
         player.setId(me.id);
-        players_list.set(me.id, player);
-        setIntervalTimes(sendUpdated, 1000/24);
-        const list = document.querySelector('#users_list ul');
+        queue_list.set(player.getId(), player);
+        const list = document.querySelector('#queue_list ul');
         if((response.users).length > 0){
           for(const i of response.users){
-            players_list.set(i.id, new Player(i.name, i.my_class, i.level, i.pos_axis));
+            queue_list.set(i.id, new Player(i.name, i.my_class, i.level, i.pos_axis));
             const li = document.createElement('li');
-            li.appendChild(document.createTextNode(i.name));
+            li.appendChild(document.createTextNode(i.name + " - lvl."+i.level));
             li.setAttribute("data-id", i.id);
             list.appendChild(li);
           }
         }
         const li = document.createElement('li');
-        li.appendChild(document.createTextNode(response.me.name + " (me)"));
+        li.appendChild(document.createTextNode(response.me.name + " - lvl."+response.me.level + " (me)"));
         li.classList.add("you");
         list.appendChild(li);
         break;
@@ -297,10 +303,10 @@ window.onload = () => {
 
       case "connection":{
         const player_info = response.player;
-        players_list.set(player_info.id, new Player(player_info.name, player_info.my_class, player_info.level, player_info.pos_axis));
-        const list = document.getElementById('users_list');
+        queue_list.set(player_info.id, new Player(player_info.name, player_info.my_class, player_info.level, player_info.pos_axis));
+        const list = document.querySelector('#queue_list ul');
         const li = document.createElement('li');
-        li.appendChild(document.createTextNode(player_info.name));
+        li.appendChild(document.createTextNode(player_info.name + " - lvl."+i.level));
         li.setAttribute("data-id", player_info.id);
         list.appendChild(li);
         break;
@@ -318,24 +324,45 @@ window.onload = () => {
         break;
       }
 
-      case "startGameCountDown": {
-        console.log("BROAD CAST START COUNT", response);
-        response.countDownStart===true?game.startCountdown(response.time):game.stopCountdown();
+      case "gameStarting": {
+        console.log("Game will start in some seconds!");
 
         break;
       }
 
       case "startGame": {
         game.gameStarted = true;
-        console.log("START GAME", response.users);
-        for(const i of response.users){
-          const player = players_list.get(i.id);
-            player.pos_axis = i.pos_axis;
-            players_list.set(i.id, player);
+        console.log(response.me, response.users);
+        player = response.me;
+        //players_list.set(player)
+        const list = document.querySelector('#users_list ul');
+        if((response.users).length > 0){
+          for(const i of response.users){
+            players_list.set(i.id, new Player(i.name, i.my_class, i.level, i.pos_axis));
+            const li = document.createElement('li');
+            li.appendChild(document.createTextNode(i.name));
+            li.setAttribute("data-id", i.id);
+            list.appendChild(li);
+          }
         }
+        /*setIntervalTimes(sendUpdated, 1000/24);
         updatePlayerPos();
-        //game.startGame();
+        window.addEventListener("keydown", keyDown);
+        window.addEventListener("keyup", keyUp);
+        window.addEventListener("mousedown", clickScreen);*/
+        break;
+      }
 
+      case "midGame": {
+        const list = document.querySelector('#midGame_users_list ul');
+        if((response.users).length > 0){
+          for(const i of response.users){
+            const li = document.createElement('li');
+            li.appendChild(document.createTextNode(i.name));
+            li.setAttribute("data-id", i.id);
+            list.appendChild(li);
+          }
+        }
         break;
       }
 

@@ -13,7 +13,14 @@
     <body>
         <div class="container">
             <canvas id="game"></canvas>
+            <div id="queue_list">
+                <ul></ul>
+            </div>
             <div id="users_list" class="hide">
+                <ul></ul>
+            </div>
+            <div id="midGame_users_list">
+                <h3>Players in-game</h3>
                 <ul></ul>
             </div>
         </div>
