@@ -68,7 +68,9 @@ $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
         });
     });
     $routes->get('manage', 'User::manage');
+    $routes->get('change_password', 'User::change_password');
     $routes->put('update', 'User::update');
+    $routes->put('update_password', 'User::update_password');
 
     $routes->group('character', static function ($routes) {
         $routes->get('', 'Character::index');

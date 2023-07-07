@@ -9,9 +9,9 @@
     font-style: italic;
     text-transform: uppercase;
     font-size: 3em;
-    background-color: #061C25;
-    border: 1px solid #222222;
-    padding: 30px;
+    background-color: #222;
+    border: 2px solid #555;
+    padding: 24px;
     color: #fff;
     margin: 0px auto;
 }
@@ -31,7 +31,7 @@
 .ann_info{
     display: flex;
     flex-direction: column;
-    padding: 24px;
+    padding: 18px;
     align-items: center;
 }
 
@@ -47,15 +47,21 @@
 
 .ann_details .tag{
     font-size: 10px;
-    color: #e5d04b;
+    color: #01b5fc;
     text-transform: uppercase;
 }
 .ann_details .credits{
     font-size: 12px;
 }
 
+.ann_card:hover img{
+    transform: scale(0.95);
+    transform-origin: center center;
+}
+
 .ann_card img{
     height: auto;
+    transition: transform 0.3s ease;
 }
 
 .tags_list{
@@ -65,8 +71,20 @@
 
 .tags_list .tag_card{
     text-decoration: none;
-    background-color: #061C25;
+    background-color: #222;
+    border: 2px solid #555;
     color: #fff;
-    padding: 24px;
-    margin: 16px 0;
+    padding: 16px 32px;
+    width: 180px;
+    height: 25px;
+    margin: 12px 0px;
+}
+
+.tag_card h3{
+    font-size: 22px;
+    transition: font-size 0.3s ease;
+}
+
+.tag_card:hover h3{
+    font-size: 20px;
 }

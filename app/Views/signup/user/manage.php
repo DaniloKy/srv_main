@@ -9,12 +9,16 @@
     <?php if(session('update_success')): ?>
     <p class="success"><?=session('update_success');?></p>
     <?php endif; ?>
-    <form action="<?=base_url('user/update')?>" method="post" class="form">
-        <input type="hidden" name="_method" value="PUT">
-        <label for="username">Username</label><br />
-        <input id="username" type="text" name="username" value="<?= $userInfo['username'] ?? old('username') ?>"><br />
-        <button id="submit_form" class="btn green" type="submit">Update profile</button>
-    </form>
+    <div class="form">
+        <label for="email">Email</label><br />
+        <input type="text" id="email" value="<?=$userInfo['email']?>" disabled>
+        <form action="<?=base_url('user/update')?>" method="post">
+            <input type="hidden" name="_method" value="PUT">
+            <label for="username">Username</label><br />
+            <input id="username" type="text" name="username" value="<?= $userInfo['username'] ?? old('username') ?>"><br />
+            <button id="submit_form" class="btn green" type="submit">Update profile</button>
+        </form>
+    </div>
     <a href="<?=base_url('user/change_password')?>">Change password</a>
     <div class="logout">
         <a href="<?=base_url('logout')?>" class="btn danger">Logout</a>

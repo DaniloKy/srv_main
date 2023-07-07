@@ -96,7 +96,7 @@ class Session extends BaseController
         if($this->login_model->isLoggedIn())
             return redirect()->to('/');
 
-        return $this->baseHomeView('register', [], ['title' => 'Sing up']);
+        return $this->baseHomeView('register', [], ['title' => 'Sign up']);
     }
 
     public function logout(){

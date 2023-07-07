@@ -1,6 +1,6 @@
         </main>
         <footer>
-            <p>Footer bue fixe</p>
+            <p>Footer</p>
         </footer>
     </body>
 </html>

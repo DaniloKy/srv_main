@@ -33,7 +33,7 @@
 
 .class_card{
     cursor: pointer;
-    width: 300px;
+    width: auto;
     text-decoration: none;
     height: auto;
     margin: 10px 50px;

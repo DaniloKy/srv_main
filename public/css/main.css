@@ -80,10 +80,15 @@ dialog button {
 }
 .how_to_play .subtitle{
     font-size: 1.75em;
+    font-style: italic;
 }
 .how_to_play .title{
     font-size: 3.75em;
     margin-bottom: 24px;
+    font-style: italic;
+}
+.how_to_play .desciption{
+    padding: 12px 48px;
 }
 
 

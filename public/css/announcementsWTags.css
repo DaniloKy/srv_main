@@ -9,9 +9,9 @@
     font-style: italic;
     text-transform: uppercase;
     font-size: 3em;
-    background-color: #061C25;
-    border: 1px solid #222222;
-    padding: 30px;
+    background-color: #222;
+    border: 2px solid #555;
+    padding: 18px;
     color: #fff;
     margin: 0px auto;
 }
@@ -25,9 +25,21 @@
 .ann_info{
     display: flex;
     flex-direction: column;
-    padding: 24px;
+    min-width: 33%;
+    margin: 24px 0px;
     align-items: center;
 }
+
+.ann_card:hover img{
+    transform: scale(0.95);
+    transform-origin: center center;
+}
+
+.ann_card img{
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
 .ann_info a{
     text-decoration: none;
     color: #222222;
@@ -36,19 +48,17 @@
 .ann_card{
     cursor: pointer;
     text-decoration: none;
+    overflow: hidden;
     height: auto;
     padding: 0px;
 }
 
 .ann_details .tag{
     font-size: 10px;
-    color: #e5d04b;
+    color: #01b5fc;
     text-transform: uppercase;
 }
+
 .ann_details .credits{
     font-size: 12px;
-}
-
-.ann_card img{
-    height: auto;
 }

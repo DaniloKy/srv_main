@@ -25,11 +25,16 @@ class Validation extends BaseConfig
         'username' => 'required|min_length[4]|max_length[16]|alpha_numeric_underscore',
         'email' => 'required|valid_email',
         'password' => 'required|min_length[4]|max_length[72]',
-        'password_confirmation' => 'required|matches[password]',        
+        'password_confirmation' => 'required|matches[password]',     
     ];
 
     public $user_update = [
         'username' => 'required|min_length[4]|max_length[16]|alpha_numeric_underscore',  
+    ];
+    public $user_update_password = [
+        'current_password' => 'required',
+        'new_password' => 'required|min_length[4]|max_length[72]',
+        'new_password_confirmation' => 'required|matches[new_password]',
     ];
 
     public $createClass = [
