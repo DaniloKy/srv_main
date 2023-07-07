@@ -25,7 +25,7 @@
                             </form>
                         </dialog>
                         <tr>
-                            <td><a href="<?=base_url("announcements/".$ann->tag_compiled."/".$ann->title_compiled); ?>"><?="announcements/".$ann->tag_compiled."/".$ann->title_compiled?></a></td>
+                            <td><a href="<?=base_url("announcement/".$ann->tag_compiled."/".$ann->title_compiled); ?>"><?="announcement/".$ann->tag_compiled."/".$ann->title_compiled?></a></td>
                             <td><?=$ann->title; ?></td>
                             <td><?=character_limiter($ann->description, 30, '...'); ?></td>
                             <td><?=$ann->username; ?></td>

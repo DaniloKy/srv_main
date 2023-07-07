@@ -34,15 +34,17 @@ class AnnouncementController extends BaseController
     public function getByTag($tag){
         $results = $this->ann_model->list(['tag_compiled' => $tag]);
         if($results){
-            return $this->baseHomeView('announcements/indexWTag', ['announcements' => $results], ['title' => $tag.' - Announcement', 'cssPath' => 'css/announcementsWTags.css']);
+            $title = $results[0]->tag;
+            return $this->baseHomeView('announcements/indexWTag', ['announcements' => $results], ['title' => $title.' - Announcement', 'cssPath' => 'css/announcementsWTags.css']);
         }
         return redirect('announcements');
     }
 
     public function getByTagAndName($tag, $name){
         $result = $this->ann_model->list(['tags.tag_compiled' => $tag, 'announcements.title_compiled' => $name]);
-        if($result[0]){            
-            return $this->baseHomeView('announcements/details', ['announcement' => $result[0]], ['title' => $name.' - Announcement', 'cssPath' => 'css/announcement.css']);
+        if($result[0]){
+            $title = $result[0]->title;
+            return $this->baseHomeView('announcements/details', ['announcement' => $result[0]], ['title' => $title.' - Announcement', 'cssPath' => 'css/announcement.css']);
         }
         return redirect('announcements');
     }

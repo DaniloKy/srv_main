@@ -25,7 +25,7 @@ class AnnouncementsModel extends Model
     }
 
     public function list($where){
-        $query = $this->select('announcements.*, tags.*, users.username')
+        $query = $this->select('announcements.*, tags.tag, tags.tag_compiled, users.username')
             ->join('users', 'users.id = announcements.created_by')
             ->join('tags', 'tags.id = announcements.tag_id')
             ->where($where)

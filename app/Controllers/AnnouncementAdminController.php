@@ -98,8 +98,8 @@ class AnnouncementAdminController extends BaseController
     }
 
     public function delete(){
-        $deleteChar = $this->request->getPost();
-        $ann = $this->ann_model->getById($deleteChar['id']);
+        $deleteId = $this->request->getVar('id');
+        $ann = $this->ann_model->getById($deleteId);
         if($ann){
             $this->delteImages('announcements', $ann['image_path']);
             $this->ann_model->delete(['id' => $ann['id']]);
