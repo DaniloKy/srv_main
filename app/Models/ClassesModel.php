@@ -8,7 +8,7 @@ class ClassesModel extends Model
 {   
 
     protected $table = 'classes';
-    protected $allowedFields = ['name', 'name_compiled', 'nickname','description', 'image_path'];
+    protected $allowedFields = ['name', 'name_compiled', 'nickname', 'description', 'image_path'];
 
     public function create($validated){
         $data = [
@@ -19,11 +19,6 @@ class ClassesModel extends Model
             'image_path' => $validated['image_path'],
         ];
         return $this->insert($data);
-    }
-
-    public function updateClass($id, $data){
-        dd($data);
-        return $this->update($id, $data);
     }
 
 }

@@ -9,8 +9,13 @@
 .lobby .logo a{
     text-decoration: none;
     display: flex;
-    gap: 32px;
-    margin: 24px 0px;
+    align-items: center;
+    gap: 8px;
+    margin: 28px 0px;
+}
+
+.lobby .logo h1{
+    color: white;
 }
 
 .lobby_content{

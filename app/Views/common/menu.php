@@ -1,7 +1,7 @@
 <nav >
     <ul class="navbar-list">
         <li class="logo">
-            <a href="<?=base_url('/')?>"><p><i class="bx bx-lg bxl-postgresql" ></i></p></a>
+            <a href="<?=base_url('/')?>"><p><img class="invert" src="/images/potion-48.svg" alt="survive_utopia_logo" /></p></a>
         </li>
         <li>
             <a href="<?=base_url('how-to-play')?>">Game</a>

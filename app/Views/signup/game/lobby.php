@@ -1,7 +1,7 @@
 <div class="lobby">
     <div class="logo">
         <a href="<?=base_url('/');?>">
-            <i class="bx bx-lg bxl-postgresql"></i>
+            <img class="invert" src="/images/potion-48.svg" alt="survive_utopia_logo">
             <h1>Survive Utopia</h1>
         </a>
     </div>

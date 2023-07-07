@@ -1,4 +1,6 @@
-*:not(dialog){ 
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+*{ 
     margin: 0;
     border: 0;
     padding: 0;
@@ -21,6 +23,74 @@ footer{
     color: #adbac7;
     margin-top: auto;
 }
+
+dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+}
+  
+dialog p {
+    margin-bottom: 20px;
+}
+
+dialog button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.main_page_title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 75px;
+    gap: 75px;
+}
+.main_page_title h1{
+    font-family: 'MedievalSharp', cursive;
+    color: #222;
+    font-size: 5em;
+}
+.main_page_title .play_btn{
+    padding: 20px 45px;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    color: #222;
+    background-color: #e5d04b;
+    border: 1px solid #222;
+}
+.main_page_title .play_btn:hover{
+    background-color: #f7e152;
+}
+.how_to_play{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.how_to_play .subtitle{
+    font-size: 1.75em;
+}
+.how_to_play .title{
+    font-size: 3.75em;
+    margin-bottom: 24px;
+}
+
+
+.invert {
+-webkit-filter: invert(100%); /* safari 6.0 - 9.0 */
+        filter: invert(100%);
+}   
 
 .bx{
     color: #fff;

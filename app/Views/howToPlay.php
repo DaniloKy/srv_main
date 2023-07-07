@@ -1,1 +1,12 @@
-<p>How to play</p>
+<div class="how_to_play">
+    <h1 class="subtitle">Welcome to Survive Utopia</h1>
+    <h2 class="title">Learn the basics</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget diam ullamcorper, vehicula erat tincidunt, aliquet quam. Praesent finibus nunc nec erat vestibulum tempor. Cras at tellus fermentum, dictum metus eu, sodales justo. Maecenas sit amet ante aliquam, dignissim libero et, volutpat velit. Vestibulum venenatis pretium felis sit amet varius. Nulla vulputate viverra mi eget accumsan. Aliquam erat volutpat. Donec ultrices quam nec pulvinar fermentum. In hac habitasse platea dictumst. Nam sed pellentesque arcu, maximus rhoncus ex. Nunc tempor in metus blandit euismod. Aliquam volutpat augue turpis, luctus pellentesque quam maximus eget.
+
+Duis ipsum nibh, vulputate ac ligula et, tristique tincidunt lacus. Etiam interdum nulla in urna ultrices gravida. Fusce porttitor, mauris sit amet consequat semper, tortor quam molestie lectus, at suscipit urna nulla non velit. Donec sagittis iaculis nisl, in malesuada tellus venenatis sit amet. Praesent maximus nibh vitae enim condimentum condimentum. Etiam ac ullamcorper justo. Aliquam varius varius egestas. Morbi ullamcorper erat nulla, vitae feugiat tellus aliquet a. Proin at lorem condimentum, interdum metus id, volutpat risus. Ut a vulputate est. Quisque sagittis nulla posuere, vestibulum nunc ac, rhoncus sapien.
+
+Curabitur vehicula lorem eu lectus bibendum placerat. Proin maximus purus eget nisl consequat, vel ornare arcu congue. Etiam quis ligula id urna sollicitudin hendrerit. Sed nec lacus arcu. Curabitur nisi sapien, ullamcorper sed tellus non, accumsan finibus dolor. Donec blandit purus in felis lacinia hendrerit. Sed at consectetur est. Vestibulum nec massa sapien. In lacinia placerat mauris non suscipit. Nulla in placerat dui. Cras elementum tellus in mattis dictum.
+
+Nulla facilisi. Fusce ultricies varius pulvinar. Cras nec quam ullamcorper, commodo magna nec, auctor enim. Sed ut dignissim leo. Duis facilisis urna ac rhoncus dictum. Integer ornare dui justo, sed pellentesque sapien maximus vitae. Etiam sed augue massa. Nulla interdum odio sem, vel aliquet augue ultrices ut. Aliquam diam elit, vulputate sed eleifend at, commodo in justo. Fusce finibus magna quis tincidunt tristique. Pellentesque nibh neque, tempor ut sodales nec, convallis in nulla. Fusce imperdiet dui eu mi luctus, quis hendrerit purus pellentesque.
+</p>
+</div>
