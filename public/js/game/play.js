@@ -28,11 +28,20 @@ window.onload = () => {
   const ctx = mainCanvas.getContext("2d");
   const users_list = document.getElementById('users_list'); 
 
-  mainCanvas.width = window.innerWidth;
-  mainCanvas.height = window.innerHeight;
-
   const backgroundImage = new Image();
   backgroundImage.src = "../../images/game/Map/map.png";
+
+  backgroundImage.onload = () => {
+    console.log(backgroundImage.width, backgroundImage.height)
+    mainCanvas.width = backgroundImage.width;
+    mainCanvas.height = backgroundImage.height;
+    mainCanvas.style.width = backgroundImage.width;
+    mainCanvas.style.height = backgroundImage.height;
+  }
+  
+  /*console.log(backgroundImage.width, backgroundImage.height)
+  mainCanvas.width = window.innerWidth;
+  mainCanvas.height = window.innerHeight;*/
 
   let lastRender = null;
   let lastUpdate = null;
@@ -58,7 +67,7 @@ window.onload = () => {
   function render() {
     ctx.save();
     ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-    ctx.translate(-player.pos_axis.x + mainCanvas.width / 2, -player.pos_axis.y + mainCanvas.height / 2);
+    ctx.translate(mainCanvas.width / 3 - player.pos_axis.x, mainCanvas.height / 5 -player.pos_axis.y);
     ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width * scale, backgroundImage.height *scale);
     for(const player of [...players_list.values()])
       player.render(ctx);
@@ -279,7 +288,7 @@ window.onload = () => {
 
       case "connected":{
         var me = response.me;
-        player = new Player(me.name, me.my_class, me.level, me.pos_axis);
+        player = new Player(ctx ,me.name, me.my_class, me.level, me.pos_axis);
         player.setId(me.id);
         queue_list.set(player.getId(), player);
         const list = document.querySelector('#queue_list ul');
@@ -314,7 +323,6 @@ window.onload = () => {
         if((response.users).length > 0){
           for(const i of response.users){
             const player = players_list.get(i.id);
-            console.log(player, i)
             player.currentState = i.currentState;
             player.pos_axis = i.pos_axis;
             players_list.set(i.id, player);
@@ -338,7 +346,7 @@ window.onload = () => {
               player.pos_axis = i.pos_axis;
               players_list.set(player.getId(), player);
             }else{
-              players_list.set(i.id, new Player(i.name, i.my_class, i.level, i.pos_axis));
+              players_list.set(i.id, new Player(ctx, i.name, i.my_class, i.level, i.pos_axis));
             }
             const li = document.createElement('li');
             li.appendChild(document.createTextNode(i.name));

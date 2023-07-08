@@ -3,6 +3,8 @@ import { Projectile } from "./Projectile.js";
 const IMAGE_PATH = "../../images/game/Heroes/";
 
 export default class Player{
+    ctx;
+
     //Player info
     #id;
     name;
@@ -15,7 +17,7 @@ export default class Player{
     projectile_damage;
     melee_protection_percentage;
     projectile_protection_percentage;
-    walk_vel = 1;
+    walk_vel = 3;
     run_vel = 0.5;
 
     //Player pos
@@ -31,7 +33,8 @@ export default class Player{
 
     projectiles = [];
 
-    constructor(name, player_class, level, pos){
+    constructor(ctx = null, name, player_class, level, pos){
+        this.ctx = ctx;
         this.name = name;
         this.player_class = player_class;
         this.level = level;
@@ -62,12 +65,20 @@ export default class Player{
     }
 
     update(){
+        const stateImagePath = this.states[this.currentState]['src'];
+        const stateWidth = stateImagePath.width;
+        const stateHeight = stateImagePath.height;
         //x
-        this.pos_axis.x += this.velocity.vxl;
-        this.pos_axis.x += this.velocity.vxr;
+        if(this.pos_axis.x > 0)
+            this.pos_axis.x += this.velocity.vxl;
+        if(this.pos_axis.x < (this.ctx.canvas.width + this.ctx.canvas.width / 2) - stateWidth/this.totalFrames) 
+            this.pos_axis.x += this.velocity.vxr;
+
         //y
-        this.pos_axis.y += this.velocity.vyl;
-        this.pos_axis.y += this.velocity.vyr;
+        if(this.pos_axis.y > 0)
+            this.pos_axis.y += this.velocity.vyl;
+        if(this.pos_axis.y < (this.ctx.canvas.height + this.ctx.canvas.height / 2) - stateHeight)
+            this.pos_axis.y += this.velocity.vyr;
     }
 
     //Gets/Sets
@@ -114,38 +125,31 @@ export default class Player{
         }
     }
 
-    render(ctx){
+    render(){
         
         const stateImagePath = this.states[this.currentState]['src'];
         const stateWidth = stateImagePath.width;
         const stateHeight = stateImagePath.height;
         this.totalFrames = this.states[this.currentState]['totalFrames']; 
 
-        
-
-        ctx.drawImage(
+        this.ctx.drawImage(
             stateImagePath,
             this.currentFrame * stateWidth/this.totalFrames,
             0,
             stateWidth/this.totalFrames,
-            stateHeight, 
+            stateHeight,
             this.pos_axis.x,
             this.pos_axis.y,
             stateWidth/this.totalFrames,
             stateHeight
         );
-    
         var speed = this.states[this.currentState]['animationSpeed']
-        if (this.animationCount == speed) {
-            this.animationCount = 0;
-            this.currentFrame++;
-            if(this.currentFrame >= this.totalFrames)
-                this.currentFrame = 0;
-        }
+        this.currentFrame = (Math.floor(this.animationCount /speed)) % this.totalFrames;
+
         this.animationCount++;
 
         for (const i of this.projectiles) {
-            i.render(ctx);
+            i.render(this.ctx);
         }
     };
 
