@@ -125,26 +125,24 @@ export default class Player{
 
         ctx.drawImage(
             stateImagePath,
-            this.currentFrame * stateWidth,
+            this.currentFrame * stateWidth/this.totalFrames,
             0,
-            stateWidth,///this.totalFrames,
+            stateWidth/this.totalFrames,
             stateHeight, 
             this.pos_axis.x,
             this.pos_axis.y,
-            stateWidth,///this.totalFrames,
+            stateWidth/this.totalFrames,
             stateHeight
         );
-
-        this.currentFrame = (this.currentFrame + 1) % this.totalFrames;
     
-        /*var speed = this.states[this.currentState]['animationSpeed']
+        var speed = this.states[this.currentState]['animationSpeed']
         if (this.animationCount == speed) {
             this.animationCount = 0;
             this.currentFrame++;
             if(this.currentFrame >= this.totalFrames)
                 this.currentFrame = 0;
-        }*/
-        //this.animationCount++;
+        }
+        this.animationCount++;
 
         for (const i of this.projectiles) {
             i.render(ctx);
