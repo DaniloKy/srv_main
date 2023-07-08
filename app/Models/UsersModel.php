@@ -17,7 +17,7 @@ class UsersModel extends Model
             'password' => $validated['password'],
             'sId' => session_id(),
             'verification_code' => $this->makeVerfCode(),
-            'status' => 0,
+            'status' => 1,
             'super' => 0,
             'created_at' => date("Y-m-d H:i:s"),
         );

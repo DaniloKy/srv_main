@@ -38,7 +38,7 @@ $routes->group('game', ['filter' => ['isLogged', 'hasPlayer']], static function 
 });
 
 $routes->group('user', ['filter' => 'isLogged'], static function ($routes) {
-    $routes->group('admin', ['filter' => 'isAdmin'], static function ($routes) {
+    $routes->group('admin', ['filter' => ['isLogged', 'isAdmin']], static function ($routes) {
         $routes->get('manage', 'Admin::manage');
         $routes->group('users', static function ($routes) {
             $routes->get('manage', 'UserAdmin::manage');

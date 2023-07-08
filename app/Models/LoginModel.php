@@ -38,6 +38,17 @@ class LoginModel extends Model
 		return false;
 	}
 
+	public function isActive(){
+		$userdata = $this->session->get('userdata');
+		if($userdata){
+			$user = $this->find($userdata['user']['id']);
+			if($user && $user['status'] == "1"){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function isAdmin(){
 		$userdata = $this->session->get('userdata');
 		if($userdata){

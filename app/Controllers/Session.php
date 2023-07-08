@@ -35,6 +35,10 @@ class Session extends BaseController
         else
             $user = $this->users_model->getWhere(['username' => $singin['login_input']], true);
         if($user){
+            if($user['status'] != "1"){
+                $this->session->setFlashdata('login_error', 'Your account is currently banned.');
+                return redirect()->to('login');
+            }
             if(password_verify($singin['password'], $user['password'])) {
                 if (isset($singin['rememberMe']) && $singin['rememberMe'] === 'on') {
                     $rememberToken = bin2hex(random_bytes(32));

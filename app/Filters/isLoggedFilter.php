@@ -12,7 +12,7 @@ class isLoggedFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!model(LoginModel::class)->isLoggedIn()){
+        if (!model(LoginModel::class)->isLoggedIn() || !model(LoginModel::class)->isActive()){
             return redirect()->to('home');
         }
         return null;

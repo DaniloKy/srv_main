@@ -122,10 +122,12 @@ window.onload = () => {
     //MOVEMENT
     if (e.code == "KeyD") {
       player.velocity.vxr = 0;
+      player.rotation = 0;
       isKeyDPressed = false;
     }
     if (e.code == "KeyA") {
       player.velocity.vxl = 0;
+      player.rotation = 180;
       isKeyAPressed = false;
     }
     if (e.code == "KeyS") {

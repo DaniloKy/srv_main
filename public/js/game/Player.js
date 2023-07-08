@@ -20,12 +20,11 @@ export default class Player{
 
     //Player pos
     pos_axis = {x: 0, y: 0};
-    rot_axis = {x: 0, y: 0};
     velocity = {vxl: 0, vxr: 0, vyl: 0, vyr: 0};
 
     //Player Frame/State
     animationCount = 0;
-    playerRotationAngle = 0;
+    rotation = 0;
     currentFrame;
     currentState;
     states;
@@ -122,28 +121,30 @@ export default class Player{
         const stateHeight = stateImagePath.height;
         this.totalFrames = this.states[this.currentState]['totalFrames']; 
 
-        //ctx.rotate(this.playerRotationAngle);
-        //ctx.scale(3, 3);
+        
 
         ctx.drawImage(
             stateImagePath,
-            this.currentFrame * stateWidth/this.totalFrames,
+            this.currentFrame * stateWidth,
             0,
-            stateWidth/this.totalFrames, 
+            stateWidth,///this.totalFrames,
             stateHeight, 
             this.pos_axis.x,
             this.pos_axis.y,
-            stateWidth/this.totalFrames,
+            stateWidth,///this.totalFrames,
             stateHeight
         );
-        var speed = this.states[this.currentState]['animationSpeed']
+
+        this.currentFrame = (this.currentFrame + 1) % this.totalFrames;
+    
+        /*var speed = this.states[this.currentState]['animationSpeed']
         if (this.animationCount == speed) {
             this.animationCount = 0;
             this.currentFrame++;
             if(this.currentFrame >= this.totalFrames)
                 this.currentFrame = 0;
-        }
-        this.animationCount++;
+        }*/
+        //this.animationCount++;
 
         for (const i of this.projectiles) {
             i.render(ctx);

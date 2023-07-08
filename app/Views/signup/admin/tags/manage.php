@@ -12,7 +12,7 @@
                 <?php if(isset($tags) && count($tags) > 0): ?>
                     <?php foreach($tags as $tag): ?>
                         <dialog data-characterId="<?=$tag->id?>" class="confirmation_box">
-                            <p>Are you sure you want to delete '<?=$tag->tag?>'?</p>
+                            <p>Are you sure you want to delete '<?=$tag->tag?>' and all of the announcements that are associated with it?</p>
                             <form action="<?=base_url('user/admin/tags/delete')?>" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="id" value="<?=$tag->id?>">
