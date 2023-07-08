@@ -16,7 +16,7 @@
             <div id="queue_list">
                 <ul></ul>
             </div>
-            <div id="users_list" class="hide">
+            <div id="users_list" class="visually-hidden">
                 <ul></ul>
             </div>
             <div id="midGame_users_list">

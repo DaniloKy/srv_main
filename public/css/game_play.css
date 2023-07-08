@@ -5,6 +5,10 @@
     font-family: sans-serif;
 }
 
+body{
+    background-color: #141412;
+}
+
 .container{
     position: relative;
 }
@@ -20,16 +24,21 @@
     padding: 1.2em;
     top: 1.5em;
     position: fixed;
+    left: 50%;
 }
 
 #users_list li.you{
     font-weight: bold;
 }
 
-#users_list.hide{
-    display: none;
-}
-
-#users_list.show{
-    display: initial;
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }

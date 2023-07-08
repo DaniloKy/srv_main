@@ -82,9 +82,7 @@ window.onload = () => {
 
     //USER LIST
     if (e.code == "KeyT") {
-      users_list.style.left = `${window.innerWidth / 2}px`;
-      users_list.classList.remove('hide');
-      users_list.classList.add('show');
+      users_list.classList.add('visually-hidden');
     }
 
     //MOVEMENT
@@ -118,8 +116,7 @@ window.onload = () => {
   function keyUp(e){
     //USER LIST
     if (e.code == "KeyT") {
-      users_list.classList.remove('show');
-      users_list.classList.add('hide');
+      users_list.classList.remove('visually-hidden');
     }
 
     //MOVEMENT
@@ -148,11 +145,11 @@ window.onload = () => {
 
   mainCanvas.removeEventListener('mousedown', clickScreen);
 
-  function clickScreen(){
+  function clickScreen(e){
     const rect = mainCanvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    player.clickHandle({x, y});
+    //player.clickHandle({x, y});
   }
 
   /*
@@ -210,7 +207,6 @@ window.onload = () => {
       try {
         socket = new WebSocket(uri.href);
       } catch (e) {
-        console.error('ERROR BEn')
         if (e instanceof SyntaxError)
           return reject(new Error("https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/WebSocket#exceptions"));
         else
@@ -274,7 +270,7 @@ window.onload = () => {
 
   function processMessage(message) {
     const data = JSON.parse(message.data);
-    console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
+    //console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
     const { type, response } = data;
 
     switch (type) {
@@ -306,7 +302,7 @@ window.onload = () => {
         queue_list.set(player_info.id, new Player(player_info.name, player_info.my_class, player_info.level, player_info.pos_axis));
         const list = document.querySelector('#queue_list ul');
         const li = document.createElement('li');
-        li.appendChild(document.createTextNode(player_info.name + " - lvl."+i.level));
+        li.appendChild(document.createTextNode(player_info.name + " - lvl."+player_info.level));
         li.setAttribute("data-id", player_info.id);
         list.appendChild(li);
         break;
@@ -316,6 +312,7 @@ window.onload = () => {
         if((response.users).length > 0){
           for(const i of response.users){
             const player = players_list.get(i.id);
+            console.log(player, i)
             player.currentState = i.currentState;
             player.pos_axis = i.pos_axis;
             players_list.set(i.id, player);
@@ -325,31 +322,34 @@ window.onload = () => {
       }
 
       case "gameStarting": {
-        console.log("Game will start in some seconds!");
+        console.log("Game will start in a few seconds!");
 
         break;
       }
 
       case "startGame": {
-        game.gameStarted = true;
-        console.log(response.me, response.users);
-        player = response.me;
-        //players_list.set(player)
         const list = document.querySelector('#users_list ul');
         if((response.users).length > 0){
           for(const i of response.users){
-            players_list.set(i.id, new Player(i.name, i.my_class, i.level, i.pos_axis));
+            console.log(i);
+            if(player.getId() == i.id){
+              player.pos_axis = i.pos_axis;
+              players_list.set(player.getId(), player);
+            }else{
+              players_list.set(i.id, new Player(i.name, i.my_class, i.level, i.pos_axis));
+            }
             const li = document.createElement('li');
             li.appendChild(document.createTextNode(i.name));
             li.setAttribute("data-id", i.id);
             list.appendChild(li);
           }
         }
-        /*setIntervalTimes(sendUpdated, 1000/24);
+        console.log("PLAYERS LIST", players_list, player)
+        setIntervalTimes(sendUpdated, 1000/24);
         updatePlayerPos();
         window.addEventListener("keydown", keyDown);
         window.addEventListener("keyup", keyUp);
-        window.addEventListener("mousedown", clickScreen);*/
+        window.addEventListener("mousedown", clickScreen);
         break;
       }
 
@@ -358,8 +358,7 @@ window.onload = () => {
         if((response.users).length > 0){
           for(const i of response.users){
             const li = document.createElement('li');
-            li.appendChild(document.createTextNode(i.name));
-            li.setAttribute("data-id", i.id);
+            li.appendChild(document.createTextNode(i.name + "- lvl." + i.level));
             list.appendChild(li);
           }
         }
