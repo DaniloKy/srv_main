@@ -91,7 +91,7 @@ window.onload = () => {
 
     //USER LIST
     if (e.code == "KeyT") {
-      users_list.classList.add('visually-hidden');
+      users_list.classList.remove('visually-hidden');
     }
 
     //MOVEMENT
@@ -125,7 +125,7 @@ window.onload = () => {
   function keyUp(e){
     //USER LIST
     if (e.code == "KeyT") {
-      users_list.classList.remove('visually-hidden');
+      users_list.classList.add('visually-hidden');
     }
 
     //MOVEMENT
@@ -158,9 +158,31 @@ window.onload = () => {
 
   function clickScreen(e){
     const rect = mainCanvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    //player.clickHandle({x, y});
+    const mouseX  = e.clientX;
+    const mouseY = e.clientY;
+    player.clickHandle({x: mouseX, y: mouseY});
+    
+    /*const centerX = mainCanvas.width / 2;
+    const centerY = mainCanvas.height / 2;
+    const deltaX = mouseX - centerX;
+    const deltaY = centerY - mouseY;
+    const angleInRadians = Math.atan2(deltaY, deltaX);
+    const angleInDegrees = (angleInRadians * 180) / Math.PI;*/
+
+    socket.send(JSON.stringify(
+      {
+          action: "click",
+          body: {
+            x: mouseX,
+            y: mouseY,
+          }
+      }
+    ));
+
+    // Output the angle
+    //console.log('Clicked angle:', angleInDegrees);
+    
+    
   }
 
   /*
@@ -195,10 +217,6 @@ window.onload = () => {
                 name: username.value,
                 class_name: class_name.value,
                 level: level.value,
-                pos: {
-                  x: 0,
-                  y: 0
-                }
               }
             }
         }
@@ -289,6 +307,7 @@ window.onload = () => {
       case "connected":{
         var me = response.me;
         player = new Player(ctx ,me.name, me.my_class, me.level, me.pos_axis);
+        player.setStats(me.hp, me.melee_damage, me.walk_vel);
         player.setId(me.id);
         queue_list.set(player.getId(), player);
         const list = document.querySelector('#queue_list ul');
@@ -349,7 +368,7 @@ window.onload = () => {
               players_list.set(i.id, new Player(ctx, i.name, i.my_class, i.level, i.pos_axis));
             }
             const li = document.createElement('li');
-            li.appendChild(document.createTextNode(i.name));
+            li.appendChild(document.createTextNode(i.name+ "- lvl." + i.level));
             li.setAttribute("data-id", i.id);
             list.appendChild(li);
           }

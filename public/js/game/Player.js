@@ -12,13 +12,9 @@ export default class Player{
     level;
 
     //Player stats
-    health = 100;
+    hp;
     melee_damage;
-    projectile_damage;
-    melee_protection_percentage;
-    projectile_protection_percentage;
-    walk_vel = 3;
-    run_vel = 0.5;
+    walk_vel;;
 
     //Player pos
     pos_axis = {x: 0, y: 0};
@@ -33,13 +29,15 @@ export default class Player{
 
     projectiles = [];
 
-    constructor(ctx = null, name, player_class, level, pos){
+    constructor(ctx = null, name, player_class, level, pos, hp, melee_damage, walk_vel){
         this.ctx = ctx;
         this.name = name;
         this.player_class = player_class;
         this.level = level;
-        this.whatClassAmI(player_class);
         this.pos_axis = pos;
+        this.hp = hp;
+        this.melee_damage = melee_damage;
+        this.walk_vel = walk_vel;
         this.currentFrame = 0;
         this.currentState = "idle";
         this.states = {
@@ -62,6 +60,12 @@ export default class Player{
         this.states.idle.src.src = IMAGE_PATH+player_class+"/Idle/Idle-Sheet.png";
         this.states.run.src.src = IMAGE_PATH+player_class+"/Run/Run-Sheet.png"
         this.states.death.src.src = IMAGE_PATH+player_class+"/Death/Death-Sheet.png";
+    }
+
+    setStats(hp, melee_damage, walk_vel){
+        this.hp = hp;
+        this.melee_damage = melee_damage;
+        this.walk_vel = walk_vel;
     }
 
     update(){
@@ -95,23 +99,14 @@ export default class Player{
         switch(player_class){
             case "fighter":
                 this.melee_damage = 40;
-                this.projectile_damage = 20;
-                this.melee_protection_percentage = 25;
-                this.projectile_protection_percentage = 50;
                 this.walk_vel *= 2.15;
                 break;
             case "archer":
-                this.melee_damage = 20;
-                this.projectile_damage = 40;
-                this.melee_protection_percentage = 15;
-                this.projectile_protection_percentage = 25;
+                this.melee_damage = 40;
                 this.walk_vel *= 2.35;
                 break;
             case "mage":
                 this.melee_damage = 20;
-                this.projectile_damage = 30;
-                this.melee_protection_percentage = 25;
-                this.projectile_protection_percentage = 25;
                 this.walk_vel *= 2.25;
                 break;
         }
@@ -143,6 +138,11 @@ export default class Player{
             stateWidth/this.totalFrames,
             stateHeight
         );
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = '12px Arial';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillText(this.name, this.pos_axis.x + (stateWidth/this.totalFrames) / 2, this.pos_axis.y - 10);
+
         var speed = this.states[this.currentState]['animationSpeed']
         this.currentFrame = (Math.floor(this.animationCount /speed)) % this.totalFrames;
 
@@ -154,12 +154,24 @@ export default class Player{
     };
 
     clickHandle({x, y}) {
-        //console.log(`CLICK:\nx: ${x}\ty: ${y}`);
-        //console.log(`PLAYER:\nx: ${this.pos_axis.x}\ty: ${this.pos_axis.y}`);
-        const dx = x - this.pos_axis.x;
-        const dy = y - this.pos_axis.y;
-        const angle = Math.atan2(dy, dx);
+        var canvasRect = this.ctx.canvas.getBoundingClientRect();
+        //console.log("CLICK", this.melee_damage);
+        console.log("CLICK", x, y);
 
-        //this.projectiles.push(new Projectile(this.pos_axis.x, this.pos_axis.y, /*angle*/ dx, dy));
+        console.log("Y", this.pos_axis.y, "X", this.pos_axis.x)
+
+        const radians = Math.atan2(-y , x);
+
+        console.log("radians", radians)
+
+        var degrees  = (radians * 180) / Math.PI;
+
+        console.log("degrees before", degrees)
+
+        degrees = (degrees + 360) % 360;
+
+        console.log("degrees after", degrees)
+        
+        //this.projectiles.push(new Projectile(angle, this.pos_axis.x, this.pos_axis.y));
     }
 }

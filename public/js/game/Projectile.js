@@ -1,35 +1,26 @@
 export class Projectile {
     x;
     y;
-    dx;
-    dy;
-    speed;
+    angle;
 
-    constructor(x, y,/* angle*/ dx, dy) {
+    constructor(angle, x, y) {
+        this.angle = angle;
         this.x = x;
         this.y = y;
-        this.speed = 5;
-        this.dx = dx;
-        this.dy = dy;
-        //this.dx = Math.cos(angle) * this.speed;
-        //this.dy = Math.sin(angle) * this.speed;
     }
 
     render(ctx) {
-        /*
-        this.x += this.dx;
-        this.y += this.dy;
 
-        ctx.beginPath();
-        ctx.arc(this.x+12, this.y+12, 5, 0, Math.PI * 2);
+        const distance = 50;
+        const endX = this.x + distance * Math.cos(this.angle);
+        const endY = this.y + distance * Math.sin(this.angle);
+        
+        const rectWidth = 30;
+        const rectHeight = 20;
+        const rectX = angleDegrees - rectWidth / 2;
+        const rectY = angleDegrees - rectHeight / 2;
         ctx.fillStyle = 'red';
-        ctx.fill();
-      */
-        ctx.strokeStyle = 'red';
-        ctx.lineWidth = 5;
-        ctx.beginPath();
-        ctx.moveTo(this.x + 25, this.y + 25);
-        ctx.lineTo(this.dx, this.dy);
-        ctx.stroke();
+        ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
+        
       }
 }

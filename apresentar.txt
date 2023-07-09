@@ -1,0 +1,34 @@
+introducao
+	quem sou?
+	oq estou a fazer?
+		oq ]e Survive Utopia
+			jogo no web browser
+			multiplayer
+			estilo dungeon crawler
+	tarefas e objetivos?
+	como surgiu a ideia?
+	dificuldades
+	
+noq consiste
+	site
+		codeigniter 4 php
+	base de dados
+		mysql
+	API & Servidor Multiplayer
+		ts
+	(usei cloudflare)
+	oq ]e o cloudflare?
+	quais foram os servicos que usei
+			oq sao Worker?
+			oq sao durable objects?
+			oq sao websockets?
+	jogo (mostrar diagrama?)
+
+
+
+
+oq ]e Survive Utopia
+	tem classes
+		oq sao classes
+
+oq ]e 
