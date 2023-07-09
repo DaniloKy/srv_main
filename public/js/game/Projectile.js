@@ -1,26 +1,31 @@
 export class Projectile {
     x;
     y;
-    angle;
+    radians;
+    currentOpacity;
 
-    constructor(angle, x, y) {
-        this.angle = angle;
+    constructor(radians, x, y) {
+        this.currentOpacity = 0.8;
+        this.radians = radians;
         this.x = x;
         this.y = y;
     }
 
     render(ctx) {
 
-        const distance = 50;
-        const endX = this.x + distance * Math.cos(this.angle);
-        const endY = this.y + distance * Math.sin(this.angle);
+        const distance = 75;
+        const endX = this.x + distance * Math.cos(this.radians);
+        const endY = this.y + distance * Math.sin(this.radians);
         
         const rectWidth = 30;
         const rectHeight = 20;
-        const rectX = angleDegrees - rectWidth / 2;
-        const rectY = angleDegrees - rectHeight / 2;
-        ctx.fillStyle = 'red';
-        ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
+        
+        ctx.fillStyle = "rgba(255, 0, 0, "+this.currentOpacity +")";
+
+        if(this.currentOpacity > 0){
+            this.currentOpacity -= 0.01;
+        }
+        ctx.fillRect(endX, endY, rectWidth, rectHeight);
         
       }
 }

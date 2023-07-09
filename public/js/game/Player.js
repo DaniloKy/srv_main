@@ -1,6 +1,6 @@
 import { Projectile } from "./Projectile.js";
 
-const IMAGE_PATH = "../../images/game/Heroes/";
+const IMAGE_PATH = "../../images/game/";
 
 export default class Player{
     ctx;
@@ -12,9 +12,10 @@ export default class Player{
     level;
 
     //Player stats
-    hp;
+    currentHp;
+    maxHp;
     melee_damage;
-    walk_vel;;
+    walk_vel;
 
     //Player pos
     pos_axis = {x: 0, y: 0};
@@ -27,6 +28,9 @@ export default class Player{
     currentState;
     states;
 
+    swordImg;
+    swordX;
+    swordY;
     projectiles = [];
 
     constructor(ctx = null, name, player_class, level, pos, hp, melee_damage, walk_vel){
@@ -57,13 +61,17 @@ export default class Player{
                 animationSpeed: 6,
             }
         };
-        this.states.idle.src.src = IMAGE_PATH+player_class+"/Idle/Idle-Sheet.png";
-        this.states.run.src.src = IMAGE_PATH+player_class+"/Run/Run-Sheet.png"
-        this.states.death.src.src = IMAGE_PATH+player_class+"/Death/Death-Sheet.png";
+        this.states.idle.src.src = IMAGE_PATH+"Heroes/"+player_class+"/Idle/Idle-Sheet.png";
+        this.states.run.src.src = IMAGE_PATH+"Heroes/"+player_class+"/Run/Run-Sheet.png"
+        this.states.death.src.src = IMAGE_PATH+"Heroes/"+player_class+"/Death/Death-Sheet.png";
+
+        this.swordImg = new Image();
+        this.swordImg.src = IMAGE_PATH+"Weapons/Wood/sword.png";
     }
 
-    setStats(hp, melee_damage, walk_vel){
-        this.hp = hp;
+    setStats(currentHp, maxHp, melee_damage, walk_vel){
+        this.currentHp = currentHp;
+        this.maxHp = maxHp;
         this.melee_damage = melee_damage;
         this.walk_vel = walk_vel;
     }
@@ -94,23 +102,6 @@ export default class Player{
     getId(){
         return this.#id;
     }
-
-    whatClassAmI(player_class){
-        switch(player_class){
-            case "fighter":
-                this.melee_damage = 40;
-                this.walk_vel *= 2.15;
-                break;
-            case "archer":
-                this.melee_damage = 40;
-                this.walk_vel *= 2.35;
-                break;
-            case "mage":
-                this.melee_damage = 20;
-                this.walk_vel *= 2.25;
-                break;
-        }
-    }
     
     setState(newState) {
         if (this.currentState !== newState) {
@@ -138,40 +129,41 @@ export default class Player{
             stateWidth/this.totalFrames,
             stateHeight
         );
+        
+        var speed = this.states[this.currentState]['animationSpeed']
+        
+        if(this.currentState !== "death"){
+            this.currentFrame = (Math.floor(this.animationCount /speed)) % this.totalFrames;
+            this.animationCount++;
+        }
+        
+        
+
         this.ctx.fillStyle = 'white';
         this.ctx.font = '12px Arial';
         this.ctx.textAlign = 'center';
         this.ctx.fillText(this.name, this.pos_axis.x + (stateWidth/this.totalFrames) / 2, this.pos_axis.y - 10);
 
-        var speed = this.states[this.currentState]['animationSpeed']
-        this.currentFrame = (Math.floor(this.animationCount /speed)) % this.totalFrames;
-
-        this.animationCount++;
+        this.updateSwordPosition();
+        this.ctx.drawImage(this.swordImg, this.swordX, this.swordY);
 
         for (const i of this.projectiles) {
             i.render(this.ctx);
         }
     };
 
+    updateSwordPosition(){
+        this.swordX = this.pos_axis.x + 35 - this.swordImg.width / 2;
+        this.swordY = this.pos_axis.y + 8 - this.swordImg.height / 2;
+    }
+
     clickHandle({x, y}) {
-        var canvasRect = this.ctx.canvas.getBoundingClientRect();
-        //console.log("CLICK", this.melee_damage);
-        console.log("CLICK", x, y);
-
-        console.log("Y", this.pos_axis.y, "X", this.pos_axis.x)
-
-        const radians = Math.atan2(-y , x);
-
-        console.log("radians", radians)
-
-        var degrees  = (radians * 180) / Math.PI;
-
-        console.log("degrees before", degrees)
-
-        degrees = (degrees + 360) % 360;
-
-        console.log("degrees after", degrees)
+        const radians = Math.atan2(y, x);
         
-        //this.projectiles.push(new Projectile(angle, this.pos_axis.x, this.pos_axis.y));
+        this.projectiles.push(new Projectile(radians, this.pos_axis.x, this.pos_axis.y));
+    }
+
+    deadAnimation(){
+        this.setState("death")
     }
 }

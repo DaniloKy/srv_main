@@ -31,6 +31,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 
 $routes->group('game', ['filter' => ['isLogged', 'hasPlayer']], static function ($routes) {
+    $routes->get('/', 'Main::index');
     $routes->get('lobby', 'Main::index');
     $routes->get('career', 'Main::career');
     $routes->get('change_class', 'Main::changeClass');

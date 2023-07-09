@@ -1,10 +1,11 @@
 import { SERVER_URL } from "../env.js";
 import Game from "./Game.js";
 
-const UPS = 30;
-const RPS = 30;
+const UPS = 24;
+const RPS = 60;
 
 let socket;
+let interval;
 let player;
 let queue_list = new Map();
 let players_list = new Map();
@@ -32,16 +33,11 @@ window.onload = () => {
   backgroundImage.src = "../../images/game/Map/map.png";
 
   backgroundImage.onload = () => {
-    console.log(backgroundImage.width, backgroundImage.height)
     mainCanvas.width = backgroundImage.width;
     mainCanvas.height = backgroundImage.height;
     mainCanvas.style.width = backgroundImage.width;
     mainCanvas.style.height = backgroundImage.height;
   }
-  
-  /*console.log(backgroundImage.width, backgroundImage.height)
-  mainCanvas.width = window.innerWidth;
-  mainCanvas.height = window.innerHeight;*/
 
   let lastRender = null;
   let lastUpdate = null;
@@ -159,30 +155,26 @@ window.onload = () => {
   function clickScreen(e){
     const rect = mainCanvas.getBoundingClientRect();
     const mouseX  = e.clientX;
-    const mouseY = e.clientY;
-    player.clickHandle({x: mouseX, y: mouseY});
-    
-    /*const centerX = mainCanvas.width / 2;
-    const centerY = mainCanvas.height / 2;
+    console.log(window.innerHeight, rect.height)
+    const mouseY = window.innerHeight - e.clientY;
+    //player.clickHandle({x: mouseX, y: mouseY});
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
     const deltaX = mouseX - centerX;
     const deltaY = centerY - mouseY;
-    const angleInRadians = Math.atan2(deltaY, deltaX);
-    const angleInDegrees = (angleInRadians * 180) / Math.PI;*/
+    player.clickHandle({x: deltaX, y: deltaY});
 
     socket.send(JSON.stringify(
       {
           action: "click",
           body: {
-            x: mouseX,
-            y: mouseY,
+            mouse: {
+              x: deltaX,
+              y: deltaY,
+            },
           }
       }
     ));
-
-    // Output the angle
-    //console.log('Clicked angle:', angleInDegrees);
-    
-    
   }
 
   /*
@@ -254,13 +246,14 @@ window.onload = () => {
   }
 
   function setIntervalTimes(callable, ms) {
-    setTimeout(() => {
+    interval = setTimeout(() => {
       callable();
       setIntervalTimes(callable, ms);
     }, ms)
   };
 
   function sendUpdated(){
+    console.log("SEND")
     socket.send(JSON.stringify(
       {
           action: "update",
@@ -306,8 +299,16 @@ window.onload = () => {
 
       case "connected":{
         var me = response.me;
+        console.log(me)
         player = new Player(ctx ,me.name, me.my_class, me.level, me.pos_axis);
-        player.setStats(me.hp, me.melee_damage, me.walk_vel);
+        player.setStats(me.currentHp, me.maxHp, me.melee_damage, me.walk_vel);
+        const spanMaxHP = document.getElementById('max_hp');
+        spanMaxHP.innerHTML = player.maxHp;
+        const currentHp = document.getElementById('current_hp');
+        currentHp.innerHTML = player.currentHp;
+        const progressHp = document.getElementById('hp_progress');
+        progressHp.max = player.maxHp;
+        progressHp.value = player.currentHp;
         player.setId(me.id);
         queue_list.set(player.getId(), player);
         const list = document.querySelector('#queue_list ul');
@@ -352,7 +353,6 @@ window.onload = () => {
 
       case "gameStarting": {
         console.log("Game will start in a few seconds!");
-
         break;
       }
 
@@ -360,7 +360,6 @@ window.onload = () => {
         const list = document.querySelector('#users_list ul');
         if((response.users).length > 0){
           for(const i of response.users){
-            console.log(i);
             if(player.getId() == i.id){
               player.pos_axis = i.pos_axis;
               players_list.set(player.getId(), player);
@@ -378,7 +377,7 @@ window.onload = () => {
         updatePlayerPos();
         window.addEventListener("keydown", keyDown);
         window.addEventListener("keyup", keyUp);
-        window.addEventListener("mousedown", clickScreen);
+        mainCanvas.addEventListener("mousedown", clickScreen);
         break;
       }
 
@@ -394,9 +393,52 @@ window.onload = () => {
         break;
       }
 
+      case "takeHit":{
+        player.currentHp = response.newHP;
+        const currentHp = document.getElementById('current_hp');
+        currentHp.innerHTML = player.currentHp;
+        const progressHp = document.getElementById('hp_progress');
+        progressHp.value = player.currentHp;
+        
+        break;
+      }
+
+      case "playerDied": {
+
+        if(player.getId() == response.playerId){
+          player.currentHp = 0;
+          const currentHp = document.getElementById('current_hp');
+          currentHp.innerHTML = player.currentHp;
+          const progressHp = document.getElementById('hp_progress');
+          progressHp.value = player.currentHp;
+          window.removeEventListener("keydown", keyDown);
+          window.removeEventListener("keyup", keyUp);
+          mainCanvas.removeEventListener("mousedown", clickScreen);
+  
+          clearTimeout(interval);
+        }
+        
+        players_list.delete(response.playerId);
+
+        break;
+      }
+
+      case "youLost": {
+        console.log("YOU LOST")
+
+        break;
+      }
+
+      case "youWon": {
+        console.log("YOU WON")
+
+        break;
+      }
+
       case "disconnect": {
+        queue_list.delete(response.id);
         players_list.delete(response.id);
-        document.querySelector(`li[data-id="${response.id}"]`).remove();
+        //document.querySelector(`li[data-id="${response.id}"]`).remove();
         break;
       }
 

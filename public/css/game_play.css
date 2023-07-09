@@ -20,6 +20,41 @@ body{
         overflow: hidden;
 }
 
+.UI{
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    padding: 10px;
+}
+.UI .hp_txt{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.UI .hp_txt{
+    font-weight: bold;
+    color: rgb(144, 255, 8);
+}
+
+.hp-bar {
+    margin: 10px 0px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #323232;
+    width: 250px;
+    height: 20px;
+}
+
+.hp-bar::-webkit-progress-value {
+    box-shadow: 0 0 10px rgba(144, 255, 8, 0.8);
+    background-color: rgba(144, 255, 8, 0.8);
+}
+
+.hp-bar::-webkit-progress-bar {
+    background-color: rgba(144, 255, 8, 0.1);
+}
+
 #users_list{
     background-color: rgba(90, 90, 90, 0.2);
     border-radius: 0.8em;

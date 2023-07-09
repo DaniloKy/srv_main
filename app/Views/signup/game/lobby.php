@@ -19,7 +19,7 @@
                 <p>Lvl. <span class="level_number"><?=$playerInfo->playerLevel['nextLevel'] ?></span></p>
             </div>
             </label>
-            <progress id="disk_d" class="xp-bar" value="<?=$playerInfo->playerLevel['progress'] ?>" max="1"></progress>
+            <progress id="player_xp" class="xp-bar" value="<?=$playerInfo->playerLevel['progress'] ?>" max="1"></progress>
         </div>
         <div>
             <a class="btn changeClass" href="<?=base_url('game/change_class')?>">

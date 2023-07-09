@@ -13,6 +13,13 @@
     <body>
         <div class="container">
             <canvas id="game"></canvas>
+            <div class="UI">
+                <div class="hp_txt">
+                    <p>HP</p>
+                    <p><span id="current_hp">100</span>/<span id="max_hp">100</span></p>
+                </div>
+                <progress id="hp_progress" class="hp-bar" value="100" max="100"></progress>
+            </div>
             <div id="queue_list">
                 <ul></ul>
             </div>
