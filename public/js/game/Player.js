@@ -143,7 +143,6 @@ export default class Player{
         this.ctx.font = '12px Arial';
         this.ctx.textAlign = 'center';
         this.ctx.fillText(this.name, this.pos_axis.x + (stateWidth/this.totalFrames) / 2, this.pos_axis.y - 10);
-
         this.updateSwordPosition();
         this.ctx.drawImage(this.swordImg, this.swordX, this.swordY);
 

@@ -40,7 +40,7 @@ class User extends BaseController
                 $status = $this->users_model->updateUser(session('userdata')['user']['id'] ,['username' => $update['username']]);
                 if($status){
                     $this->session->setFlashdata('update_success', 'Profile updated with success.');    
-                    return redirect()->to('user/manage');
+                    return redirect()->to('logout');
                 }
             }else
                 $this->session->setFlashdata('update_error', 'Username already in use.');
