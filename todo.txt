@@ -21,5 +21,10 @@ on click left mouse only
 
 fix camera player to center of screen
 
+background image do jogo
+
+how to play game
+
+hit cooldown
 
 
