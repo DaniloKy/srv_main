@@ -43,8 +43,8 @@
         <div class="main_inputs">
             <a href="<?=base_url('user/character/list')?>" class="btn">Back</a>
             <div>
-                <label for="">CHARACTER NAME</label><br>
-                <input type="text" name="character_name" value="<?= old('character_name') ?>" placeholder="ID" >
+                <label for="character_name"><b>CHARACTER NAME</b></label><br>
+                <input id="character_name" type="text" name="character_name" value="<?= old('character_name') ?>" placeholder="ID" >
             </div>
             <button type="submit" class="class_btn">Confirm</button>
         </div>                        

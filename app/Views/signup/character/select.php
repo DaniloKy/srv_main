@@ -3,7 +3,7 @@
 <?php foreach($characters as $character): ?>
     <?php if(isset($character)): ?>
     <dialog data-characterId="<?=$character->id?>" class="confirm_delete">
-        <p>Are you sure you want to delete '<?=$character->username?>'?</p>
+        <p>Are you sure you want to <b>delete</b> '<?=$character->username?>'? <b>All of the progress will be lost!</b></p>
         <form action="<?=base_url('user/character/delete')?>" method="post">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="character_name" value="<?=$character->username?>">

@@ -12,23 +12,39 @@
     </head>
     <body>
         <div class="container">
-            <canvas id="game"></canvas>
+            <canvas id="game" class="visually-hidden"></canvas>
             <div class="UI">
-                <div class="hp_txt">
-                    <p>HP</p>
-                    <p><span id="current_hp">100</span>/<span id="max_hp">100</span></p>
+                <div class="hpUI visually-hidden">
+                    <div class="hp_txt">
+                        <p>HP</p>
+                        <p><span id="current_hp">100</span>/<span id="max_hp">100</span></p>
+                    </div>
+                    <progress id="hp_progress" class="hp-bar" value="100" max="100"></progress>
                 </div>
-                <progress id="hp_progress" class="hp-bar" value="100" max="100"></progress>
+                <div class="pointsTable visually-hidden">
+                    <p><span id="game_status"></span></p>
+                    <p><span id="player_kills"></span> - kills</p>
+                    <p class="xp_gained">+<span id="xp_gained"></span>XP</p>
+
+                    <a class="btn" href="<?=base_url('game/lobby')?>">Back to lobby</a>
+                </div>
+                <div id="users_list" class="visually-hidden">
+                    <ul></ul>
+                </div>
             </div>
-            <div id="queue_list">
-                <ul></ul>
-            </div>
-            <div id="users_list" class="visually-hidden">
-                <ul></ul>
-            </div>
-            <div id="midGame_users_list">
-                <h3>Players in-game</h3>
-                <ul></ul>
+            <div class="lists">
+                <div id="queue_list">
+                    <h3>Players In Queue </h3>
+                    <ul></ul>
+                </div>
+                <div class="status">
+                    <h2 class="game_status">Waiting for more players to join.</h2>
+                    <a class="btn_queue" href="<?=base_url('game/lobby')?>">Go Back to lobby</a>
+                </div>
+                <div id="midGame_list">
+                    <h3>Playing right now</h3>
+                    <ul><p>No one playing</p></ul>
+                </div>
             </div>
         </div>
         <input type="hidden" class="visually-hidden" name="username" value="<?=$playerInfo->username?>">

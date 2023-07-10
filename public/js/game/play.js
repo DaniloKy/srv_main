@@ -29,6 +29,8 @@ window.onload = () => {
   const ctx = mainCanvas.getContext("2d");
   const users_list = document.getElementById('users_list'); 
 
+  let animationFrame;
+
   const backgroundImage = new Image();
   backgroundImage.src = "../../images/game/Map/map.png";
 
@@ -53,7 +55,7 @@ window.onload = () => {
         render();
     }
 
-    requestAnimationFrame(updatePlayerPos);
+    animationFrame = requestAnimationFrame(updatePlayerPos);
   }
 
   function update() {
@@ -153,28 +155,30 @@ window.onload = () => {
   mainCanvas.removeEventListener('mousedown', clickScreen);
 
   function clickScreen(e){
-    const rect = mainCanvas.getBoundingClientRect();
-    const mouseX  = e.clientX;
-    console.log(window.innerHeight, rect.height)
-    const mouseY = window.innerHeight - e.clientY;
-    //player.clickHandle({x: mouseX, y: mouseY});
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-    const deltaX = mouseX - centerX;
-    const deltaY = centerY - mouseY;
-    player.clickHandle({x: deltaX, y: deltaY});
+    if(e.button === 0){
+      const rect = mainCanvas.getBoundingClientRect();
+      const mouseX  = e.clientX;
+      console.log(window.innerHeight, rect.height)
+      const mouseY = window.innerHeight - e.clientY;
+      //player.clickHandle({x: mouseX, y: mouseY});
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const deltaX = mouseX - centerX;
+      const deltaY = centerY - mouseY;
+      player.clickHandle({x: deltaX, y: deltaY});
 
-    socket.send(JSON.stringify(
-      {
-          action: "click",
-          body: {
-            mouse: {
-              x: deltaX,
-              y: deltaY,
-            },
-          }
-      }
-    ));
+      socket.send(JSON.stringify(
+        {
+            action: "click",
+            body: {
+              mouse: {
+                x: deltaX,
+                y: deltaY,
+              },
+            }
+        }
+      ));
+    }
   }
 
   /*
@@ -195,9 +199,10 @@ window.onload = () => {
 
       socket.onclose = message => {
           if (message.wasClean)
-              console.log(`[close] Connection closed cleanly, code=${message.code} reason=${message.reason}`);
+            console.log(`[close] Connection closed cleanly, code=${message.code} reason=${message.reason}`);
           else
-              console.log("[close] Connection died");
+            console.log("[close] Connection died");
+          alert("Connection lost! Refresh your page.");
           socket = null;
       };
 
@@ -292,7 +297,7 @@ window.onload = () => {
 
   function processMessage(message) {
     const data = JSON.parse(message.data);
-    //console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
+    console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
     const { type, response } = data;
 
     switch (type) {
@@ -341,6 +346,7 @@ window.onload = () => {
 
       case "update": {
         if((response.users).length > 0){
+          console.log(response.users)
           for(const i of response.users){
             const player = players_list.get(i.id);
             player.currentState = i.currentState;
@@ -350,13 +356,20 @@ window.onload = () => {
         }
         break;
       }
-
       case "gameStarting": {
+        const gameStatus = document.querySelector('.game_status');
+        gameStatus.innerHTML = "Game starting in a few seconds!"
         console.log("Game will start in a few seconds!");
         break;
       }
 
       case "startGame": {
+        const gameCanvas = document.getElementById('game');
+        gameCanvas.classList.remove('visually-hidden');
+        const lists = document.querySelector('.lists');
+        lists.classList.add('visually-hidden');
+        const hpUI = document.querySelector('.UI .hpUI');
+        hpUI.classList.remove('visually-hidden');
         const list = document.querySelector('#users_list ul');
         if((response.users).length > 0){
           for(const i of response.users){
@@ -382,14 +395,28 @@ window.onload = () => {
       }
 
       case "midGame": {
-        const list = document.querySelector('#midGame_users_list ul');
+        const gameStatus = document.querySelector('.game_status');
+        gameStatus.innerHTML = "Waiting for game to end."
+        const list = document.querySelector('#midGame_list ul');
         if((response.users).length > 0){
+          list.innerHTML = "";
           for(const i of response.users){
+            console.log(i)
             const li = document.createElement('li');
             li.appendChild(document.createTextNode(i.name + "- lvl." + i.level));
+            li.setAttribute("data-id", i.id);
             list.appendChild(li);
           }
         }
+        break;
+      }
+
+      case "gameEnded": {
+        const gameStatus = document.querySelector('.game_status');
+        gameStatus.innerHTML = "Waiting for more players to join."
+        const list = document.querySelector('#midGame_list ul');
+        list.innerHTML = "";
+
         break;
       }
 
@@ -416,6 +443,7 @@ window.onload = () => {
           mainCanvas.removeEventListener("mousedown", clickScreen);
   
           clearTimeout(interval);
+          cancelAnimationFrame(animationFrame);
         }
         
         players_list.delete(response.playerId);
@@ -425,20 +453,25 @@ window.onload = () => {
 
       case "youLost": {
         console.log("YOU LOST")
-
+        gameStatus(false, response.kills, response.points);
         break;
       }
 
       case "youWon": {
-        console.log("YOU WON")
-
+        console.log("YOU WON");
+        window.removeEventListener("keydown", keyDown);
+        window.removeEventListener("keyup", keyUp);
+        mainCanvas.removeEventListener("mousedown", clickScreen);
+        clearTimeout(interval);
+        cancelAnimationFrame(animationFrame);
+        gameStatus(true, response.kills, response.points);
         break;
       }
 
       case "disconnect": {
         queue_list.delete(response.id);
         players_list.delete(response.id);
-        //document.querySelector(`li[data-id="${response.id}"]`).remove();
+        document.querySelector(`li[data-id="${response.id}"]`).remove();
         break;
       }
 
@@ -446,6 +479,24 @@ window.onload = () => {
         console.log("default");
       }
     }
+  }
+
+  function gameStatus(status, kills, points){
+    const hpUI = document.querySelector('.UI .hpUI');
+    hpUI.classList.remove('visually-hidden');
+    const pointsTable = document.querySelector('.pointsTable');
+    pointsTable.classList.remove("visually-hidden");
+    const game_status = document.getElementById('game_status');
+    var textStatus;
+    if(status)
+      textStatus = "YOU WON!"
+    else
+      textStatus = "YOU LOST!"
+    game_status.innerHTML = textStatus;
+    const player_kills = document.getElementById('player_kills');
+    player_kills.innerHTML = kills;
+    const xp_gained = document.getElementById('xp_gained');
+    xp_gained.innerHTML = points;
   }
 
 };//On load
