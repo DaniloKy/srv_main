@@ -19,10 +19,33 @@ main{
 }
 
 footer{
-    background-color: #373e47;
-    color: #adbac7;
+    display: flex;
+    justify-content: space-around;
+    background-color: #222;
+    color: rgba(186,177,168,.7);
     margin-top: auto;
 }
+footer *{
+    list-style: none;
+    text-decoration: none;
+}
+footer a:link{
+    color: rgba(186,177,168,.7);
+}
+footer a:visited{
+    color: rgba(186,177,168,.7);
+}
+footer a:hover{
+    color: #e5d04b;
+}
+footer a:active{
+    color: #e5d04b;
+}
+
+footer .bx{
+    color: rgba(186,177,168,.7);
+}
+
 
 dialog {
     position: fixed;
