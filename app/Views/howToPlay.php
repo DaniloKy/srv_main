@@ -2,12 +2,34 @@
     <h1 class="subtitle">Welcome to Survive Utopia</h1>
     <h2 class="title">Learn the basics</h2>
     <div class="desciption">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget diam ullamcorper, vehicula erat tincidunt, aliquet quam. Praesent finibus nunc nec erat vestibulum tempor. Cras at tellus fermentum, dictum metus eu, sodales justo. Maecenas sit amet ante aliquam, dignissim libero et, volutpat velit. Vestibulum venenatis pretium felis sit amet varius. Nulla vulputate viverra mi eget accumsan. Aliquam erat volutpat. Donec ultrices quam nec pulvinar fermentum. In hac habitasse platea dictumst. Nam sed pellentesque arcu, maximus rhoncus ex. Nunc tempor in metus blandit euismod. Aliquam volutpat augue turpis, luctus pellentesque quam maximus eget.</p>
+	<h3>About the Game</h3>
+        <p>Welcome to our thrilling top-down, web browser-based multiplayer game! Immerse yourself in an immersive world of intense battles and fierce competition. Choose your class wisely, as each offers unique stats such as speed, damage, and health. Level up your character to unlock mighty abilities and become an unstoppable force on the battlefield. Teleport to a random location on the map and engage in relentless combat against other players, aiming to claim victory and earn the highest XP. In this cutthroat world, only the strongest will rise to the top. Are you ready to prove your dominance and become the ultimate champion? Join us now and experience the adrenaline-fueled adventure of our captivating game!</p>
 <br />
-<p>Duis ipsum nibh, vulputate ac ligula et, tristique tincidunt lacus. Etiam interdum nulla in urna ultrices gravida. Fusce porttitor, mauris sit amet consequat semper, tortor quam molestie lectus, at suscipit urna nulla non velit. Donec sagittis iaculis nisl, in malesuada tellus venenatis sit amet. Praesent maximus nibh vitae enim condimentum condimentum. Etiam ac ullamcorper justo. Aliquam varius varius egestas. Morbi ullamcorper erat nulla, vitae feugiat tellus aliquet a. Proin at lorem condimentum, interdum metus id, volutpat risus. Ut a vulputate est. Quisque sagittis nulla posuere, vestibulum nunc ac, rhoncus sapien.</p>
-<br />
-<p>Curabitur vehicula lorem eu lectus bibendum placerat. Proin maximus purus eget nisl consequat, vel ornare arcu congue. Etiam quis ligula id urna sollicitudin hendrerit. Sed nec lacus arcu. Curabitur nisi sapien, ullamcorper sed tellus non, accumsan finibus dolor. Donec blandit purus in felis lacinia hendrerit. Sed at consectetur est. Vestibulum nec massa sapien. In lacinia placerat mauris non suscipit. Nulla in placerat dui. Cras elementum tellus in mattis dictum.</p>
-<br />
-<p>Nulla facilisi. Fusce ultricies varius pulvinar. Cras nec quam ullamcorper, commodo magna nec, auctor enim. Sed ut dignissim leo. Duis facilisis urna ac rhoncus dictum. Integer ornare dui justo, sed pellentesque sapien maximus vitae. Etiam sed augue massa. Nulla interdum odio sem, vel aliquet augue ultrices ut. Aliquam diam elit, vulputate sed eleifend at, commodo in justo. Fusce finibus magna quis tincidunt tristique. Pellentesque nibh neque, tempor ut sodales nec, convallis in nulla. Fusce imperdiet dui eu mi luctus, quis hendrerit purus pellentesque.</p>
+<h3>How to Play</h3>
+
+<ol>
+<li>
+Class Selection: Choose from a range of classes, each with their own distinct stats. Consider your preferred playstyle and select the class that suits you best.
+</li>
+<li>
+Level Up: Gain experience points (XP) by engaging in battles and defeating opponents. As you level up, unlock powerful abilities that will give you the upper hand in combat.
+</li>
+<li>
+Random Teleportation: Upon starting the game, you will be instantly teleported to a random location on the map. Be ready to adapt to your surroundings and make strategic decisions.
+</li>
+<li>
+Battle for Victory: Engage in intense real-time combat against other players. Utilize your class abilities, employ tactical maneuvers, and strike down your opponents to gain XP.
+</li>
+<li>
+The Quest for XP: Your goal is to amass as much XP as possible. Defeat opponents to earn more XP and increase your chances of becoming the ultimate winner.
+</li>
+<li>
+Solo Triumph: Remember, in this game, there can only be one victor. Fight strategically, outwit your rivals, and be the last one standing to claim victory and earn the highest rewards.
+</li>
+</ol>
+<br />    
+<p>
+Join us now and embrace the challenge of our top-down, web browser-based multiplayer game. Show off your skills, rise through the ranks, and become a legend on the battlefield!
+</p>
 </div>
 </div>
