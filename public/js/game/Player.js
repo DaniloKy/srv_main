@@ -139,15 +139,6 @@ export default class Player{
         
         const rectWidth = 45;
         const rectHeight = 6;
-        const third_health = this.maxHp / 3;
-        console.info("HHHHHH", this.hp, this.third_health);
-        if (this.hp >= (2 * this.third_health)) {
-            this.ctx.fillStyle = "rgba(0, 128, 0, 0.8)";
-        } else if (this.hp > this.third_health) {
-            this.ctx.fillStyle = "rgba(128, 128, 0, 0.8)";
-        } else {
-            this.ctx.fillStyle = "rgba(128, 0, 0, 0.8)";
-        }
         this.ctx.fillRect(this.pos_axis.x + ((stateWidth/this.totalFrames) /2)/rectHeight/2, this.pos_axis.y - 20, rectWidth, rectHeight);
 
         this.ctx.fillStyle = 'white';
@@ -168,6 +159,11 @@ export default class Player{
     }
 
     clickHandle({x, y}) {
+        const stateImagePath = this.states[this.currentState]['src'];
+        const stateWidth = stateImagePath.width;
+        const stateHeight = stateImagePath.height;
+        x += (stateWidth/this.totalFrames)/2;
+        y += stateHeight/2;
         const radians = Math.atan2(y, x);
         
         this.projectiles.push(new Projectile(radians, this.pos_axis.x, this.pos_axis.y));

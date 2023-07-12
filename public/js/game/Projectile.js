@@ -23,7 +23,7 @@ export class Projectile {
         ctx.fillStyle = "rgba(255, 0, 0, "+this.currentOpacity +")";
 
         if(this.currentOpacity > 0){
-            this.currentOpacity -= 0.01;
+            this.currentOpacity -= 0.02;
         }
         ctx.fillRect(endX, endY, rectWidth, rectHeight);
         

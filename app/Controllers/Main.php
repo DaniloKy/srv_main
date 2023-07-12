@@ -28,10 +28,11 @@ class Main extends BaseController
             $response = $this->client->head(env('SERVER_URL'));
             if($response->getStatusCode() != 200)
                 return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
-                
+
             $characterId = session()->get('playerInfo')['player']->id;
             $response = $this->client->get(env('SERVER_URL').'character/'.$characterId.'/'.session('userdata')['user']['id']);
             $playerInfo = json_decode($response->getBody());
+            session()->set('playerInfo', ["player" => $playerInfo]);
             $playerInfo->playerLevel = [
                 "level" => $playerInfo->level,
                 "nextLevel" => $playerInfo->level+1,
