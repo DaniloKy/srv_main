@@ -88,9 +88,15 @@ class ClassAdminController extends BaseController
     }
 
     public function updater($id){
-        $results = $this->class_model->getById($id);
-        $data = $this->list();
-        return $this->baseHomeView('signup/admin/class/manage', ['isPUT' => true, 'classes' => $data, 'classInfo' => $results], ['title' => 'Update Class']);
+        $data = [
+            'isPUT' => true,
+            'classInfo' => $this->class_model->getById($id),
+            'classes' => $this->class_model->listClasses()->paginate(5),
+            'pager' => $this->class_model->pager,
+        ];
+        
+        //$data = $this->list();
+        return $this->baseHomeView('signup/admin/class/manage', $data, ['title' => 'Update Class']);
     }
 
     public function delete(){
