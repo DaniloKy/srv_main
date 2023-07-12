@@ -65,7 +65,8 @@ window.onload = () => {
   function render() {
     ctx.save();
     ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-    ctx.translate(mainCanvas.width / 3 - player.pos_axis.x, mainCanvas.height / 5 -player.pos_axis.y);
+    //ctx.translate(mainCanvas.width / 3 - player.pos_axis.x, mainCanvas.height / 5 -player.pos_axis.y);
+    ctx.translate(-(player.pos_axis.x - mainCanvas.width / 2.75), -(player.pos_axis.y - mainCanvas.height / 5));
     ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width * scale, backgroundImage.height *scale);
     for(const player of [...players_list.values()])
       player.render(ctx);
@@ -258,7 +259,6 @@ window.onload = () => {
   };
 
   function sendUpdated(){
-    console.log("SEND")
     socket.send(JSON.stringify(
       {
           action: "update",
@@ -297,7 +297,7 @@ window.onload = () => {
 
   function processMessage(message) {
     const data = JSON.parse(message.data);
-    console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
+    //console.log(`[message] Data received from server: ${JSON.stringify(data)}`);
     const { type, response } = data;
 
     switch (type) {
@@ -336,6 +336,7 @@ window.onload = () => {
       case "connection":{
         const player_info = response.player;
         queue_list.set(player_info.id, new Player(player_info.name, player_info.my_class, player_info.level, player_info.pos_axis));
+        
         const list = document.querySelector('#queue_list ul');
         const li = document.createElement('li');
         li.appendChild(document.createTextNode(player_info.name + " - lvl."+player_info.level));
@@ -346,11 +347,12 @@ window.onload = () => {
 
       case "update": {
         if((response.users).length > 0){
-          console.log(response.users)
+          //console.log(response.users)
           for(const i of response.users){
             const player = players_list.get(i.id);
             player.currentState = i.currentState;
             player.pos_axis = i.pos_axis;
+            player.currentHp = i.currentHp;
             players_list.set(i.id, player);
           }
         }
@@ -377,7 +379,9 @@ window.onload = () => {
               player.pos_axis = i.pos_axis;
               players_list.set(player.getId(), player);
             }else{
-              players_list.set(i.id, new Player(ctx, i.name, i.my_class, i.level, i.pos_axis));
+              var somePlayer = new Player(ctx, i.name, i.my_class, i.level, i.pos_axis);
+              somePlayer.setStats(i.currentHp, i.maxHp, i.melee_damage, i.walk_vel);
+              players_list.set(i.id, somePlayer);
             }
             const li = document.createElement('li');
             li.appendChild(document.createTextNode(i.name+ "- lvl." + i.level));

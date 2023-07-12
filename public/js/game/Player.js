@@ -33,15 +33,12 @@ export default class Player{
     swordY;
     projectiles = [];
 
-    constructor(ctx = null, name, player_class, level, pos, hp, melee_damage, walk_vel){
+    constructor(ctx = null, name, player_class, level, pos){
         this.ctx = ctx;
         this.name = name;
         this.player_class = player_class;
         this.level = level;
         this.pos_axis = pos;
-        this.hp = hp;
-        this.melee_damage = melee_damage;
-        this.walk_vel = walk_vel;
         this.currentFrame = 0;
         this.currentState = "idle";
         this.states = {
@@ -139,7 +136,12 @@ export default class Player{
         
         const rectWidth = 45;
         const rectHeight = 6;
+        this.ctx.fillStyle = "rgba(255, 0, 0, 0.2)";
         this.ctx.fillRect(this.pos_axis.x + ((stateWidth/this.totalFrames) /2)/rectHeight/2, this.pos_axis.y - 20, rectWidth, rectHeight);
+        const currentHpPercentage = (this.currentHp * 100)/this.maxHp;
+        const currentHpWidth = (currentHpPercentage * rectWidth)/100;
+        this.ctx.fillStyle = "rgba(255, 0, 0, 1)";
+        this.ctx.fillRect(this.pos_axis.x + ((stateWidth/this.totalFrames) /2)/rectHeight/2, this.pos_axis.y - 20, currentHpWidth, rectHeight);
 
         this.ctx.fillStyle = 'white';
         this.ctx.font = '12px Arial';
