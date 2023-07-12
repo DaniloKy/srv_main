@@ -15,24 +15,24 @@
             <tbody>
                 <?php if(isset($announcements) && count($announcements) > 0): ?>
                     <?php foreach($announcements as $ann): ?>
-                        <dialog data-characterId="<?=$ann->id?>" class="confirmation_box">
-                            <p>Are you sure you want to delete '<?=$ann->title?>'?</p>
+                        <dialog data-characterId="<?=$ann['id']?>" class="confirmation_box">
+                            <p>Are you sure you want to delete '<?=$ann['title']?>'?</p>
                             <form action="<?=base_url('user/admin/announcements/delete')?>" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="id" value="<?=$ann->id?>">
+                                <input type="hidden" name="id" value="<?=$ann['id']?>">
                                 <button type="submit" class="btn danger">YES</button>
                                 <button formmethod="dialog" class="btn">NO</button>
                             </form>
                         </dialog>
                         <tr>
-                            <td><a href="<?=base_url("announcement/".$ann->tag_compiled."/".$ann->title_compiled); ?>"><?="announcement/".$ann->tag_compiled."/".$ann->title_compiled?></a></td>
-                            <td><?=$ann->title; ?></td>
-                            <td><?=character_limiter($ann->description, 30, '...'); ?></td>
-                            <td><?=$ann->username; ?></td>
-                            <td><?=$ann->created_at; ?></td>
+                            <td><a href="<?=base_url("announcement/".$ann['tag_compiled']."/".$ann['title_compiled']); ?>"><?="announcement/".$ann['tag_compiled']."/".$ann['title_compiled']?></a></td>
+                            <td><?=$ann['title']; ?></td>
+                            <td><?=character_limiter($ann['description'], 30, '...'); ?></td>
+                            <td><?=$ann['username']; ?></td>
+                            <td><?=$ann['created_at']; ?></td>
                             <td>
-                                <a href="<?=base_url('user/admin/announcements/edit/'.$ann->id); ?>" class="btn">Edit</a>
-                                <button type="button" data-characterId="<?=$ann->id?>" class="btn danger">Delete</button>
+                                <a href="<?=base_url('user/admin/announcements/edit/'.$ann['id']); ?>" class="btn">Edit</a>
+                                <button type="button" data-characterId="<?=$ann['id']?>" class="btn danger">Delete</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -41,6 +41,11 @@
                 <?php endif; ?>
             </tbody>
         </table>
+        <?php if(isset($pager)): ?>
+            <div class="pagination">
+                <?= $pager->links() ?>
+            </div>
+        <?php endif; ?>
     </div>
     <div>
         <?php foreach(validation_errors() as $error): ?>

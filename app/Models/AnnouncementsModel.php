@@ -33,6 +33,13 @@ class AnnouncementsModel extends Model
         $results = $query->getResult();
         return $results;
     }
+
+    public function listPaginate($where){
+        return $this->select('announcements.*, tags.tag, tags.tag_compiled, users.username')
+            ->join('users', 'users.id = announcements.created_by')
+            ->join('tags', 'tags.id = announcements.tag_id')
+            ->where($where);
+    }
     
 }
 

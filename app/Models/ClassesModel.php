@@ -21,6 +21,10 @@ class ClassesModel extends Model
         return $this->insert($data);
     }
 
+    public function listClasses(){
+        return $this->select();
+    }
+
 }
 
 ?>

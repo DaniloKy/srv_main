@@ -78,7 +78,7 @@ class Session extends BaseController
                 if(!$this->users_model->getWhere(['username' => $signup['username']], true)){
                     $signup['password'] = password_hash($signup['password'], PASSWORD_BCRYPT);
                     $this->users_model->create($signup);
-                    return redirect()->to('/');
+                    return redirect()->to('login');
                 }else
                     $this->session->setFlashdata('register_error', 'Username already in use.');
             }else

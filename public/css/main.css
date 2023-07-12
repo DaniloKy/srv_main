@@ -163,6 +163,7 @@ dialog button {
 }
 
 table {
+    margin-top: 12px;
     border-collapse: collapse;
     width: 100%;
 }
@@ -184,6 +185,20 @@ tr:hover {
 .logout{
     display: flex;
     justify-content: flex-end;
+}
+
+.admin_manage{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 12px;
+}
+.admin_manage *{
+    margin: 8px 10px;
+    align-items: center;
+}
+.admin_manage .bx{
+    color: #000;
 }
 
 .visually-hidden {
@@ -247,7 +262,7 @@ tr:hover {
     color: #312927;
 }
 .navbar-list .last .play_btn:hover{
-    background-color: #e5d04be5;
+    background-color: #f7e152;
     color: #312927;
 }
 
@@ -474,4 +489,35 @@ tr:hover {
     background-color: rgba(0, 0, 0, 0.155);
 }
 
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    list-style: none;
+  }
+  
+  .pagination a {
+    color: #333;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    border-radius: 3px;
+  }
+  
+  .pagination a.active {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .pagination a.disabled {
+    color: #999;
+    pointer-events: none;
+  }
+  
+  .pagination a:hover {
+    background-color: #eee;
+  }
 

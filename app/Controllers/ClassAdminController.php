@@ -22,8 +22,11 @@ class ClassAdminController extends BaseController
     }
 
     public function manage(){
-        $data = $this->list();
-        return $this->baseHomeView('signup/admin/class/manage', ['classes' => $data], ['title' => 'Classes Dashboard']);
+        $data = [
+            'classes' => $this->class_model->listClasses()->paginate(5),
+            'pager' => $this->class_model->pager,
+        ];
+        return $this->baseHomeView('signup/admin/class/manage', $data, ['title' => 'Classes Dashboard']);
     }
 
     public function list(){

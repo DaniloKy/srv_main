@@ -24,9 +24,14 @@ class AnnouncementAdminController extends BaseController
     }
 
     public function manage(){
-        $data = $this->ann_model->list([]);
-        $tags = $this->tag_model->listAll();
-        return $this->baseHomeView('signup/admin/announcement/manage', ['announcements' => $data, 'tags' => $tags], ['title' => 'Announcements Dashboard']);
+        $data = [
+            'announcements' => $this->ann_model->listPaginate([])->paginate(5),
+            'tags' => $this->tag_model->listAll(),
+            'pager' => $this->ann_model->pager,
+        ];
+        
+        //return $this->baseHomeView('signup/admin/announcement/manage', [$data, 'tags' => $tags], ['title' => 'Announcements Dashboard']);
+        return $this->baseHomeView('signup/admin/announcement/manage', $data, ['title' => 'Announcements Dashboard']);
     }
 
     public function create(){

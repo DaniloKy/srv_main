@@ -24,6 +24,11 @@ class UsersModel extends Model
         return $this->insert($data);
     }
 
+    public function listWStatus(){
+        $array = ['status !=' => 0];
+        return $this->select()->where($array);
+    }
+
     public function updateUser($id, $data){
         return $this->update($id, $data);
     }

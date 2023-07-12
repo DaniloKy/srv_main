@@ -6,6 +6,7 @@
                 <tr>
                     <th>Publication</th>
                     <th>Name</th>
+                    <th>Nickname</th>
                     <th>Desciption</th>
                     <th>Action</th>
                 </tr>
@@ -13,22 +14,23 @@
             <tbody>
                 <?php if(isset($classes) && count($classes) > 0): ?>
                     <?php foreach($classes as $class): ?>
-                        <dialog data-characterId="<?=$class->id?>" class="confirmation_box">
-                            <p>Are you sure you want to delete '<?=$class->name?>'?</p>
+                        <dialog data-characterId="<?=$class['id']?>" class="confirmation_box">
+                            <p>Are you sure you want to delete '<?=$class['name']?>'?</p>
                             <form action="<?=base_url('user/admin/classes/delete')?>" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="id" value="<?=$class->id?>">
+                                <input type="hidden" name="id" value="<?=$class['id']?>">
                                 <button type="submit" class="btn danger">YES</button>
                                 <button formmethod="dialog" class="btn">NO</button>
                             </form>
                         </dialog>
                         <tr>
-                            <td><a href="<?=base_url("classes/".$class->name_compiled); ?>"><?="classes/".$class->name_compiled?></a></td>
-                            <td><?=$class->name; ?></td>
-                            <td><?=character_limiter($class->description, 30, '...'); ?></td>
+                            <td><a href="<?=base_url("classes/".$class['name_compiled']); ?>"><?="classes/".$class['name_compiled']?></a></td>
+                            <td><?=$class['name']; ?></td>
+                            <td><?=$class['nickname']; ?></td>
+                            <td><?=character_limiter($class['description'], 30, '...'); ?></td>
                             <td>
-                                <a href="<?=base_url('user/admin/classes/edit/'.$class->id); ?>" class="btn">Edit</a>
-                                <button type="button" data-characterId="<?=$class->id?>" class="btn danger">Delete</button>
+                                <a href="<?=base_url('user/admin/classes/edit/'.$class['id']); ?>" class="btn">Edit</a>
+                                <button type="button" data-characterId="<?=$class['id']?>" class="btn danger">Delete</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -37,6 +39,11 @@
                 <?php endif; ?>
             </tbody>
         </table>
+        <?php if(isset($pager)): ?>
+            <div class="pagination">
+                <?= $pager->links() ?>
+            </div>
+        <?php endif; ?>
     </div>
     <div>
         <?php foreach(validation_errors() as $error): ?>
