@@ -69,7 +69,9 @@
                                 <?php endif;?>
                             </td>
                             <td>
-                                <?php if($user['super'] == 0):?>
+                                <?php if($user['id'] == session('userdata')['user']['id']):?>
+                                    <button type="button" class="btn special" disabled>Remove super</button>
+                                <?php elseif($user['super'] == 0):?>
                                     <button type="button" data-makeSuperId="<?=$user['id']?>" class="btn special">Make super</button>
                                 <?php else:?>
                                     <button type="button" data-removeSuperId="<?=$user['id']?>" class="btn special">Remove super</button>

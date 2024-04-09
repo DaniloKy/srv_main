@@ -1,5 +1,4 @@
 import { SERVER_URL } from "../env.js";
-import Game from "./Game.js";
 
 const UPS = 24;
 const RPS = 60;
@@ -65,8 +64,8 @@ window.onload = () => {
   function render() {
     ctx.save();
     ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-    //ctx.translate(mainCanvas.width / 3 - player.pos_axis.x, mainCanvas.height / 5 -player.pos_axis.y);
-    ctx.translate(-(player.pos_axis.x - mainCanvas.width / 2.75), -(player.pos_axis.y - mainCanvas.height / 5));
+    ctx.translate(window.innerWidth / 2 - player.pos_axis.x, window.innerHeight / 2 -player.pos_axis.y);
+    //ctx.translate(-(player.pos_axis.x - mainCanvas.width), -(player.pos_axis.y - mainCanvas.height));
     ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width * scale, backgroundImage.height *scale);
     for(const player of [...players_list.values()])
       player.render(ctx);
@@ -153,10 +152,12 @@ window.onload = () => {
     }
   }
 
+  let canAttack = true;
+
   mainCanvas.removeEventListener('mousedown', clickScreen);
 
   function clickScreen(e){
-    if(e.button === 0){
+    if(e.button === 0 && canAttack){
       const rect = mainCanvas.getBoundingClientRect();
       const mouseX  = e.clientX;
       console.log(window.innerHeight, rect.height)
@@ -179,6 +180,10 @@ window.onload = () => {
             }
         }
       ));
+      canAttack = false;
+      setTimeout(() => {
+        canAttack = true;
+      }, 500);
     }
   }
 

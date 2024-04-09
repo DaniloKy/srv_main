@@ -181,8 +181,16 @@ dialog button {
     background-color: #e5d04b;
     color: #312927;
 }
+.btn.special:disabled{
+    background-color: #e5d04b85;
+    color: #3129277a;
+}
 .btn.special:hover{
     background-color: #c4b133;
+}
+.btn.special:disabled:hover{
+    background-color: #e5d04b85;
+    color: #3129277a;
 }
 
 table {
