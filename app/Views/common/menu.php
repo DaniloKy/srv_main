@@ -20,7 +20,7 @@
         </li>
         <?php if(session('userdata') == null || !session('userdata')['logged_in']): ?>
         <li class="last">
-            <a href="<?=base_url('login');?>">Sing in</a>
+            <a href="<?=base_url('login');?>">Sign in</a>
             <a class="play_btn" href="<?=base_url('login');?>">Play</a>
         </li>
         <?php else: ?>

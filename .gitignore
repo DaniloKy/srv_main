@@ -1,4 +1,6 @@
 .env
+.apresentacao
+.tests
 /vendor/
 **/writable/debugbar/
 **/writable/logs/

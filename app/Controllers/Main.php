@@ -46,7 +46,7 @@ class Main extends BaseController
                 ]
             );
         }catch(\Exception $e){
-            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+            return $e;#view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
         }
     }
 

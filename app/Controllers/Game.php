@@ -30,6 +30,7 @@ class Game extends BaseController
                 return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
 
             $playerInfo = session()->get('playerInfo')['player'];
+            //return var_dump($playerInfo);
             return view("signup/game/play", ['playerInfo' => $playerInfo]);
         }catch(\Exception $e){
             return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);

@@ -20,6 +20,18 @@ class Character extends BaseController
         LoggerInterface $logger
     ) {
         parent::initController($request, $response, $logger);
+        
+        // APONTAR PARA O FICHEIRO DE CERTIFICADOS INTERNO DO APACHE/XAMPP
+        // Este é o caminho standard do XAMPP
+        $caBundlePath = 'C:/xampp/apache/bin/curl-ca-bundle.pem';
+        #var_dump(file_exists('C:/xampp/apache/bin/curl-ca-bundle.pem'));
+
+        // Vamos verificar se ele existe, só para ter a certeza
+        if (!file_exists($caBundlePath)) {
+            // Se falhar, é porque o seu XAMPP está instalado noutro local.
+            die("ERRO CRÍTICO: Não foi possível encontrar o ficheiro de certificados do XAMPP em " . $caBundlePath);
+        }
+
         $this->client = \Config\Services::curlrequest([
             'baseURI' => env('SERVER_URL'),
             'headers' => [
@@ -27,7 +39,13 @@ class Character extends BaseController
                 'Accept' => 'application/json',
                 'Content-Type' =>  'application/json',
             ],
+            'verify' => false,
+            /*'curl' => [
+                CURLOPT_SSL_VERIFYPEER => true,
+                CURLOPT_CAINFO => $caBundlePath,
+            ],*/
         ]);
+
     }
 
     public function index(){
@@ -44,7 +62,7 @@ class Character extends BaseController
             $response = $this->client->get('character/belong_to/'.session('userdata')['user']['id']);
             $data = json_decode($response->getBody());
         }catch(Exception $e){
-            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance. ']);
+            return $e->__toString(); #view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance. '.$e]);
         }
         return $this->baseHomeView('signup/character/select', ["characters" => $data], ['title' => 'Select Your Character']);
     }
@@ -57,7 +75,7 @@ class Character extends BaseController
             session()->set('playerInfo', ["player" => $data]);
             return redirect()->to('game/lobby');
         }catch(Exception $e){
-            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.'.$e]);
         }
     }
 
@@ -72,7 +90,7 @@ class Character extends BaseController
             $response = $this->client->get('classes');
             $data = json_decode($response->getBody());
         }catch(Exception $e){
-            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.'.$e]);
         }
         return $this->baseHomeView('signup/character/create', ["classes" => $data, 'class' => $_GET['class']??false], ['title' => 'Create Your Character']);
     }
@@ -107,7 +125,7 @@ class Character extends BaseController
                 }else
                     $this->session->setFlashdata('creation_error', 'Username already in use.');
             }catch(Exception $e){
-                return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+                return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.'.$e]);
             }
         }
         return redirect()->to('user/character/create')->withInput();
@@ -118,7 +136,7 @@ class Character extends BaseController
         try{
             $this->client->delete('character/'.session('userdata')['user']['id']."/".$deleteChar['character_name']);
         }catch(Exception $e){
-            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.'.$e]);
         }
         return redirect()->to('user/character/list');
     }
