@@ -178,6 +178,9 @@ class CreateDatabase extends Migration
 
     public function down()
     {
-        //
+        $this->forge->dropTable('users', true);
+        $this->forge->dropTable('announcements', true);
+        $this->forge->dropTable('tags', true);
+        $this->forge->dropTable('classes', true);
     }
 }

@@ -21,17 +21,6 @@ class Character extends BaseController
     ) {
         parent::initController($request, $response, $logger);
         
-        // APONTAR PARA O FICHEIRO DE CERTIFICADOS INTERNO DO APACHE/XAMPP
-        // Este é o caminho standard do XAMPP
-        $caBundlePath = 'C:/xampp/apache/bin/curl-ca-bundle.pem';
-        #var_dump(file_exists('C:/xampp/apache/bin/curl-ca-bundle.pem'));
-
-        // Vamos verificar se ele existe, só para ter a certeza
-        if (!file_exists($caBundlePath)) {
-            // Se falhar, é porque o seu XAMPP está instalado noutro local.
-            die("ERRO CRÍTICO: Não foi possível encontrar o ficheiro de certificados do XAMPP em " . $caBundlePath);
-        }
-
         $this->client = \Config\Services::curlrequest([
             'baseURI' => env('SERVER_URL'),
             'headers' => [
@@ -40,10 +29,6 @@ class Character extends BaseController
                 'Content-Type' =>  'application/json',
             ],
             'verify' => false,
-            /*'curl' => [
-                CURLOPT_SSL_VERIFYPEER => true,
-                CURLOPT_CAINFO => $caBundlePath,
-            ],*/
         ]);
 
     }

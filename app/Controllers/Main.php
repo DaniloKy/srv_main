@@ -19,18 +19,32 @@ class Main extends BaseController
         LoggerInterface $logger
     ) {
         parent::initController($request, $response, $logger);
-        $this->client = \Config\Services::curlrequest();
+        $this->client = \Config\Services::curlrequest([
+            'baseURI' => env('SERVER_URL'),
+            'headers' => [
+                'Authorization' => env('AUTHORIZATION_TOKEN'),
+                'Accept' => 'application/json',
+                'Content-Type' =>  'application/json',
+            ],
+            'verify' => false,
+            'http_errors' => false,
+        ]);
     }
 
     public function index()
     {
         try{
-            $response = $this->client->head(env('SERVER_URL'));
+            $response = $this->client->head('/');
             if($response->getStatusCode() != 200)
-                return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+                return "API Error (" . $response->getStatusCode() . "): " . $response->getBody();
 
             $characterId = session()->get('playerInfo')['player']->id;
-            $response = $this->client->get(env('SERVER_URL').'character/'.$characterId.'/'.session('userdata')['user']['id']);
+            $response = $this->client->get('character/'.$characterId.'/'.session('userdata')['user']['id']);
+            
+            if ($response->getStatusCode() >= 400) {
+                return "API Error (" . $response->getStatusCode() . "): " . $response->getBody();
+            }
+
             $playerInfo = json_decode($response->getBody());
             session()->set('playerInfo', ["player" => $playerInfo]);
             $playerInfo->playerLevel = [
@@ -46,24 +60,29 @@ class Main extends BaseController
                 ]
             );
         }catch(\Exception $e){
-            return $e;#view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+            return $e->getMessage();
         }
     }
 
     public function career()
     {
         try{
-            $response = $this->client->head(env('SERVER_URL'));
+            $response = $this->client->head('/');
             if($response->getStatusCode() != 200)
-                return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+                return "API Error (" . $response->getStatusCode() . "): " . $response->getBody();
             $characterId = session()->get('playerInfo')['player']->id;
-            $response = $this->client->get(env('SERVER_URL').'character/'.$characterId.'/'.session('userdata')['user']['id']);
+            $response = $this->client->get('character/'.$characterId.'/'.session('userdata')['user']['id']);
+            
+            if ($response->getStatusCode() >= 400) {
+                return "API Error (" . $response->getStatusCode() . "): " . $response->getBody();
+            }
+
             $playerInfo = json_decode($response->getBody());
             $playerInfo->wl = $playerInfo->games_lost!=0?number_format(($playerInfo->games_won/$playerInfo->games_lost), 2):0;
             $playerInfo->kd = $playerInfo->deaths!=0?number_format(($playerInfo->kills/$playerInfo->deaths), 2):0;
             return $this->baseGameView('signup/game/career', ['playerInfo' => $playerInfo], ['title' => 'Career', 'cssPath' => 'css/game_career.css']);
         }catch(\Exception $e){
-            return view("errors/html/error_503", ['message' => 'Server temporarily busy, overloaded, or down for maintenance.']);
+            return $e->getMessage();
         }
     }
 

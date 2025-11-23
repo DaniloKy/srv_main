@@ -1,16 +1,52 @@
+# Environment variables (contains secrets)
 .env
+.env.test
+.env.backup
+
+# Composer dependencies
+/vendor/
+composer.phar
+
+# Node dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDEs
+.idea/
+.vscode/
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# PHPUnit
+phpunit.xml
+/tests/_support/_generated/
+/tests/coverage/
+
+# CodeIgniter 4 Writable (Logs, Cache, etc)
+# Ignore contents but keep the directories
+/writable/cache/*
+!/writable/cache/index.html
+!/writable/cache/.gitkeep
+/writable/debugbar/*
+!/writable/debugbar/index.html
+!/writable/debugbar/.gitkeep
+/writable/logs/*
+!/writable/logs/index.html
+!/writable/logs/.gitkeep
+/writable/session/*
+!/writable/session/index.html
+!/writable/session/.gitkeep
+/writable/uploads/*
+!/writable/uploads/index.html
+!/writable/uploads/.gitkeep
+
+# User specific ignores
 .apresentacao
 .tests
-/vendor/
-**/writable/debugbar/
-**/writable/logs/
-**/writable/cache/
-**/writable/session/
-**/writable/uploads/
-writable/debugbar/
-writable/cache/
-writable/session/
-writable/uploads/
 public/images/publish/announcements/*
 public/images/publish/classes/*
 public/images/storage/announcements/*
@@ -20,3 +56,6 @@ public/images/thumb/classes/*
 !public/images/publish/.gitkeep
 !public/images/storage/.gitkeep
 !public/images/thumb/.gitkeep
+
+# JS Env
+public/js/env.js

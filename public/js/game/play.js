@@ -193,7 +193,7 @@ window.onload = () => {
 
   */
 
-  connectToWebSocket(/*`ws://${SERVER_URL}/ws`*/`wss://srvutpnew.surviveutopia.workers.dev/ws`).then(webSocket => {
+  connectToWebSocket(`ws://${SERVER_URL}ws`).then(webSocket => {
 
       socket = webSocket;
 
